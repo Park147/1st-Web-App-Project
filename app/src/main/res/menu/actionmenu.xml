@@ -4,6 +4,6 @@
     <item
         android:id="@+id/action_setting"
         android:title="설정"
-        android:icon="@drawable/bookmark"
+        android:icon="@drawable/wheel"
         app:showAsAction="ifRoom" />
 </menu>
