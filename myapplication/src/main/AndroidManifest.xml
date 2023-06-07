@@ -9,6 +9,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.1stWebAppProject">
         <activity
+            android:name=".MainActivity2"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
