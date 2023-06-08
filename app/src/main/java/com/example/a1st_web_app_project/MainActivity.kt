@@ -27,10 +27,4 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.search, menu)
-
-        return true
-    }
-
 }
