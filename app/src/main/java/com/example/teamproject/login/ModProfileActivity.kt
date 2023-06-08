@@ -4,18 +4,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.teamproject.R
 import com.example.teamproject.databinding.ActivityLoginBinding
-import com.example.teamproject.databinding.ActivityMembershipBinding
+import com.example.teamproject.databinding.ActivityModProfileBinding
 
-class MembershipActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMembershipBinding
+class ModProfileActivity : AppCompatActivity() {
+    lateinit var binding: ActivityModProfileBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMembershipBinding.inflate(layoutInflater)
+        binding = ActivityModProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        binding.toolbar.title = "회원 가입"
+        binding.toolbar.title = "내 정보 수정"
     }
 }
