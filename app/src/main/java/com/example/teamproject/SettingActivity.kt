@@ -6,9 +6,6 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import com.example.teamproject.databinding.ActivitySettingBinding
-import com.example.teamproject.login.AlamActivity
-import com.example.teamproject.login.ModProfileActivity
-import com.example.teamproject.login.ModifyProfileActivity
 
 class SettingActivity : AppCompatActivity() {
     lateinit var binding: ActivitySettingBinding
@@ -32,18 +29,15 @@ class SettingActivity : AppCompatActivity() {
         alamset = binding. alamset
 
         binding.modprofileset.setOnClickListener {
-            val intent = Intent(this@SettingActivity, ModifyProfileActivity::class.java)
-            startActivity(intent)
+            Toast.makeText(this@SettingActivity, "미구현", Toast.LENGTH_SHORT).show()
         }
 
         binding.infomode.setOnClickListener {
-            val intent = Intent(this@SettingActivity, ModProfileActivity::class.java)
-            startActivity(intent)
+            Toast.makeText(this@SettingActivity, "미구현", Toast.LENGTH_SHORT).show()
         }
 
         binding.alamset.setOnClickListener {
-            val intent = Intent(this@SettingActivity, AlamActivity::class.java)
-            startActivity(intent)
+            Toast.makeText(this@SettingActivity, "미구현", Toast.LENGTH_SHORT).show()
         }
 
     }

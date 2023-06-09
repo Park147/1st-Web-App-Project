@@ -12,24 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TeamProject"
         tools:targetApi="31">
-        <activity
-            android:name=".login.ModProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".login.AlamActivity"
-            android:exported="false" />
-        <activity
-            android:name=".login.ModifyProfileActivity"
-            android:exported="false" />
+
         <activity
             android:name=".SettingActivity"
             android:exported="false" />
-        <activity
-            android:name=".login.MembershipActivity"
-            android:exported="true" />
-        <activity
-            android:name=".login.LoginActivity"
-            android:exported="true" />
+
         <activity
             android:name=".MyProfilePage"
             android:exported="true"
