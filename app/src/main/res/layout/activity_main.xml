@@ -60,6 +60,7 @@
             tools:context=".MainActivity">
 
             <ImageButton
+                android:contentDescription="true"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="bottom"
@@ -69,6 +70,7 @@
                 android:src="@drawable/anniversary" />
 
             <ImageButton
+                android:contentDescription="true"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="bottom"
@@ -78,6 +80,7 @@
                 android:src="@drawable/best" />
 
             <ImageButton
+                android:contentDescription="true"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="bottom"
@@ -88,6 +91,8 @@
                 android:src="@drawable/dining" />
 
             <ImageButton
+
+                android:contentDescription="true"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="bottom"
@@ -111,9 +116,7 @@
                 android:background="@drawable/round_button"
                 android:text="식당 예약"
                 android:textStyle="bold"
-                android:drawableRight="@drawable/reserve"
                 android:paddingRight="10dp"/>
-
             <Button
                 android:layout_width="150dp"
                 android:layout_height="150dp"

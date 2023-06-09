@@ -5,6 +5,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.example.a1st_web_app_project.fragment.FragmentFirst;
+import com.example.a1st_web_app_project.fragment.FragmentFourth;
+import com.example.a1st_web_app_project.fragment.FragmentSecond;
+import com.example.a1st_web_app_project.fragment.FragmentThird;
+
 public class MyAdapter extends FragmentStateAdapter {
 
     public int mCount;

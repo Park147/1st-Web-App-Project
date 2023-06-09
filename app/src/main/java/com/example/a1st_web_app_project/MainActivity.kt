@@ -1,7 +1,6 @@
 package com.example.a1st_web_app_project
 
 import android.os.Bundle
-import android.view.Menu
 import android.widget.TextView
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.FragmentActivity

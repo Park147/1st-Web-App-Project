@@ -1,5 +1,4 @@
-package com.example.a1st_web_app_project;
-
+package com.example.a1st_web_app_project.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,13 +7,16 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-public class FragmentFirst extends Fragment {
+import com.example.a1st_web_app_project.R;
+
+public class FragmentThird extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
-                R.layout.fragment_1p, container, false);
+                R.layout.fragment_3p, container, false);
 
         return rootView;
     }
+
 }
