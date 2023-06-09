@@ -24,13 +24,11 @@ class MainActivity : AppCompatActivity() {
         binding.toolbar.title = "메인페이지"
 
         bottommenu = binding.bottommenu
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottommenu)
+        bottomNavigationView.selectedItemId = R.id.first_tab
 
-        binding.bottommenu.setOnItemReselectedListener {item ->
+        binding.bottommenu.setOnItemSelectedListener {item ->
             when(item.itemId) {
-                R.id.first_tab -> {
-                    val intent = Intent(this@MainActivity, MainActivity::class.java)
-                    startActivity(intent)
-                }
                 R.id.second_tab -> {
                     Toast.makeText(this@MainActivity, "미구현", Toast.LENGTH_SHORT).show()
                 }
@@ -38,11 +36,11 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this@MainActivity, "미구현", Toast.LENGTH_SHORT).show()
                 }
                 R.id.fourth_tab -> {
-                    val intent = Intent(this@MainActivity, MyProfilePage::class.java)
-                    startActivity(intent)
+                    Toast.makeText(this@MainActivity, "미구현", Toast.LENGTH_SHORT).show()
                 }
                 R.id.fifth_tab -> {
-                    Toast.makeText(this@MainActivity, "미구현", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@MainActivity, MyProfilePage::class.java)
+                    startActivity(intent)
                 }
 
             }

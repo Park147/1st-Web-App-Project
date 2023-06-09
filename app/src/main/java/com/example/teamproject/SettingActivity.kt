@@ -49,7 +49,6 @@ class SettingActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        Toast.makeText(this@SettingActivity, "업버튼 클릭시 동작", Toast.LENGTH_SHORT).show()
         onBackPressed()
         return super.onSupportNavigateUp()
     }

@@ -22,7 +22,8 @@ class MyProfilePage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMyProfilePageBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        
+        //액션바 설정
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         binding.toolbar.title = "마이페이지"
@@ -30,7 +31,14 @@ class MyProfilePage : AppCompatActivity() {
         modprofile = binding.modprofile
         bottommenu = binding.bottommenu
 
-        binding.bottommenu.setOnItemReselectedListener {item ->
+        
+        // 하단바 초기값 설정
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottommenu)
+        bottomNavigationView.selectedItemId = R.id.fifth_tab
+
+        
+        // 하단바 선택시 이벤티
+        binding.bottommenu.setOnItemSelectedListener {item ->
             when(item.itemId) {
                 R.id.first_tab -> {
                     val intent = Intent(this@MyProfilePage, MainActivity::class.java)
@@ -43,17 +51,14 @@ class MyProfilePage : AppCompatActivity() {
                     Toast.makeText(this@MyProfilePage, "미구현", Toast.LENGTH_SHORT).show()
                 }
                 R.id.fourth_tab -> {
-                    val intent = Intent(this@MyProfilePage, MyProfilePage::class.java)
-                    startActivity(intent)
-                }
-                R.id.fifth_tab -> {
                     Toast.makeText(this@MyProfilePage, "미구현", Toast.LENGTH_SHORT).show()
+
                 }
 
             }
             true
-
         }
+
 
 
 
@@ -64,11 +69,13 @@ class MyProfilePage : AppCompatActivity() {
 
     }
 
+    //액션바 메뉴 설정
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.actionmenu, menu)
         return true
     }
 
+    //액션바 메뉴 클릭시
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item?.itemId) {
             R.id.action_setting -> {
