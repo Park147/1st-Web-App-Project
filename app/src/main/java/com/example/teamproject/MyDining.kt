@@ -26,6 +26,7 @@ class MyDining : AppCompatActivity() {
 
         val bottomN = findViewById<BottomNavigationView>(R.id.bottommenu)
         bottomN.selectedItemId = R.id.fourth_tab
+
         binding.bottommenu.setOnItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.first_tab -> {
@@ -59,7 +60,16 @@ class MyDining : AppCompatActivity() {
 
         // 탭 부분과 뷰페이저2 연동하기.
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.text = "나의 ${(position + 1)}"
+            when(position) {
+                0 -> {
+                    tab.text = "나의 예약"
+                }
+
+                1 -> {
+                    tab.text = "나의 알림"
+                }
+        }
+
         }.attach()
     }
     class MyFragmentPagerAdapter(activity: FragmentActivity): FragmentStateAdapter(activity){
