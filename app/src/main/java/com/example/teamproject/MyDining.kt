@@ -24,10 +24,10 @@ class MyDining : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
         binding.toolbar.title = "마이다이닝"
 
-        val bottomN = findViewById<BottomNavigationView>(R.id.bottommenu)
+        val bottomN = findViewById<BottomNavigationView>(R.id.bottomMenu)
         bottomN.selectedItemId = R.id.fourth_tab
 
-        binding.bottommenu.setOnItemSelectedListener { item ->
+        binding.bottomMenu.setOnItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.first_tab -> {
                     val intent = Intent(this@MyDining, MainActivity::class.java)
@@ -56,7 +56,7 @@ class MyDining : AppCompatActivity() {
 
         // 뷰페이져2 부분에 설정 한 부분 적용하기. 어댑터 연결.
         // 어댑터 , 뷰 객체에 데이터를 연결(연동) 하는 부분.
-        viewPager.adapter= MyDining.MyFragmentPagerAdapter(this)
+        viewPager.adapter= MyFragmentPagerAdapter(this)
 
         // 탭 부분과 뷰페이저2 연동하기.
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
@@ -68,8 +68,7 @@ class MyDining : AppCompatActivity() {
                 1 -> {
                     tab.text = "나의 알림"
                 }
-        }
-
+            }
         }.attach()
     }
     class MyFragmentPagerAdapter(activity: FragmentActivity): FragmentStateAdapter(activity){

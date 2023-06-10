@@ -22,9 +22,7 @@
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        app:tabMode="scrollable">
-    </com.google.android.material.tabs.TabLayout>
-
+        app:tabGravity="fill" />
     <!--뷰 페이저 추가 부분-->
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewpager"
@@ -32,7 +30,7 @@
         android:layout_height="570dp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottommenu"
+        android:id="@+id/bottomMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
