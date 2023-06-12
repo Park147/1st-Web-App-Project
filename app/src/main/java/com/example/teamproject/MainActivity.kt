@@ -33,8 +33,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this@MainActivity, "미구현", Toast.LENGTH_SHORT).show()
                 }
                 R.id.fourth_tab -> {
-                    val intent = Intent(this@MainActivity, MyDining::class.java)
-                    startActivity(intent)
+                    Toast.makeText(this@MainActivity, "미구현", Toast.LENGTH_SHORT).show()
                 }
                 R.id.fifth_tab -> {
                     Toast.makeText(this@MainActivity, "미구현", Toast.LENGTH_SHORT).show()
