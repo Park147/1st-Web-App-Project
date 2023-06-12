@@ -35,7 +35,6 @@ class MyProfilePage : AppCompatActivity() {
         // 하단바 초기값 설정
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottommenu)
         bottomNavigationView.selectedItemId = R.id.fifth_tab
-
         
         // 하단바 선택시 이벤티
         binding.bottommenu.setOnItemSelectedListener {item ->

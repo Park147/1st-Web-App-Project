@@ -2,8 +2,6 @@ package com.example.teamproject.login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.teamproject.R
-import com.example.teamproject.databinding.ActivityLoginBinding
 import com.example.teamproject.databinding.ActivityMembershipBinding
 
 class MembershipActivity : AppCompatActivity() {

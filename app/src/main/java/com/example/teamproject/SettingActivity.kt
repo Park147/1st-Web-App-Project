@@ -50,6 +50,7 @@ class SettingActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
+        Toast.makeText(this@SettingActivity, "뒤로가기", Toast.LENGTH_SHORT).show()
         return super.onSupportNavigateUp()
     }
     

@@ -22,6 +22,7 @@ class BookMarkActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding.toolbar.title = "마이페이지"
 
     }

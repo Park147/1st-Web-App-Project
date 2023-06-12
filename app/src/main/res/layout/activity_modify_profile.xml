@@ -16,4 +16,74 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         tools:layout_editor_absoluteX="0dp" />
 
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintVertical_bias="0.023">
+
+        <ImageButton
+            android:layout_width="108dp"
+            android:layout_height="96dp"
+            android:layout_gravity="center"
+            android:src="@drawable/user_basic" />
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:text="닉네임"
+            android:textSize="30dp" />
+
+        <EditText
+            android:id="@+id/modnick"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:hint="닉네임"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:text="자기소개"
+            android:textSize="30dp" />
+
+        <EditText
+            android:id="@+id/modintro"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:hint="자신을 알릴 수 있는 소개글을 작성해 주세요."
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:text="활동지역"
+            android:textSize="30dp" />
+
+        <EditText
+            android:id="@+id/modmove"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:hint="자신이 활동하는 지역을 작성해 주세요."
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/modprofiler"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:text="저장"
+            android:layout_marginTop="120dp"
+            android:backgroundTint="#FF5722"/>
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

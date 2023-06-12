@@ -16,6 +16,7 @@ class AlamActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding.toolbar.title = "알림 설정"
 
     }

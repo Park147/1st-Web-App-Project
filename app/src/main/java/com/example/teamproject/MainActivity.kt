@@ -3,11 +3,19 @@ package com.example.teamproject
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teamproject.databinding.ActivityMainBinding
-import com.example.teamproject.databinding.ActivityMyProfilePageBinding
+import com.example.teamproject.model.PageListModel
+import com.example.teamproject.model.PageListModel2
+import com.example.teamproject.recycler.MyAdapter
+import com.example.teamproject.recycler.MyAdapter2
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -15,6 +23,8 @@ class MainActivity : AppCompatActivity() {
     var bottommenu: BottomNavigationView? = null
     var modprofile: Button? = null
     override fun onCreate(savedInstanceState: Bundle?) {
+        val serviceKey = "DLqEcgtBqy4lMOUw1BMi8NL1H5XiTbNKGuQtPM3epTpiPJZa6jcwQo1DDRmsGstF"
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -47,5 +57,92 @@ class MainActivity : AppCompatActivity() {
             true
 
         }
+
+        val networkService = (applicationContext as MyApplication).networkService
+        val rsListCall = networkService.getList(serviceKey)
+        val rsImgListCall = networkService.getImgList(serviceKey)
+        Log.d("lsy", "url:" + rsListCall.request().url().toString())
+        Log.d("lsy", "url:" + rsImgListCall.request().url().toString())
+
+        rsListCall.enqueue(object : Callback<PageListModel> {
+
+            override fun onResponse(call: retrofit2.Call<PageListModel>, response: Response<PageListModel>) {
+
+                val rsList = response.body()
+
+                Log.d("lsy","rsList data 값 : ${rsList?.body}")
+                Log.d("lsy","rsList data 갯수 : ${rsList?.body?.size}")
+
+                rsImgListCall.enqueue(object : Callback<PageListModel2> {
+
+                    override fun onResponse(call: retrofit2.Call<PageListModel2>, response: Response<PageListModel2>) {
+
+                        val rsImgList = response.body()
+
+                        Log.d("lsy","rsImgList data 값 : ${rsImgList?.body}")
+                        Log.d("lsy","rsImgList data 갯수 : ${rsImgList?.body?.size}")
+                        Log.d("lsy","rsList 이름 : ${rsList?.body?.get(0)?.RSTR_NM}")
+                        Log.d("lsy","rsImgList 이름 : ${rsImgList?.body?.get(0)?.RSTR_NM}")
+                        for ( i in 0 until (rsList?.body?.size ?: 0)) {
+                            var item1 = rsList?.body?.get(i)?.RSTR_NM
+                            for ( j in 0 until (rsImgList?.body?.size ?: 0)) {
+                                var item2 = rsImgList?.body?.get(j)?.RSTR_NM
+
+                                if ( item1.equals(item2)) {
+                                    Log.d("lsy", "rsList 이름 : ${item1}")
+                                    Log.d(
+                                        "lsy",
+                                        "rsImgList 이름 : ${item2}"
+                                    )
+                                    binding.recyclerView.adapter= MyAdapter(this@MainActivity,rsList?.body, rsImgList?.body)
+
+                                    binding.recyclerView.addItemDecoration(
+                                        DividerItemDecoration(this@MainActivity, LinearLayoutManager.VERTICAL))
+
+
+                                    continue
+                                }
+                            }
+                        }
+                        /*if ( rsList?.body?.get(1)?.RSTR_NM == rsImgList?.body?.get(1)?.RSTR_NM ) {
+                            Log.d("lsy","rsList 이름 : ${rsList?.body?.get(1)?.RSTR_NM}")
+                            Log.d("lsy","rsImgList 이름 : ${rsImgList?.body?.get(1)?.RSTR_NM}")
+                            binding.recyclerView.adapter= MyAdapter(this@MainActivity,rsList?.body)
+                            binding.recyclerView.adapter= MyAdapter2(this@MainActivity, rsImgList?.body)
+
+                            binding.recyclerView.addItemDecoration(
+                                DividerItemDecoration(this@MainActivity, LinearLayoutManager.VERTICAL)
+                            )
+                        }*/
+                    }
+
+                    override fun onFailure(call: retrofit2.Call<PageListModel2>, t: Throwable) {
+                        Log.d("lsy","fail")
+                        call.cancel()
+                    }
+
+
+                })
+                Log.d("lsy","실행 여부 확인. userListCall.enqueue")
+
+
+
+
+//                binding.recyclerView.adapter= MyAdapter(this@MainActivity,rsList?.body)
+//
+//
+//                binding.recyclerView.addItemDecoration(
+//                    DividerItemDecoration(this@MainActivity, LinearLayoutManager.VERTICAL)
+//                )
+
+
+            }
+
+
+            override fun onFailure(call: retrofit2.Call<PageListModel>, t: Throwable) {
+                Log.d("lsy","fail")
+                call.cancel()
+            }
+        })
     }
 }
