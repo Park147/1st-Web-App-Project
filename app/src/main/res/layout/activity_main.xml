@@ -110,6 +110,7 @@
             tools:context=".MainActivity">
 
             <Button
+                android:id="@+id/btn1"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_margin="25dp"
@@ -118,6 +119,7 @@
                 android:textStyle="bold"
                 android:paddingRight="10dp"/>
             <Button
+                android:id="@+id/btn2"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_margin="25dp"
@@ -139,7 +141,7 @@
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_menu"
+        android:id="@+id/bottommenu"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="bottom"

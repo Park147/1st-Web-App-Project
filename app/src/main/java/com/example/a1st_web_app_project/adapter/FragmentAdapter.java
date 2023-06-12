@@ -1,4 +1,4 @@
-package com.example.a1st_web_app_project;
+package com.example.a1st_web_app_project.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -10,11 +10,11 @@ import com.example.a1st_web_app_project.fragment.FragmentFourth;
 import com.example.a1st_web_app_project.fragment.FragmentSecond;
 import com.example.a1st_web_app_project.fragment.FragmentThird;
 
-public class MyAdapter extends FragmentStateAdapter {
+public class FragmentAdapter extends FragmentStateAdapter {
 
     public int mCount;
 
-    public MyAdapter(FragmentActivity fa, int count) {
+    public FragmentAdapter(FragmentActivity fa, int count) {
         super(fa);
         mCount = count;
     }

@@ -1,12 +1,23 @@
 package com.example.a1st_web_app_project
 
+import android.content.Intent
 import android.os.Bundle
+import android.telecom.Call
+import android.util.Log
+import android.view.View
+import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.view.ViewCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.example.a1st_web_app_project.adapter.FragmentAdapter
 import com.example.a1st_web_app_project.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import me.relex.circleindicator.CircleIndicator3
 
 
@@ -16,17 +27,49 @@ class MainActivity : FragmentActivity() {
     lateinit var mIndicator: CircleIndicator3
     lateinit var binding: ActivityMainBinding
     val numPage = 4;
+    var bottommenu: BottomNavigationView? = null
     var Toorbarname: TextView? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-              setContentView(binding.root)
+        setContentView(binding.root)
 
+        binding.btn1.setOnClickListener {
+            val intent = Intent(this@MainActivity,MainActivity2::class.java)
+            startActivity(intent);
+        }
+
+        bottommenu = binding.bottommenu
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottommenu)
+        bottomNavigationView.selectedItemId = R.id.first_tab
+
+        binding.bottommenu.setOnItemSelectedListener {item ->
+            when(item.itemId) {
+                R.id.second_tab -> {
+                    Toast.makeText(this@MainActivity, "미구현", Toast.LENGTH_SHORT).show()
+                }
+                R.id.first_tab -> {
+                    Toast.makeText(this@MainActivity, "미구현", Toast.LENGTH_SHORT).show()
+                }
+                R.id.fourth_tab -> {
+                    Toast.makeText(this@MainActivity, "미구현", Toast.LENGTH_SHORT).show()
+                }
+                R.id.fifth_tab -> {
+                    val intent = Intent(this@MainActivity, MainActivity2::class.java)
+                    startActivity(intent)
+                }
+
+            }
+            true
+
+        }
 
         //ViewPager2
         aPager = findViewById<ViewPager2>(R.id.viewpager)
         //Adapter
-        pagerAdapter = MyAdapter(this, numPage)
+        pagerAdapter = FragmentAdapter(this, numPage)
         aPager.setAdapter(pagerAdapter)
         //Indicator
         mIndicator = findViewById<CircleIndicator3>(R.id.indicator)
@@ -47,7 +90,7 @@ class MainActivity : FragmentActivity() {
                     aPager.setCurrentItem(position)
                 }
             }
-
+            // 프래그먼트
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 mIndicator.animatePageSelected(position % numPage)
