@@ -5,10 +5,15 @@
     android:layout_height="match_parent"
     tools:context=".TwoFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/AlarmTabs"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="50dp" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/AlarmViewpager"
+        android:layout_width="match_parent"
+        android:layout_height="570dp"
+        android:layout_marginTop="50dp"/>
 
 </FrameLayout>
