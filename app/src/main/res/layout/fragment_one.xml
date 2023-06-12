@@ -9,7 +9,8 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/ReserveTabs"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="50dp"
+        app:tabGravity="start"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/ReserveViewpager"

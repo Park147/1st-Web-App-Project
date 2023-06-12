@@ -14,7 +14,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 class MyDining : AppCompatActivity() {
     lateinit var binding: ActivityMyDiningBinding
 
-    var bottommenu: BottomNavigationView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMyDiningBinding.inflate(layoutInflater)
