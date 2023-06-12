@@ -36,6 +36,11 @@ class MainActivity : FragmentActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.btn2.setOnClickListener {
+            val intent = Intent(this@MainActivity,WaitingActivity::class.java)
+            startActivity(intent);
+        }
+
         binding.btn1.setOnClickListener {
             val intent = Intent(this@MainActivity,MainActivity2::class.java)
             startActivity(intent);
