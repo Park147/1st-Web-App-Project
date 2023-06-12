@@ -30,7 +30,7 @@ class MainActivity : FragmentActivity() {
     var bottommenu: BottomNavigationView? = null
     var Toorbarname: TextView? = null
 
-ㅋㅋㅋ
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
