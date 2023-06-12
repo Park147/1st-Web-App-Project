@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     var bottommenu: BottomNavigationView? = null
     var modprofile: Button? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         val serviceKey = "DLqEcgtBqy4lMOUw1BMi8NL1H5XiTbNKGuQtPM3epTpiPJZa6jcwQo1DDRmsGstF"
 
@@ -104,16 +105,6 @@ class MainActivity : AppCompatActivity() {
                                 }
                             }
                         }
-                        /*if ( rsList?.body?.get(1)?.RSTR_NM == rsImgList?.body?.get(1)?.RSTR_NM ) {
-                            Log.d("lsy","rsList 이름 : ${rsList?.body?.get(1)?.RSTR_NM}")
-                            Log.d("lsy","rsImgList 이름 : ${rsImgList?.body?.get(1)?.RSTR_NM}")
-                            binding.recyclerView.adapter= MyAdapter(this@MainActivity,rsList?.body)
-                            binding.recyclerView.adapter= MyAdapter2(this@MainActivity, rsImgList?.body)
-
-                            binding.recyclerView.addItemDecoration(
-                                DividerItemDecoration(this@MainActivity, LinearLayoutManager.VERTICAL)
-                            )
-                        }*/
                     }
 
                     override fun onFailure(call: retrofit2.Call<PageListModel2>, t: Throwable) {
@@ -125,15 +116,6 @@ class MainActivity : AppCompatActivity() {
                 })
                 Log.d("lsy","실행 여부 확인. userListCall.enqueue")
 
-
-
-
-//                binding.recyclerView.adapter= MyAdapter(this@MainActivity,rsList?.body)
-//
-//
-//                binding.recyclerView.addItemDecoration(
-//                    DividerItemDecoration(this@MainActivity, LinearLayoutManager.VERTICAL)
-//                )
 
 
             }
