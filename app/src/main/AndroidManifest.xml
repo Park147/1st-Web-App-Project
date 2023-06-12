@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TeamProject">
         <activity
-            android:name=".MyDining"
+            android:name="com.example.teamproject.MyDining"
             android:exported="false" />
         <activity
             android:name=".MyReservation"
@@ -22,7 +22,7 @@
             android:name=".MyAlarm"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.teamproject.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
