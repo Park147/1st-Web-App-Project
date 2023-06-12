@@ -1,10 +1,10 @@
-package com.example.teamproject
+package com.example.teamproject.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.teamproject.databinding.FragmentOneBinding
 import com.google.android.material.tabs.TabLayoutMediator
@@ -25,7 +25,7 @@ class OneFragment : Fragment() {
         viewPager.adapter= MyReserveFragmentPagerAdapter(this)
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            when(position) {
+            when (position) {
                 0 -> {
                     tab.text = "방문예정"
                 }

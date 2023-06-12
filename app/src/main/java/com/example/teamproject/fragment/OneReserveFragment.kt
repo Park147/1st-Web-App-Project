@@ -1,21 +1,22 @@
-package com.example.teamproject
+package com.example.teamproject.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.teamproject.databinding.FragmentTwoReserveBinding
+import androidx.fragment.app.Fragment
+import com.example.teamproject.MainActivity
+import com.example.teamproject.databinding.FragmentOneReserveBinding
 
+class OneReserveFragment : Fragment() {
+    lateinit var binding: FragmentOneReserveBinding
 
-class TwoReserveFragment : Fragment() {
-    lateinit var binding: FragmentTwoReserveBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentTwoReserveBinding.inflate(inflater, container, false)
+        binding = FragmentOneReserveBinding.inflate(inflater, container, false)
 
         binding.MainMenu.setOnClickListener {
             val intent = Intent(activity, MainActivity::class.java)
@@ -23,4 +24,7 @@ class TwoReserveFragment : Fragment() {
         }
         return binding.root
     }
+
+
+
 }
