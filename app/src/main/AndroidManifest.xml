@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.teamproject" >
+    package="com.example.teamproject">
 
     <application
         android:allowBackup="true"
@@ -13,7 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TeamProject">
         <activity
-            android:name="com.example.teamproject.MyDining"
+            android:name=".MyApplication"
+            android:exported="false" />
+        <activity
+            android:name=".MyDining"
             android:exported="false" />
         <activity
             android:name=".MyReservation"
@@ -22,7 +25,7 @@
             android:name=".MyAlarm"
             android:exported="false" />
         <activity
-            android:name="com.example.teamproject.MainActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
