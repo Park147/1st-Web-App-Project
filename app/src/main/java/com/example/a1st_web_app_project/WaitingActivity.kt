@@ -1,8 +1,6 @@
 package com.example.a1st_web_app_project
 
-import android.R
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -39,10 +37,11 @@ class WaitingActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-        override fun onSupportNavigateUp(): Boolean {
+    override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         Toast.makeText(this@WaitingActivity, "뒤로가기", Toast.LENGTH_SHORT).show()
         return super.onSupportNavigateUp()
-}}
+    }
+
+}
 
