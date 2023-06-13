@@ -39,6 +39,15 @@
                 android:textSize="16dp"
                 android:layout_marginLeft="24dp"
                 />
+            <TextView
+                android:id="@+id/item_waiting"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:layout_marginLeft="24dp"
+                />
         </LinearLayout>
     </LinearLayout>
 

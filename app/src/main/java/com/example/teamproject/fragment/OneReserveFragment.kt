@@ -2,7 +2,6 @@ package com.example.teamproject.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,20 +9,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-
+import com.example.teamproject.recycler.MyReserveAdapter
 import com.example.teamproject.MainActivity
 import com.example.teamproject.MyApplication
-import com.example.teamproject.recycler.MyAdapter
 import com.example.teamproject.databinding.FragmentOneReserveBinding
-import com.example.teamproject.model.ItemData
+import com.example.teamproject.model.ItemDataList
+import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class OneReserveFragment : Fragment() {
     lateinit var binding: FragmentOneReserveBinding
-    var datas: MutableList<String>? = null
-    lateinit var adapter: MyAdapter
-    lateinit var userid: String
+    lateinit var adapter: MyReserveAdapter
+    lateinit var name: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,37 +34,49 @@ class OneReserveFragment : Fragment() {
             startActivity(intent)
         }
 
+        val networkService = (context?.applicationContext as MyApplication).networkService
+        val reserveList = networkService.getMyReserve(name)
+        reserveList.enqueue(object: Callback<ItemDataList>{
+            override fun onResponse(call: Call<ItemDataList>, response: Response<ItemDataList>) {
 
-        return binding.root
-    }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+                val itemList = response.body() //responsebody에 있는 값을 가져옴
+//                var memberCheck: List<String>?
+                //all
 
-        val networkService = (requireActivity().applicationContext as MyApplication).networkService
-        val usrListCall = networkService.reserve(userid)
-        Log.d("lsy", "url:" + usrListCall.request().url().toString())
+                adapter = MyReserveAdapter(this@OneReserveFragment, itemList?.items)
+                adapter.notifyDataSetChanged()
+                binding.recyclerView.adapter = adapter
+                binding.recyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+                adapter.notifyDataSetChanged()
 
-        usrListCall.enqueue(object : Callback<ItemData> {
-            override fun onResponse(
-                call: retrofit2.Call<ItemData>,
-                response: Response<ItemData>
-            ) {
-                val usrList = response.body()
-                binding.recyclerView.adapter =
-                    MyAdapter(requireContext(), usrList)
+//                personal
+//                var itemDataList = arrayListOf<ItemData>()
+//                for(i in 0 until (itemList?.items?.size ?:0)){
+//                    memberCheck = itemList?.items?.get(i)?.name?.split(",") ?: null
+//
+//                    if(memberCheck?.size?.minus(1) == 1){
+//                        itemList?.items?.get(i)?.let { itemDataList?.add(it) }
+//                    }
+//                    adapter = MyReserveAdapter(this@OneReserveFragment, itemDataList)
+//                }
 
-                binding.recyclerView.addItemDecoration(
-                    DividerItemDecoration(
-                        requireContext(),
-                        LinearLayoutManager.VERTICAL
+//                people
+//                var itemDataList = arrayListOf<ItemData>()
+//                for(i in 0 until (itemList?.items?.size ?:0)){
+//                    memberCheck = itemList?.items?.get(i)?.name?.split(",") ?: null
+//                    if(memberCheck?.size?.minus(1)!! > 1){
+//                        itemList?.items?.get(i)?.let { itemDataList?.add(it) }
+//                    }
+//                    adapter = MyReserveAdapter(this@OneReserveFragment, itemDataList)
+//                }
+
 
             }
 
-            override fun onFailure(call: retrofit2.Call<ItemData>, t: Throwable) {
-                Log.d("lsy", "fail")
-                call.cancel()
+            override fun onFailure(call: Call<ItemDataList>, t: Throwable) {
             }
         })
+        return binding.root
     }
 
 }

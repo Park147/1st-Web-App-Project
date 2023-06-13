@@ -14,15 +14,10 @@
         android:theme="@style/Theme.TeamProject">
         <activity
             android:name=".MyApplication"
-            android:exported="false" />
+            android:exported="false"
+            tools:ignore="Instantiatable" />
         <activity
             android:name=".MyDining"
-            android:exported="false" />
-        <activity
-            android:name=".MyReservation"
-            android:exported="false" />
-        <activity
-            android:name=".MyAlarm"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
