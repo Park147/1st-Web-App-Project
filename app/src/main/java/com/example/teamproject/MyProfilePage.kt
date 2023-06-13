@@ -1,8 +1,10 @@
 package com.example.teamproject
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
@@ -10,12 +12,16 @@ import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.core.content.ContextCompat.startActivity
 import com.example.teamproject.databinding.ActivityMyProfilePageBinding
+import com.example.teamproject.login.ModProfileActivity
 import com.example.teamproject.login.ModifyProfileActivity
+import com.example.teamproject.model.Member
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MyProfilePage : AppCompatActivity() {
     lateinit var binding: ActivityMyProfilePageBinding
-
     var modprofile: Button? = null
     var bottommenu: BottomNavigationView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,12 +65,53 @@ class MyProfilePage : AppCompatActivity() {
         }
 
 
-
-
         binding.modprofile.setOnClickListener {
-            val intent = Intent(this@MyProfilePage, ModifyProfileActivity::class.java)
-            startActivity(intent)
+
+            var m_id = binding.userId.text.toString()
+
+            val userService = (applicationContext as MyApplication).userService
+
+            var userModify = userService.getPro(m_id)
+
+            userModify.enqueue(object: Callback<Member> {
+                override fun onResponse(call: Call<Member>, response: Response<Member>) {
+                    if(response.isSuccessful) {
+                        val sucUser = response.body()
+
+                        val m_id = sucUser?.m_id.toString()
+                        val m_name = sucUser?.m_name.toString()
+                        val m_phone = sucUser?.m_phone.toString()
+                        val m_address = sucUser?.m_address.toString()
+                        val m_password = sucUser?.m_password.toString()
+
+                        Log.d("logintest3", "${m_id}, ${m_name}, ${m_phone}, ${m_address}, ${m_password}")
+
+                        val intent = Intent(this@MyProfilePage, ModProfileActivity::class.java)
+                        intent.putExtra("m_id", m_id)
+                        intent.putExtra("m_name", m_name)
+                        intent.putExtra("m_phone", m_phone)
+                        intent.putExtra("m_address", m_address)
+                        intent.putExtra("m_password", m_password)
+                        startActivity(intent)
+
+                    }
+                }
+
+                override fun onFailure(call: Call<Member>, t: Throwable) {
+                    call.cancel()
+                }
+
+            })
+
+
         }
+
+        val loginSharedPref = applicationContext.getSharedPreferences("login_prof", Context.MODE_PRIVATE)
+        val userId = loginSharedPref.getString("m_id", "")
+        val password = loginSharedPref.getString("m_password", "")
+
+        binding.userId.text = userId
+
 
     }
 

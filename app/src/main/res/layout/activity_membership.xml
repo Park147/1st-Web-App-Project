@@ -39,59 +39,59 @@
                 android:layout_gravity="center">
 
                 <TextView
-                    android:layout_width="180dp"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="아이디"
                     android:textSize="25dp" />
 
                 <EditText
                     android:id="@+id/memid"
-                    android:layout_width="180dp"
+                    android:layout_width="230dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:hint="아이디를 입력하세요" />
 
                 <TextView
-                    android:layout_width="180dp"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="비밀번호"
                     android:textSize="25dp" />
 
                 <EditText
                     android:id="@+id/mempass"
-                    android:layout_width="180dp"
+                    android:layout_width="230dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:hint="비밀번호를 입력하세요" />
 
                 <TextView
-                    android:layout_width="180dp"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="비밀번호 확인"
                     android:textSize="25dp" />
 
                 <EditText
                     android:id="@+id/mempasscon"
-                    android:layout_width="180dp"
+                    android:layout_width="230dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:hint="비밀번호 확인" />
 
                 <TextView
-                    android:layout_width="180dp"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="이름"
                     android:textSize="25dp" />
 
                 <EditText
                     android:id="@+id/memId"
-                    android:layout_width="180dp"
+                    android:layout_width="230dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:hint="이름을 입력하세요" />
 
                 <TextView
-                    android:layout_width="180dp"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="성별"
                     android:textSize="25dp" />
@@ -117,73 +117,73 @@
                 </RadioGroup>
 
                 <TextView
-                    android:layout_width="180dp"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="번호"
                     android:textSize="25dp" />
 
                 <EditText
                     android:id="@+id/memphone"
-                    android:layout_width="180dp"
+                    android:layout_width="230dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:hint="휴대전화를 입력하세요" />
 
                 <TextView
-                    android:layout_width="180dp"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="주소"
                     android:textSize="25dp" />
 
                 <EditText
                     android:id="@+id/memaddress"
-                    android:layout_width="180dp"
+                    android:layout_width="230dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:hint="주소를 입력하세요" />
 
                 <TextView
-                    android:layout_width="180dp"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="닉네임"
                     android:textSize="25dp" />
 
                 <EditText
                     android:id="@+id/memnick"
-                    android:layout_width="180dp"
+                    android:layout_width="230dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:hint="닉네임를 입력하세요" />
 
                 <TextView
-                    android:layout_width="180dp"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="자기소개"
                     android:textSize="25dp" />
 
                 <EditText
                     android:id="@+id/memintro"
-                    android:layout_width="180dp"
+                    android:layout_width="230dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:hint="자기소개를 입력하세요" />
                 <TextView
-                    android:layout_width="180dp"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="활동지역"
                     android:textSize="25dp" />
 
                 <EditText
                     android:id="@+id/memmove"
-                    android:layout_width="180dp"
+                    android:layout_width="230dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:hint="활동지역를 입력하세요" />
             </GridLayout>
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/sucmem"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="가입하기"
                 android:textSize="30dp"

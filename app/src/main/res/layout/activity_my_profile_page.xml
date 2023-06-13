@@ -27,7 +27,7 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/userId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
@@ -46,7 +46,7 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/pictures"
         app:layout_constraintStart_toEndOf="@+id/pictures"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/userId">
 
         <TextView
             android:layout_width="wrap_content"
@@ -71,7 +71,7 @@
 
     </GridLayout>
 
-    <Button
+    <android.widget.Button
         android:id="@+id/modprofile"
         android:text="프로필 수정"
         android:textColor="#000000"

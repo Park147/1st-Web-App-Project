@@ -1,5 +1,6 @@
 package com.example.teamproject
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,10 +10,10 @@ import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teamproject.databinding.ActivityMainBinding
+import com.example.teamproject.login.LoginActivity
 import com.example.teamproject.model.PageListModel
 import com.example.teamproject.model.PageListModel2
 import com.example.teamproject.recycler.MyAdapter
-import com.example.teamproject.recycler.MyAdapter2
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,7 +22,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
 
     var bottommenu: BottomNavigationView? = null
-    var modprofile: Button? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val serviceKey = "DLqEcgtBqy4lMOUw1BMi8NL1H5XiTbNKGuQtPM3epTpiPJZa6jcwQo1DDRmsGstF"
@@ -50,8 +50,16 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this@MainActivity, "미구현", Toast.LENGTH_SHORT).show()
                 }
                 R.id.fifth_tab -> {
-                    val intent = Intent(this@MainActivity, MyProfilePage::class.java)
-                    startActivity(intent)
+                    val loginSharedPref = applicationContext.getSharedPreferences("login_prof", Context.MODE_PRIVATE)
+                    val userId = loginSharedPref.getString("m_id", null)
+                    if ( userId == null){
+                        val intent = Intent(this@MainActivity, LoginActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        val intent = Intent(this@MainActivity, MyProfilePage::class.java)
+                        startActivity(intent)
+                    }
+
                 }
 
             }
