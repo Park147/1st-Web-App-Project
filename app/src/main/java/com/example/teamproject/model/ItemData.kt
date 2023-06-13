@@ -1,13 +1,13 @@
 package com.example.teamproject.model
 
 data class ItemData (
-    var id: String,
-    var name: String,
-    var image: String,
-    var title: String,
-    var content: String,
-    var waiting: String,
-    var time: String,
-    var people: String,
-    var confirm: String
+    var r_id: String,
+    var r_username: String,
+    var r_image: String,
+    var r_title: String,
+    var r_item: String,
+    var r_waiting: String,
+    var r_time: String,
+    var r_people: String,
+    var r_reserve_confirm: String
 )

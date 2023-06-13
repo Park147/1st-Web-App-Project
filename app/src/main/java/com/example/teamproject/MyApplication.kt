@@ -5,6 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import androidx.multidex.MultiDexApplication
 import com.example.teamproject.retrofit.NetworkService
 
+
 class MyApplication : MultiDexApplication() {
 
     var networkService: NetworkService

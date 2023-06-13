@@ -15,39 +15,39 @@ import com.example.teamproject.model.ItemData
 
 class MyViewHolder(val binding: ItemRecyclerviewBinding): RecyclerView.ViewHolder(binding.root)
 
-class MyReserveAdapter(val context: OneReserveFragment, val datas:List<ItemData>?): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class MyReserveAdapter(val context: OneReserveFragment, val item:List<ItemData>?): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     override fun getItemCount(): Int{
-        return datas?.size ?: 0
+        return item?.size ?: 0
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
-            = MyViewHolder(ItemRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            = MyViewHolder(ItemRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent,  false))
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val binding=(holder as MyViewHolder).binding
 
-        val reserve = datas?.get(position)
-        binding.itemTitle.text = reserve?.title
-        binding.itemContent.text = reserve?.content
-        binding.itemWaiting.text = reserve?.waiting
-        val urlImg = reserve?.image
-
-        Glide.with(context)
-            .asBitmap()
-            .load(urlImg)
-            .into(object : CustomTarget<Bitmap>(200, 200) {
-                override fun onResourceReady(
-                    resource: Bitmap,
-                    transition: Transition<in Bitmap>?
-                ) {
-                    binding.itemImage.setImageBitmap(resource)
-                }
-
-                override fun onLoadCleared(placeholder: Drawable?) {
-                    UCharacter.GraphemeClusterBreak.T
-                }
-            })
+        val reserve = item?.get(position)
+        binding.itemTitle.text = reserve?.r_title
+        binding.itemContent.text = reserve?.r_item
+        binding.itemWaiting.text = reserve?.r_waiting
+//        val urlImg = reserve?.r_image
+//
+//        Glide.with(context)
+//            .asBitmap()
+//            .load(urlImg)
+//            .into(object : CustomTarget<Bitmap>(200, 200) {
+//                override fun onResourceReady(
+//                    resource: Bitmap,
+//                    transition: Transition<in Bitmap>?
+//                ) {
+//                    binding.itemImage.setImageBitmap(resource)
+//                }
+//
+//                override fun onLoadCleared(placeholder: Drawable?) {
+//                    UCharacter.GraphemeClusterBreak.T
+//                }
+//            })
     }
 }
 
