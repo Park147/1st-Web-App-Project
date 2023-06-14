@@ -84,7 +84,7 @@
                     android:textSize="25dp" />
 
                 <EditText
-                    android:id="@+id/memId"
+                    android:id="@+id/memname"
                     android:layout_width="230dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -100,7 +100,8 @@
                     android:id="@+id/memgender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
 
                     <RadioButton
                         android:id="@+id/genderM"

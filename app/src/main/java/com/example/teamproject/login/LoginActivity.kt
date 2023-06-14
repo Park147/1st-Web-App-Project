@@ -57,6 +57,11 @@ class LoginActivity : AppCompatActivity() {
             true
         }
 
+        binding.membershipbtn.setOnClickListener {
+            val intent = Intent(this@LoginActivity, MembershipActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.loginbtn.setOnClickListener {
             var m_id = binding.loginid.text.toString()
             var m_password =binding.loginps.text.toString()

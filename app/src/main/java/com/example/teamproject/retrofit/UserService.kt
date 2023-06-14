@@ -1,6 +1,8 @@
 package com.example.teamproject.retrofit
 
 import com.example.teamproject.model.Member
+import com.example.teamproject.model.ModInfo
+import com.example.teamproject.model.ModPro
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -29,12 +31,12 @@ interface UserService {
 
     @POST("/seat/member/userPro")
     fun mUpPro(
-        @Body member: Member
+        @Body member: ModPro
     ): Call<Unit>
 
     @POST("/seat/member/userIntro")
     fun mUpIntro(
-        @Body member: Member
+        @Body member: ModInfo
     ): Call<Unit>
 
     @POST("/seat/member/userDelete")

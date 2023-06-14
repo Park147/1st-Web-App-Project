@@ -13,5 +13,5 @@ data class Member(
     var m_nickname: String,
     var m_introduction: String,
     var m_activity_area: String,
-    var m_created_date: Date
+    var m_created_date: String
 )
