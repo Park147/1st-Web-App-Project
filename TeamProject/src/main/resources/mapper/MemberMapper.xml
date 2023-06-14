@@ -20,7 +20,7 @@
 	</select>
 	
 	<delete id="deleteUser">
-		delete member where m_id = #{m_id}
+		delete from member where m_id = #{m_id}
 	</delete>
 	
 	<update id="updateProfile">

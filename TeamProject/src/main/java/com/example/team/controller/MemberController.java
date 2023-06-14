@@ -38,6 +38,7 @@ public class MemberController {
 
 	@PostMapping("/userPro")
 	public void userProfile(@RequestBody MemberVO member) {
+		System.out.println("정보수정 테스트ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
 		memberService.updateProfile(member);
 	}
 
