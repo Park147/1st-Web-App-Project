@@ -11,11 +11,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TeamProject">
+        android:theme="@style/Theme.TeamProject"
+        android:name=".MyApplication">
         <activity
             android:name=".MyApplication"
-            android:exported="false"
-            tools:ignore="Instantiatable" />
+            android:exported="false" />
         <activity
             android:name=".MyDining"
             android:exported="false" />

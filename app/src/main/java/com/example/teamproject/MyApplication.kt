@@ -1,12 +1,13 @@
 package com.example.teamproject
 
+import android.app.Application
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import androidx.multidex.MultiDexApplication
 import com.example.teamproject.retrofit.NetworkService
 
 
-class MyApplication : MultiDexApplication() {
+class MyApplication : Application() {
 
     var networkService: NetworkService
     val retrofit: Retrofit
