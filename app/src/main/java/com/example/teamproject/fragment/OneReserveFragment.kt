@@ -47,10 +47,6 @@ class OneReserveFragment : Fragment() {
                     var item = response.body()?.items
                     Log.d("lmj","ListItem 값 ${item}")
 
-                    val layoutManager = LinearLayoutManager(context)
-                    layoutManager.orientation = LinearLayoutManager.HORIZONTAL
-                    binding.oneRecyclerView.layoutManager = layoutManager
-
                     adapter = MyReserveAdapter(this@OneReserveFragment, item)
                     binding.oneRecyclerView.adapter = adapter
                     binding.oneRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
@@ -63,6 +59,8 @@ class OneReserveFragment : Fragment() {
                 }
 
             })
+
+
 
 //                personal
 //                var itemDataList = arrayListOf<ItemData>()
