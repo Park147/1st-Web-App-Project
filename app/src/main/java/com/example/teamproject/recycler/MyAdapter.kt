@@ -6,13 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.teamproject.databinding.ItemMainBinding
-import com.example.teamproject.model.ItemModel2
-import com.example.teamproject.model.ItemModel4
+import com.example.teamproject.model.Rstr
 
 
 class MyViewHolder(val binding: ItemMainBinding): RecyclerView.ViewHolder(binding.root)
 
-class MyAdapter(val context: Context, val datas: List<ItemModel2>?, val datas2: List<ItemModel4>?): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class MyAdapter(val context: Context, val datas: List<Rstr>?): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     override fun getItemCount(): Int{
         return datas?.size ?: 0
     }
@@ -26,13 +25,13 @@ class MyAdapter(val context: Context, val datas: List<ItemModel2>?, val datas2: 
 
         //관광기후
         val rs = datas?.get(position)
-        val rsimg = datas2?.get(position)
-        binding.firstNameView.text = "지역이름: "+rs?.RSTR_ID
-        binding.secondNameView.text = "코스이름: "+rs?.RSTR_NM
-        binding.thirdNameView.text = "관광지명: "+rs?.RSTR_TELNO
-        binding.fourthNameView.text = "일 3시간 기온: "+rs?.BSNS_STATM_BZCND_NM
+        binding.id.text = rs?.rstr_nm
+        binding.firstNameView.text = "주소: "+rs?.rstr_addr
+        binding.secondNameView.text = "전화: "+rs?.rstr_tell
+        binding.thirdNameView.text = "업종: "+rs?.rstr_list
+        binding.fourthNameView.text = "소개: "+rs?.rstr_intro
 
-        val imageUrl = rsimg?.RSTR_IMG_URL
+        val imageUrl = rs?.rstr_img
 
         if (imageUrl != null) {
             Glide.with(context)

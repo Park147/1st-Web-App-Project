@@ -5,16 +5,15 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teamproject.databinding.ActivityMainBinding
 import com.example.teamproject.login.LoginActivity
-import com.example.teamproject.model.PageListModel
-import com.example.teamproject.model.PageListModel2
+import com.example.teamproject.model.Rstr
 import com.example.teamproject.recycler.MyAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
@@ -65,7 +64,30 @@ class MainActivity : AppCompatActivity() {
             true
 
         }
+        val userService = (applicationContext as MyApplication).userService
+        var getrstrlist = userService.rstrList()
 
+        Log.d("lsy", "${getrstrlist}")
+
+        getrstrlist.enqueue(object: Callback<List<Rstr>>{
+            override fun onResponse(call: Call<List<Rstr>>, response: Response<List<Rstr>>) {
+                if (response.isSuccessful){
+                    val rstrL = response.body()
+                    Log.d("lsy", "${rstrL}")
+                    binding.recyclerView.adapter = MyAdapter(this@MainActivity, rstrL)
+
+                    binding.recyclerView.addItemDecoration(
+                        DividerItemDecoration(this@MainActivity, LinearLayoutManager.VERTICAL))
+
+                }
+            }
+
+            override fun onFailure(call: Call<List<Rstr>>, t: Throwable) {
+                Log.d("lsy", "실패! ${t.message}")
+                call.cancel()
+            }
+
+        })
 
 
     }

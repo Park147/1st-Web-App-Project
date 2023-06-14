@@ -47,7 +47,7 @@ interface UserService {
     ): Call<Unit>
 
     @GET("/seat/rstr/list")
-    fun rstrList(): Call<RstrList>
+    fun rstrList(): Call<List<Rstr>>
 
     @GET("seat/rstr/rstrinfo")
     fun getrstr(

@@ -1,7 +1,5 @@
 package com.example.teamproject.model
 
-import java.util.Date
-
 data class Rstr(
     var rstr_nm: String,
     var rstr_addr: String,
