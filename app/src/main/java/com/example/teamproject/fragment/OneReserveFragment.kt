@@ -40,12 +40,11 @@ class OneReserveFragment : Fragment() {
         }
             val networkService = (context?.applicationContext as MyApplication).networkService
             val reserveListCall = networkService.getReserve()
-            Log.d("lmj", "url: " + reserveListCall.request().url().toString())
+
 
             reserveListCall.enqueue(object : Callback<ItemDataList> {
                 override fun onResponse(call: Call<ItemDataList>, response: Response<ItemDataList>) {
                     var item = response.body()?.items
-                    Log.d("lmj","ListItem 값 ${item}")
 
                     adapter = MyReserveAdapter(this@OneReserveFragment, item)
                     binding.oneRecyclerView.adapter = adapter
@@ -54,7 +53,6 @@ class OneReserveFragment : Fragment() {
                 }
 
                 override fun onFailure(call: Call<ItemDataList>, t: Throwable) {
-                    Log.d("lmj","fail: " + t.message)
                     call.cancel()
                 }
 
