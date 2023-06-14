@@ -38,8 +38,6 @@ class OneReserveFragment : Fragment() {
             val intent = Intent(activity, MainActivity::class.java)
             startActivity(intent)
         }
-
-        binding.btn.setOnClickListener {
             val networkService = (context?.applicationContext as MyApplication).networkService
             val reserveListCall = networkService.getReserve()
             Log.d("lmj", "url: " + reserveListCall.request().url().toString())
@@ -65,8 +63,6 @@ class OneReserveFragment : Fragment() {
                 }
 
             })
-        }
-
 
 //                personal
 //                var itemDataList = arrayListOf<ItemData>()
