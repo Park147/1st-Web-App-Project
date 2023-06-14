@@ -26,10 +26,7 @@ import retrofit2.Response
 class OneReserveFragment : Fragment() {
     lateinit var binding: FragmentOneReserveBinding
     lateinit var adapter: MyReserveAdapter
-    var r_username = "이름"
-    var r_title = "타이틀"
-    var r_item = "아이템"
-    var r_waiting = "웨이팅"
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,6 +42,7 @@ class OneReserveFragment : Fragment() {
         binding.btn.setOnClickListener {
             val networkService = (context?.applicationContext as MyApplication).networkService
             val reserveListCall = networkService.getReserve()
+            Log.d("lmj", "url: " + reserveListCall.request().url().toString())
 
             reserveListCall.enqueue(object : Callback<ItemDataList> {
                 override fun onResponse(call: Call<ItemDataList>, response: Response<ItemDataList>) {

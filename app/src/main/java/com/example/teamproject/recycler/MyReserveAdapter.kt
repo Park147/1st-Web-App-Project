@@ -20,11 +20,11 @@ class MyReserveAdapter(val context: OneReserveFragment, val datas:List<ItemData>
 
         val reserve = datas?.get(position)
         Log.d("lmj","reserve?.r_title===========================${reserve?.r_title}")
-        binding.itemTitle.text = reserve?.r_title
+        binding.itemtitle.text = reserve?.r_title
         Log.d("lmj","reserve?.r_item===========================${reserve?.r_item}")
-        binding.itemContent.text = reserve?.r_item
+        binding.itemcontent.text = reserve?.r_item
         Log.d("lmj","reserve?.r_waiting===========================${reserve?.r_waiting}")
-        binding.itemWaiting.text = reserve?.r_waiting
+        binding.itemwaiting.text = reserve?.r_waiting
 //        val urlImg = reserve?.r_image
 //
 //        Glide.with(context)
