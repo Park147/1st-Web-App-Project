@@ -3,6 +3,8 @@ package com.example.teamproject.retrofit
 import com.example.teamproject.model.Member
 import com.example.teamproject.model.ModInfo
 import com.example.teamproject.model.ModPro
+import com.example.teamproject.model.Rstr
+import com.example.teamproject.model.RstrList
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -44,4 +46,11 @@ interface UserService {
         @Query("m_id")m_id: String
     ): Call<Unit>
 
+    @GET("/seat/rstr/list")
+    fun rstrList(): Call<RstrList>
+
+    @GET("seat/rstr/rstrinfo")
+    fun getrstr(
+        @Query("rstr_nm") rstr_nm: String
+    ): Call<Rstr>
 }

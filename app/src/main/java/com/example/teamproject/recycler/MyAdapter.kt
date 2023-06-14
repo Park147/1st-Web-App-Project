@@ -31,9 +31,6 @@ class MyAdapter(val context: Context, val datas: List<ItemModel2>?, val datas2: 
         binding.secondNameView.text = "코스이름: "+rs?.RSTR_NM
         binding.thirdNameView.text = "관광지명: "+rs?.RSTR_TELNO
         binding.fourthNameView.text = "일 3시간 기온: "+rs?.BSNS_STATM_BZCND_NM
-        binding.fifthNameView.text = "습도: "+rs?.RSTR_INTRCN_CONT
-        binding.sixthNameView.text = "강수: "+rs?.RSTR_RDNMADR
-        binding.seventhNameView.text = "강수: "+rs?.RSTR_LNNO_ADRES
 
         val imageUrl = rsimg?.RSTR_IMG_URL
 
