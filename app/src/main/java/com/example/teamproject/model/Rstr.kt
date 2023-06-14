@@ -6,5 +6,6 @@ data class Rstr(
     var rstr_tell: String,
     var rstr_list: String,
     var rstr_intro: String,
-    var rstr_img: String
+    var rstr_img: String,
+    var markview: String
 )

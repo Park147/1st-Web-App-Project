@@ -1,10 +1,12 @@
 package com.example.teamproject.recycler
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.teamproject.R
 import com.example.teamproject.databinding.ItemMainBinding
 import com.example.teamproject.model.Rstr
 
@@ -30,6 +32,16 @@ class MyAdapter(val context: Context, val datas: List<Rstr>?): RecyclerView.Adap
         binding.secondNameView.text = "전화: "+rs?.rstr_tell
         binding.thirdNameView.text = "업종: "+rs?.rstr_list
         binding.fourthNameView.text = "소개: "+rs?.rstr_intro
+        binding.bookmarkbtn.contentDescription = rs?.rstr_nm
+        Log.d("markviewtest1", "성공! ${rs?.markview}")
+
+        if (rs?.markview == "X") {
+            Log.d("markviewtest2", "성공! ${rs?.markview}")
+            binding.bookmarkbtn.setImageResource(R.drawable.bookmarkoff)
+        } else if (rs?.markview == "O") {
+            Log.d("markviewtest3", "실패! ${rs?.markview}")
+            binding.bookmarkbtn.setImageResource(R.drawable.bookmarkon)
+        }
 
         val imageUrl = rs?.rstr_img
 
