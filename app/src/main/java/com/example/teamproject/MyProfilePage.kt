@@ -64,9 +64,10 @@ class MyProfilePage : AppCompatActivity() {
             true
         }
 
-
+        // 프로필 수정으로 돌아가는 작업
         binding.modprofile.setOnClickListener {
-
+            
+            // 정보를 뽑기위해 m_id의 값을 들고오는 작업
             var m_id = binding.userId.text.toString()
 
             val userService = (applicationContext as MyApplication).userService
@@ -77,7 +78,8 @@ class MyProfilePage : AppCompatActivity() {
                 override fun onResponse(call: Call<Member>, response: Response<Member>) {
                     if(response.isSuccessful) {
                         val sucUser = response.body()
-
+                        
+                        // body에서 쓸 아이템만 가져오기 위해 따로 변수로 선언하는 곳
                         val m_id = sucUser?.m_id.toString()
                         val m_name = sucUser?.m_name.toString()
                         val m_phone = sucUser?.m_phone.toString()
@@ -86,6 +88,7 @@ class MyProfilePage : AppCompatActivity() {
 
                         Log.d("logintest3", "${m_id}, ${m_name}, ${m_phone}, ${m_address}, ${m_password}")
 
+                        // activity를 넘어갈때 값을 가져가는 구간
                         val intent = Intent(this@MyProfilePage, ModProfileActivity::class.java)
                         intent.putExtra("m_id", m_id)
                         intent.putExtra("m_name", m_name)
@@ -105,7 +108,8 @@ class MyProfilePage : AppCompatActivity() {
 
 
         }
-
+        
+        // 로그인 정보를 가져오는 곳
         val loginSharedPref = applicationContext.getSharedPreferences("login_prof", Context.MODE_PRIVATE)
         val userId = loginSharedPref.getString("m_id", "")
         val password = loginSharedPref.getString("m_password", "")

@@ -1,7 +1,6 @@
 package com.example.teamproject.model
 
-import java.util.Date
-
+// Member 의 객체 [ 로그인 회원가입을 위한 정보 ]
 data class Member(
     var m_id: String,
     var m_password: String,

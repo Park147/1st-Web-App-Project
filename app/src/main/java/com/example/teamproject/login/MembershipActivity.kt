@@ -41,15 +41,19 @@ class MembershipActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         binding.toolbar.title = "회원 가입"
-
+        
+        // 라디오 버튼 2개이상을 쓸 경우 그룹을 통해서 값을 전달하는 구간
         binding.memgender.setOnCheckedChangeListener { group, checkedId ->
             when(checkedId){
                 R.id.genderM -> cGender = binding.genderM.text?.toString()
                 R.id.genderF -> cGender = binding.genderF.text?.toString()
             }
         }
-
+        
+        // 회원가입을 완료하는 작업
         binding.sucmem.setOnClickListener {
+
+            // member 모델의 각 변수에 값을 넣고 저장하고  현재시간을 불러오는 Date() 함수
             var datep = Date()
             var member = Member(
                 m_id = binding.memid.text.toString(),

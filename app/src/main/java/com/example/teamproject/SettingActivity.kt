@@ -39,11 +39,15 @@ class SettingActivity : AppCompatActivity() {
         infomode = binding.infomode
         alamset = binding. alamset
         delmem = binding.delmem
-
+        
+        
+        //로그인 정보를 가져오는 곳
         val loginSharedPref = applicationContext.getSharedPreferences("login_prof", Context.MODE_PRIVATE)
         val userId = loginSharedPref.getString("m_id", "")
         val password = loginSharedPref.getString("m_password", "")
-
+        
+        
+        //프로필 설정으로 들어가는 버튼
         binding.modprofileset.setOnClickListener {
             var m_id = userId.toString()
 
@@ -79,7 +83,8 @@ class SettingActivity : AppCompatActivity() {
 
             })
         }
-
+        
+        // 내정보 수정으로 들어가는 버튼
         binding.infomode.setOnClickListener {
             var m_id = userId.toString()
 
@@ -117,17 +122,19 @@ class SettingActivity : AppCompatActivity() {
 
             })
         }
-
+        
+        // 알람 설정으로 들어가는 버튼
         binding.alamset.setOnClickListener {
             val intent = Intent(this@SettingActivity, AlamActivity::class.java)
             startActivity(intent)
         }
-
+        // 회원 탈퇴를 위한 버튼
         binding.delmem.setOnClickListener {
             var m_id = userId.toString()
 
             val userService = (applicationContext as MyApplication).userService
-
+            
+            //탈퇴를 위해 설정한 서비스가져오기
             var deluser = userService.memberDelete(m_id)
 
             deluser.enqueue(object: Callback<Unit> {
@@ -135,9 +142,11 @@ class SettingActivity : AppCompatActivity() {
                     if(response.isSuccessful) {
                         val sucUser = response.body()
 
+                        //로그인 정보를 비워버리는 작업 [ 세션 지우기와 같음 ]
                         val loginSharedPref = applicationContext.getSharedPreferences("login_prof", Context.MODE_PRIVATE)
                         loginSharedPref.edit().clear().apply()
-
+                        
+                        //로그인 정보를 비웠기에 로그인 페이지로 돌아가는 작업
                         val intent = Intent(this@SettingActivity, LoginActivity::class.java)
                         startActivity(intent)
                         Log.d("deletetest1", "성공 LoginActivity로 이동")
@@ -158,7 +167,6 @@ class SettingActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
-        Toast.makeText(this@SettingActivity, "뒤로가기", Toast.LENGTH_SHORT).show()
         return super.onSupportNavigateUp()
     }
     

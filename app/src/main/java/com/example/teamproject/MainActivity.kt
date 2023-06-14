@@ -35,7 +35,8 @@ class MainActivity : AppCompatActivity() {
         bottommenu = binding.bottommenu
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottommenu)
         bottomNavigationView.selectedItemId = R.id.first_tab
-
+        
+        // 하단바 메뉴 선택 이동 구간
         binding.bottommenu.setOnItemSelectedListener {item ->
             when(item.itemId) {
                 R.id.second_tab -> {
@@ -64,16 +65,19 @@ class MainActivity : AppCompatActivity() {
             true
 
         }
+        // 메인화면에 스프링에서 받아온 식당리스트를 출력하는 구간
         val userService = (applicationContext as MyApplication).userService
         var getrstrlist = userService.rstrList()
 
         Log.d("lsy", "${getrstrlist}")
-
+        
         getrstrlist.enqueue(object: Callback<List<Rstr>>{
             override fun onResponse(call: Call<List<Rstr>>, response: Response<List<Rstr>>) {
                 if (response.isSuccessful){
                     val rstrL = response.body()
                     Log.d("lsy", "${rstrL}")
+                    
+                    //받아온 식당정보를 MyAdapter에 넣어서 recyclerView에 넣어주는 작업
                     binding.recyclerView.adapter = MyAdapter(this@MainActivity, rstrL)
 
                     binding.recyclerView.addItemDecoration(

@@ -25,7 +25,7 @@ class MyAdapter(val context: Context, val datas: List<Rstr>?): RecyclerView.Adap
         val binding=(holder as MyViewHolder).binding
 
 
-        //관광기후
+        //받아온 데이터를 아이템에 넣기 위한 설정
         val rs = datas?.get(position)
         binding.id.text = rs?.rstr_nm
         binding.firstNameView.text = "주소: "+rs?.rstr_addr
@@ -35,6 +35,7 @@ class MyAdapter(val context: Context, val datas: List<Rstr>?): RecyclerView.Adap
         binding.bookmarkbtn.contentDescription = rs?.rstr_nm
         Log.d("markviewtest1", "성공! ${rs?.markview}")
 
+        // 데이터 값을 비교해서 상황에 따라 출력하는 구간
         if (rs?.markview == "X") {
             Log.d("markviewtest2", "성공! ${rs?.markview}")
             binding.bookmarkbtn.setImageResource(R.drawable.bookmarkoff)
@@ -42,7 +43,8 @@ class MyAdapter(val context: Context, val datas: List<Rstr>?): RecyclerView.Adap
             Log.d("markviewtest3", "실패! ${rs?.markview}")
             binding.bookmarkbtn.setImageResource(R.drawable.bookmarkon)
         }
-
+        
+        // 이미지의 주소가 url일 경우 출력하는 구간
         val imageUrl = rs?.rstr_img
 
         if (imageUrl != null) {

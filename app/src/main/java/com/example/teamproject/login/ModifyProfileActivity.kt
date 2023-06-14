@@ -28,6 +28,7 @@ class ModifyProfileActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding.toolbar.title = "프로필 수정"
 
+        // 이전 페이지에서 intent를 통해서 받아온 값을 출력하는 부분
         var m_id = intent.getStringExtra("m_id")
         var m_nickname = intent.getStringExtra("m_nickname")
         var m_introduction = intent.getStringExtra("m_introduction")
@@ -38,6 +39,8 @@ class ModifyProfileActivity : AppCompatActivity() {
         binding.modmove.setText(m_activity_area)
         modprofiler = binding.modprofiler
 
+        
+        // 프로필을 수정하는 구간
         binding.modprofiler.setOnClickListener {
             var member = ModInfo(
                 m_id = m_id.toString(),
@@ -59,6 +62,7 @@ class ModifyProfileActivity : AppCompatActivity() {
                         var modpromemb = response.body()
 
                         Log.d("Modprofiler3", "성공 ${modpromemb}")
+                        //이전 페이지로 돌아가는 onBackPressed() 함수
                         onBackPressed()
                     }
                 }

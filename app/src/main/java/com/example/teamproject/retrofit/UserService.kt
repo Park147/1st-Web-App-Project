@@ -4,11 +4,11 @@ import com.example.teamproject.model.Member
 import com.example.teamproject.model.ModInfo
 import com.example.teamproject.model.ModPro
 import com.example.teamproject.model.Rstr
-import com.example.teamproject.model.RstrList
 import retrofit2.Call
 import retrofit2.http.*
 
 
+// 스프링의 Controller 와 같은 구간으로 스프링과 안드로이드 연동을 위한 서비스 구간
 interface UserService {
 
     //https://apis.data.go.kr/1360000/TourStnInfoService1/getCityTourClmIdx1?serviceKey=인증키&pageNo=1&numOfRows=10&dataType=JSON&CURRENT_DATE=2018123110&DAY=3&CITY_AREA_ID=5013000000
