@@ -121,7 +121,7 @@ class MainActivity : FragmentActivity() {
                             2 -> FragmentThird()
                             3 -> FragmentFourth()
                             else -> throw IllegalArgumentException("Invalid position: $i")
-                        }
+                        }asdasd
                         fragment.arguments = bundle
                         supportFragmentManager.beginTransaction().replace(R.id.fragend, fragment).commit()
                     }
