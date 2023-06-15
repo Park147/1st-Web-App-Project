@@ -1,14 +1,19 @@
 package com.example.teamproject.recycler
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.teamproject.MyApplication
+import com.example.teamproject.MyDining
 import com.example.teamproject.databinding.ItemRecyclerviewBinding
 import com.example.teamproject.fragment.ThreeReserveFragment
 import com.example.teamproject.model.ItemData
@@ -30,7 +35,10 @@ class MyReserveCanAdapter(val context: ThreeReserveFragment, val datas:List<Item
             val networkService = (context.context?.applicationContext as MyApplication).networkService
             val requestCall: Call<Unit> = networkService.deleteReserveList(reserve?.r_title)
             requestCall.enqueue(object : Callback<Unit> {
+
                 override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                    val intent= Intent(holder.itemView?.context,MyDining::class.java)
+                    startActivity(holder.itemView.context,intent,null)
                 }
 
                 override fun onFailure(call: Call<Unit>, t: Throwable) {

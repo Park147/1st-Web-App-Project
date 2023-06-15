@@ -49,7 +49,6 @@ class ThreeReserveFragment : Fragment() {
             override fun onFailure(call: Call<ItemDataList>, t: Throwable) {
                 call.cancel()
             }
-
         })
         return binding.root
     }
