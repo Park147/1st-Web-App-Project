@@ -11,27 +11,26 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import com.example.teamproject.MyApplication
 import com.example.teamproject.databinding.ItemRecyclerviewBinding
-import com.example.teamproject.fragment.OneReserveFragment
+import com.example.teamproject.fragment.OneWaitingFragment
 import com.example.teamproject.model.ItemData
 
 class MyReserveViewHolder(val binding: ItemRecyclerviewBinding): RecyclerView.ViewHolder(binding.root)
 
-class MyReserveAdapter(val context: OneReserveFragment, val datas:List<ItemData>?): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class MyReserveAdapter(val context: OneWaitingFragment, val datas:List<ItemData>?): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
             = MyReserveViewHolder(ItemRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent,  false))
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val binding=(holder as MyReserveViewHolder).binding
 
-        val reserve = datas?.get(position)
+        val waiting = datas?.get(position)
 
-        binding.itemtitle.text = reserve?.r_title
-        binding.itemcontent.text = reserve?.r_item
-        binding.itemwaiting.text = reserve?.r_waiting
+        binding.itemtitle.text = waiting?.w_title
+        binding.itemcontent.text = waiting?.w_item
+        binding.itemwaiting.text = waiting?.w_waiting
         binding.cancelbutton.isInvisible = true
-        val urlImg = reserve?.r_image
+        val urlImg = waiting?.w_image
 
         Glide.with(context)
             .asBitmap()

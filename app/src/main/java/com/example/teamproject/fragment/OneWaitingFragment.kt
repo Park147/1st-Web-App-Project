@@ -2,31 +2,24 @@ package com.example.teamproject.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isInvisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.teamproject.recycler.MyReserveAdapter
 import com.example.teamproject.MainActivity
 import com.example.teamproject.MyApplication
-import com.example.teamproject.MyDining
-import com.example.teamproject.R
-import com.example.teamproject.databinding.FragmentOneReserveBinding
-import com.example.teamproject.databinding.ItemRecyclerviewBinding
-import com.example.teamproject.model.ItemData
+import com.example.teamproject.databinding.FragmentOneWaitingBinding
 import com.example.teamproject.model.ItemDataList
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class OneReserveFragment : Fragment() {
-    lateinit var binding: FragmentOneReserveBinding
+class OneWaitingFragment : Fragment() {
+    lateinit var binding: FragmentOneWaitingBinding
     lateinit var adapter: MyReserveAdapter
 
     override fun onCreateView(
@@ -34,21 +27,21 @@ class OneReserveFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentOneReserveBinding.inflate(inflater, container, false)
+        binding = FragmentOneWaitingBinding.inflate(inflater, container, false)
 
         binding.MainMenu.setOnClickListener {
             val intent = Intent(activity, MainActivity::class.java)
             startActivity(intent)
         }
             val networkService = (context?.applicationContext as MyApplication).networkService
-            val reserveListCall = networkService.getReserve()
+            val reserveListCall = networkService.getWaiting()
 
 
             reserveListCall.enqueue(object : Callback<ItemDataList> {
                 override fun onResponse(call: Call<ItemDataList>, response: Response<ItemDataList>) {
                     var item = response.body()?.items
 
-                    adapter = MyReserveAdapter(this@OneReserveFragment, item)
+                    adapter = MyReserveAdapter(this@OneWaitingFragment, item)
                     binding.oneRecyclerView.adapter = adapter
                     binding.oneRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
                     adapter.notifyDataSetChanged()

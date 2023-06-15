@@ -11,7 +11,6 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.teamproject.databinding.ItemRecyclerviewBinding
 import com.example.teamproject.fragment.OneAlarmFragment
-import com.example.teamproject.fragment.OneReserveFragment
 import com.example.teamproject.model.ItemData
 
 class MyAlarmViewHolder(val binding: ItemRecyclerviewBinding): RecyclerView.ViewHolder(binding.root)
@@ -23,11 +22,11 @@ class MyAlarmAdapter(val context: OneAlarmFragment, val datas:List<ItemData>?): 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val binding=(holder as MyAlarmViewHolder).binding
 
-        val reserve = datas?.get(position)
-        binding.itemtitle.text = reserve?.r_title
-        binding.itemcontent.text = reserve?.r_item
-        binding.itemwaiting.text = reserve?.r_waiting
-        val urlImg = reserve?.r_image
+        val waiting = datas?.get(position)
+        binding.itemtitle.text = waiting?.w_title
+        binding.itemcontent.text = waiting?.w_item
+        binding.itemwaiting.text = waiting?.w_waiting
+        val urlImg = waiting?.w_image
 
         Glide.with(context)
             .asBitmap()

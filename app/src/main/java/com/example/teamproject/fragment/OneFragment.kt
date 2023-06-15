@@ -1,19 +1,13 @@
 package com.example.teamproject.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.teamproject.MyApplication
 import com.example.teamproject.databinding.FragmentOneBinding
-import com.example.teamproject.model.ItemDataList
 import com.google.android.material.tabs.TabLayoutMediator
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class OneFragment : Fragment() {
 
@@ -51,7 +45,7 @@ class OneFragment : Fragment() {
     class MyReserveFragmentPagerAdapter(Fragment: Fragment): FragmentStateAdapter(Fragment){
         val fragments: List<Fragment>
         init {
-            fragments= listOf(OneReserveFragment(), TwoReserveFragment(), ThreeReserveFragment())
+            fragments= listOf(OneWaitingFragment(), TwoWaitingFragment(), ThreeWaitingFragment())
         }
         override fun getItemCount(): Int = fragments.size
 
