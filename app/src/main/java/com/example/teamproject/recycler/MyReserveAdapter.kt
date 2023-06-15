@@ -6,10 +6,12 @@ import android.graphics.drawable.Drawable
 import android.icu.lang.UCharacter
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import com.example.teamproject.MyApplication
 import com.example.teamproject.databinding.ItemRecyclerviewBinding
 import com.example.teamproject.fragment.OneReserveFragment
 import com.example.teamproject.model.ItemData
@@ -24,9 +26,11 @@ class MyReserveAdapter(val context: OneReserveFragment, val datas:List<ItemData>
         val binding=(holder as MyReserveViewHolder).binding
 
         val reserve = datas?.get(position)
+
         binding.itemtitle.text = reserve?.r_title
         binding.itemcontent.text = reserve?.r_item
         binding.itemwaiting.text = reserve?.r_waiting
+        binding.cancelbutton.isInvisible = true
         val urlImg = reserve?.r_image
 
         Glide.with(context)

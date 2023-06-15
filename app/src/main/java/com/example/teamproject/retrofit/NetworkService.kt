@@ -14,6 +14,6 @@ interface NetworkService {
     @GET("main/myDining/reserve")
     fun getReserve(): Call<ItemDataList>
 
-    @POST("main/myDining/insert")
-    fun doInsertReserve(@Body item: ItemData?): Call<ItemData>
+    @POST("main/myDining/delete/{r_title}")
+    fun  deleteReserveList(@Path("r_title")r_title:String?):Call<Unit>
 }
