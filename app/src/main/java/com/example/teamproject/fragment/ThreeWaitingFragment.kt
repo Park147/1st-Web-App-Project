@@ -29,7 +29,7 @@ class ThreeWaitingFragment : Fragment() {
         bindingRe = ItemRecyclerviewBinding.inflate(inflater, container, false)
 
         val networkService = (context?.applicationContext as MyApplication).networkService
-        val reserveListCall = networkService.getWaiting()
+        val reserveListCall = networkService.getWaitingCan()
 
         reserveListCall.enqueue(object : Callback<ItemDataList> {
             override fun onResponse(call: Call<ItemDataList>, response: Response<ItemDataList>) {

@@ -27,7 +27,7 @@ class TwoAlarmFragment : Fragment() {
         binding = FragmentTwoAlarmBinding.inflate(inflater, container, false)
 
         val networkService = (context?.applicationContext as MyApplication).networkService
-        val reserveListCall = networkService.getWaiting()
+        val reserveListCall = networkService.getWaitingAll()
 
 
         reserveListCall.enqueue(object : Callback<ItemDataList> {

@@ -2,6 +2,7 @@ package com.example.teamproject.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.example.teamproject.recycler.MyReserveAdapter
 import com.example.teamproject.MainActivity
 import com.example.teamproject.MyApplication
 import com.example.teamproject.databinding.FragmentOneWaitingBinding
+import com.example.teamproject.model.ItemData
 import com.example.teamproject.model.ItemDataList
 import retrofit2.Call
 import retrofit2.Callback
@@ -34,7 +36,8 @@ class OneWaitingFragment : Fragment() {
             startActivity(intent)
         }
             val networkService = (context?.applicationContext as MyApplication).networkService
-            val reserveListCall = networkService.getWaiting()
+            val reserveListCall = networkService.getWaitingAll()
+
 
 
             reserveListCall.enqueue(object : Callback<ItemDataList> {
@@ -42,6 +45,7 @@ class OneWaitingFragment : Fragment() {
                     var item = response.body()?.items
 
                     adapter = MyReserveAdapter(this@OneWaitingFragment, item)
+
                     binding.oneRecyclerView.adapter = adapter
                     binding.oneRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
                     adapter.notifyDataSetChanged()

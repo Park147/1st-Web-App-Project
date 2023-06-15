@@ -32,7 +32,7 @@ class TwoWaitingFragment : Fragment() {
         }
 
         val networkService = (context?.applicationContext as MyApplication).networkService
-        val reserveListCall = networkService.getWaiting()
+        val reserveListCall = networkService.getWaitingCom()
 
         reserveListCall.enqueue(object : Callback<ItemDataList> {
             override fun onResponse(call: Call<ItemDataList>, response: Response<ItemDataList>) {
