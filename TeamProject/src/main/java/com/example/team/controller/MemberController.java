@@ -21,6 +21,7 @@ public class MemberController {
 	@PostMapping("/register")
 	public void register(@RequestBody MemberVO member) {
 		memberService.registerUser(member);
+		System.out.print("11");
 	}
 
 	@GetMapping("/getUser")
