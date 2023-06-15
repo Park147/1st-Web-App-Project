@@ -1,42 +1,56 @@
 package com.example.a1st_web_app_project
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.ViewCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager.widget.PagerAdapter
+import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import com.example.a1st_web_app_project.adapter.FragmentAdapter
 import com.example.a1st_web_app_project.databinding.ActivityMainBinding
-import com.example.a1st_web_app_project.model.RstrModel
-import com.example.a1st_web_app_project.retrofit.RstrService
+import com.example.a1st_web_app_project.fragment.FragmentFirst
+import com.example.a1st_web_app_project.fragment.FragmentFourth
+import com.example.a1st_web_app_project.fragment.FragmentSecond
+import com.example.a1st_web_app_project.fragment.FragmentThird
+import com.example.a1st_web_app_project.model.randRstr
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import me.relex.circleindicator.CircleIndicator3
-
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class MainActivity : FragmentActivity() {
-    lateinit var aPager: ViewPager2
-    lateinit var pagerAdapter: FragmentStateAdapter
-    lateinit var mIndicator: CircleIndicator3
     lateinit var binding: ActivityMainBinding
-    val numPage = 4;
     var bottommenu: BottomNavigationView? = null
     var Toorbarname: TextView? = null
+    lateinit var viewPager: ViewPager2
+    lateinit var indicator: CircleIndicator3
 
+    class MyFragmentAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
+        val fragments: List<Fragment>
+        init {
+            fragments= listOf(FragmentFirst(), FragmentSecond(), FragmentThird(), FragmentFourth())
+        }
+
+        override fun getItemCount(): Int = fragments.size
+
+        override fun createFragment(position: Int): Fragment = fragments[position]
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val dataValues = arrayOf("rstr_nm", "rstr_tell")
-
-        val viewPager = findViewById<ViewPager2>(R.id.viewpager)
-        val adapter = FragmentAdapter(this, dataValues.size, dataValues)
-        viewPager.adapter = adapter
 
 
         binding.btn2.setOnClickListener {
@@ -74,59 +88,63 @@ class MainActivity : FragmentActivity() {
 
         }
 
+        val RstrService = (applicationContext as MyApplication).rstrService
 
-        //ViewPager2
-        aPager = findViewById<ViewPager2>(R.id.viewpager)
-        //Adapter
-        pagerAdapter = FragmentAdapter(this, numPage,dataValues )
-        aPager.setAdapter(pagerAdapter)
-        //Indicator
-        mIndicator = findViewById<CircleIndicator3>(R.id.indicator)
-        mIndicator.setViewPager(aPager)
-        mIndicator.createIndicators(numPage, 0)
-        //ViewPager Setting
-        aPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL)
-        aPager.setCurrentItem(1000)
-        aPager.setOffscreenPageLimit(3)
-        aPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
+        var getrandlist = RstrService.getRandList();
+
+        getrandlist.enqueue(object: Callback<List<randRstr>>{
+            override fun onResponse(
+                call: Call<List<randRstr>>,
+                response: Response<List<randRstr>>
             ) {
-                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-                if (positionOffsetPixels == 0) {
-                    aPager.setCurrentItem(position)
+                if (response.isSuccessful){
+                    val rand = response.body()
+                    Log.d("randlist1", "${rand}")
+
+                    viewPager = findViewById(R.id.viewpager)
+                    indicator = findViewById(R.id.indicator)
+
+                    val fragmentAdapter = MyFragmentAdapter(this@MainActivity)
+                    viewPager = binding.viewpager
+                    viewPager.adapter = fragmentAdapter
+                    indicator.setViewPager(viewPager)
+
+                    for (i in 0 until rand?.size!!) {
+                        val bundle = Bundle()
+                        bundle.putString("rstr_nm", rand?.get(i)?.rstr_nm)
+                        Log.d("randlist2", "${rand?.get(i)?.rstr_nm}")
+                        bundle.putString("rstr_img", rand?.get(i)?.rstr_img)
+                        Log.d("fraglist", "${rand?.get(i)?.rstr_nm} , ${rand?.get(i)?.rstr_img}")
+                        val fragment: Fragment = when (i) {
+                            0 -> FragmentFirst()
+                            1 -> FragmentSecond()
+                            2 -> FragmentThird()
+                            3 -> FragmentFourth()
+                            else -> throw IllegalArgumentException("Invalid position: $i")
+                        }
+                        fragment.arguments = bundle
+                        supportFragmentManager.beginTransaction().replace(R.id.fragend, fragment).commit()
+                    }
+
+
+
+                    // ViewPager2 설정
+
                 }
             }
-            // 프래그먼트
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                mIndicator.animatePageSelected(position % numPage)
+
+            override fun onFailure(call: Call<List<randRstr>>, t: Throwable) {
+                Log.d("randlist2", "실패 ${t.message}")
+                call.cancel()
             }
+
         })
 
 
-        for (i in 0 until dataValues.size) {
-            val data = dataValues[i]
-            adapter.setFragmentData(i, data)
-        }
 
-        val pageMargin = resources.getDimensionPixelOffset(R.dimen.pageMargin).toFloat()
-        val pageOffset = resources.getDimensionPixelOffset(R.dimen.offset).toFloat()
-        aPager.setPageTransformer(ViewPager2.PageTransformer { page, position ->
-            val myOffset = position * -(2 * pageOffset + pageMargin)
-            if (aPager.getOrientation() == ViewPager2.ORIENTATION_HORIZONTAL) {
-                if (ViewCompat.getLayoutDirection(aPager) == ViewCompat.LAYOUT_DIRECTION_RTL) {
-                    page.translationX = -myOffset
-                } else {
-                    page.translationX = myOffset
-                }
-            } else {
-                page.translationY = myOffset
-            }
-        })
     }
+
+
 
 
 }

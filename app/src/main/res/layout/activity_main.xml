@@ -34,7 +34,8 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/frameSize"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:id="@+id/fragend">
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewpager"
