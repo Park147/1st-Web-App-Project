@@ -9,7 +9,9 @@ import com.bumptech.glide.Glide
 import com.example.a1st_web_app_project.databinding.ItemMainBinding
 import com.example.a1st_web_app_project.model.RstrModel
 
-
+interface MyAdapterListener {
+    fun onItemClick(data:RstrModel)
+}
 class MyViewHolder(val binding: ItemMainBinding): RecyclerView.ViewHolder(binding.root)
 
 class MyAdapter(val context: Context, val datas: List<RstrModel>?): RecyclerView.Adapter<RecyclerView.ViewHolder>(){

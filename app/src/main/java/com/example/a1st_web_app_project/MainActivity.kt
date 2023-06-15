@@ -2,23 +2,19 @@ package com.example.a1st_web_app_project
 
 import android.content.Intent
 import android.os.Bundle
-import android.telecom.Call
-import android.util.Log
-import android.view.View
-import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.ViewCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.a1st_web_app_project.adapter.FragmentAdapter
 import com.example.a1st_web_app_project.databinding.ActivityMainBinding
+import com.example.a1st_web_app_project.model.RstrModel
+import com.example.a1st_web_app_project.retrofit.RstrService
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import me.relex.circleindicator.CircleIndicator3
+
 
 
 class MainActivity : FragmentActivity() {
@@ -35,6 +31,13 @@ class MainActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val dataValues = arrayOf("rstr_nm", "rstr_tell")
+
+        val viewPager = findViewById<ViewPager2>(R.id.viewpager)
+        val adapter = FragmentAdapter(this, dataValues.size, dataValues)
+        viewPager.adapter = adapter
+
 
         binding.btn2.setOnClickListener {
             val intent = Intent(this@MainActivity,WaitingActivity::class.java)
@@ -71,10 +74,11 @@ class MainActivity : FragmentActivity() {
 
         }
 
+
         //ViewPager2
         aPager = findViewById<ViewPager2>(R.id.viewpager)
         //Adapter
-        pagerAdapter = FragmentAdapter(this, numPage)
+        pagerAdapter = FragmentAdapter(this, numPage,dataValues )
         aPager.setAdapter(pagerAdapter)
         //Indicator
         mIndicator = findViewById<CircleIndicator3>(R.id.indicator)
@@ -101,6 +105,13 @@ class MainActivity : FragmentActivity() {
                 mIndicator.animatePageSelected(position % numPage)
             }
         })
+
+
+        for (i in 0 until dataValues.size) {
+            val data = dataValues[i]
+            adapter.setFragmentData(i, data)
+        }
+
         val pageMargin = resources.getDimensionPixelOffset(R.dimen.pageMargin).toFloat()
         val pageOffset = resources.getDimensionPixelOffset(R.dimen.offset).toFloat()
         aPager.setPageTransformer(ViewPager2.PageTransformer { page, position ->
@@ -116,26 +127,6 @@ class MainActivity : FragmentActivity() {
             }
         })
     }
-}
 
-//class MainActivity : AppCompatActivity() {
-//    lateinit var binding: ActivityMainBinding
-//
-//    var Toorbarname: TextView? = null
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        binding = ActivityMainBinding.inflate(layoutInflater)
-//        setContentView(binding.root)
-//
-//        setSupportActionBar(binding.toolbar)
-//        supportActionBar?.setDisplayShowTitleEnabled(false)
-//        binding.toolbar.title = "main"
-//
-//    }
-//
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(R.menu.actionmenu, menu)
-//        return true
-//    }
-//
-//}
+
+}
