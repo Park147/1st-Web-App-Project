@@ -1,6 +1,8 @@
 package com.example.teamproject.retrofit
 
 
+import com.example.teamproject.model.BlankItem
+import com.example.teamproject.model.BlankItemList
 import com.example.teamproject.model.ItemData
 import com.example.teamproject.model.ItemDataList
 import retrofit2.Call
@@ -22,4 +24,13 @@ interface NetworkService {
 
     @POST("main/myDining/delete/{w_title}")
     fun  deleteWaitingList(@Path("w_title")w_title:String?):Call<Unit>
+
+    @GET("main/myDining/myBlank")
+    fun getMyBlank(@Query("r_username") r_username: String?): Call<BlankItem>
+
+    @GET("main/myDining/blank")
+    fun getBlank(): Call<BlankItemList>
+
+    @POST("main/myDining/blank/delete/{b_title}")
+    fun  deleteBlankList(@Path("b_title")b_title:String?):Call<Unit>
 }

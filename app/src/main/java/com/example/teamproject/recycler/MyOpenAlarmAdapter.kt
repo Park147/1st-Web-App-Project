@@ -12,11 +12,13 @@ import com.bumptech.glide.request.transition.Transition
 import com.example.teamproject.databinding.ItemRecyclerviewBinding
 import com.example.teamproject.fragment.OneAlarmFragment
 import com.example.teamproject.fragment.TwoAlarmFragment
+import com.example.teamproject.model.BlankItem
+import com.example.teamproject.model.BlankItemList
 import com.example.teamproject.model.ItemData
 
 class MyOpenAlarmViewHolder(val binding: ItemRecyclerviewBinding): RecyclerView.ViewHolder(binding.root)
 
-class MyOpenAlarmAdapter(val context: TwoAlarmFragment, val datas:List<ItemData>?): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class MyOpenAlarmAdapter(val context: TwoAlarmFragment, val datas:List<BlankItem>?): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
             = MyOpenAlarmViewHolder(ItemRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent,  false))
 
@@ -24,10 +26,10 @@ class MyOpenAlarmAdapter(val context: TwoAlarmFragment, val datas:List<ItemData>
         val binding=(holder as MyOpenAlarmViewHolder).binding
 
         val waiting = datas?.get(position)
-        binding.itemtitle.text = waiting?.w_title
-        binding.itemcontent.text = waiting?.w_item
-        binding.itemwaiting.text = waiting?.w_waiting
-        val urlImg = waiting?.w_image
+        binding.itemtitle.text = waiting?.b_title
+        binding.itemcontent.text = waiting?.b_date
+        binding.itemwaiting.text = waiting?.b_time
+        val urlImg = waiting?.b_image
 
         Glide.with(context)
             .asBitmap()
