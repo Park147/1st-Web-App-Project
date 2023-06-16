@@ -11,32 +11,40 @@ import com.example.a1st_web_app_project.databinding.ActivityDetailBinding
 
 
 class DetailActivity : AppCompatActivity() {
-    private lateinit var textViewName: TextView
-    private lateinit var imageViewImage: ImageView
-    private lateinit var textViewAddress: TextView
-    private lateinit var textViewPhone: TextView
-    private lateinit var textViewIntroduction: TextView
-
+    lateinit var binding: ActivityDetailBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
+        var binding = ActivityDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        textViewName = findViewById(R.id.textViewName)
-        imageViewImage = findViewById(R.id.imageViewImage)
-        textViewAddress = findViewById(R.id.textViewAddress)
-        textViewPhone = findViewById(R.id.textViewPhone)
-        textViewIntroduction = findViewById(R.id.textViewIntroduction)
 
-        val rstrName = intent.getStringExtra("rstr_nm")
-        val rstrImage = intent.getStringExtra("rstr_img")
-        val rstrAddress = intent.getStringExtra("rstr_addr")
-        val rstrPhone = intent.getStringExtra("rstr_tell")
-        val rstrIntroduction = intent.getStringExtra("rstr_intro")
+        val rstr_nm = intent.getStringExtra("rstr_nm")
+        val rstr_img = intent.getStringExtra("rstr_img")
+        val rstr_addr = intent.getStringExtra("rstr_addr")
+        val rstr_tell = intent.getStringExtra("rstr_tell")
+        val rstr_intro = intent.getStringExtra("rstr_intro")
+        Log.d("test34","${rstr_nm}, ${rstr_img} , ${rstr_addr},${rstr_tell},${rstr_intro}")
+        val imgBanner = findViewById<ImageView>(R.id.imageViewImage)
+        val tvName = findViewById<TextView>(R.id.textViewName)
+        val tvAddress = findViewById<TextView>(R.id.textViewAddress)
+        val tvPhoneNumber = findViewById<TextView>(R.id.textViewPhone)
+        val tvIntro = findViewById<TextView>(R.id.textViewIntroduction)
 
-        textViewName.text = rstrName
-        Glide.with(this).load(rstrImage).into(imageViewImage)
-        textViewAddress.text = rstrAddress
-        textViewPhone.text = rstrPhone
-        textViewIntroduction.text = rstrIntroduction
+        binding.textViewName.text = rstr_nm
+        binding.textViewAddress.text = rstr_addr
+        binding.textViewPhone.text = rstr_tell
+        binding.textViewIntroduction.text = rstr_intro
+        Log.d("test54","실패가 뭐고")
+        tvName.text = rstr_nm
+        tvAddress.text = rstr_addr
+        tvPhoneNumber.text = rstr_tell
+        tvIntro.text = rstr_intro
+
+        if (rstr_img != null) {
+            Glide.with(this)
+                .load(rstr_img)
+                .into(binding.imageViewImage)
+            Log.d("test44","실 뭐고")
+        }
     }
 }

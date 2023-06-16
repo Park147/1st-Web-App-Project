@@ -46,7 +46,12 @@ class FragmentFirst : Fragment() {
                 .into(imgBanner1)
         }
         imgBanner1.setOnClickListener {
-            val intent = Intent(requireContext(), DetailActivity::class.java)
+            val intent = Intent(requireContext(), DetailActivity::class.java).apply {
+                putExtra("rstr_nm", rstr_nm)
+                putExtra("rstr_img", rstr_img)
+                putExtra("rstr_addr", rstr_addr)
+                putExtra("rstr_tell", rstr_tell)
+                putExtra("rstr_intro", rstr_intro)
+            }
             startActivity(intent)
-        }
-    }}
+        }}}
