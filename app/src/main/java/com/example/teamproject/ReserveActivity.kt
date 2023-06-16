@@ -82,6 +82,56 @@ class ReserveActivity : AppCompatActivity() {
             })
 
         }
+
+        binding.btn2.setOnClickListener {
+
+            var reserveDate = binding.dateButton.text.toString()
+            var personCount = ""
+            var reserveTime = binding.btn2.text.toString()
+
+            var reserve = ItemData("유저이름","","제목","","",reserveTime,reserveDate,personCount,"방문예약")
+            Log.d("lmj","$reserve")
+
+            val networkService = (applicationContext as MyApplication).networkService
+            val requestCall = networkService.doInsertReserve(reserve)
+            requestCall.enqueue(object : Callback<ItemData> {
+                override fun onResponse(call: Call<ItemData>, response: Response<ItemData>) {
+                    val intent= Intent(this@ReserveActivity,MainActivity::class.java)
+                    startActivity(intent)
+                }
+
+                override fun onFailure(call: Call<ItemData>, t: Throwable) {
+                    call.cancel()
+                }
+
+            })
+
+        }
+
+        binding.btn3.setOnClickListener {
+
+            var reserveDate = binding.dateButton.text.toString()
+            var personCount = ""
+            var reserveTime = binding.btn3.text.toString()
+
+            var reserve = ItemData("유저이름","","제목","","",reserveTime,reserveDate,personCount,"방문예약")
+            Log.d("lmj","$reserve")
+
+            val networkService = (applicationContext as MyApplication).networkService
+            val requestCall = networkService.doInsertReserve(reserve)
+            requestCall.enqueue(object : Callback<ItemData> {
+                override fun onResponse(call: Call<ItemData>, response: Response<ItemData>) {
+                    val intent= Intent(this@ReserveActivity,MainActivity::class.java)
+                    startActivity(intent)
+                }
+
+                override fun onFailure(call: Call<ItemData>, t: Throwable) {
+                    call.cancel()
+                }
+
+            })
+
+        }
     }
 
     private fun convertLongToDate(time: Long):String {
