@@ -20,8 +20,13 @@ public class RstrServiceImpl implements RstrService {
 	}
 
 	@Override
-	public RstrVO getRstr(String rstrstr_nm) {
-		return rstrMapper.getRstr(rstrstr_nm);
+	public RstrVO getRstr(String rstr_nm) {
+		return rstrMapper.getRstr(rstr_nm);
+	}
+
+	@Override
+	public void upBook(RstrVO rstr) {
+		rstrMapper.upBook(rstr);
 	}
 
 }
