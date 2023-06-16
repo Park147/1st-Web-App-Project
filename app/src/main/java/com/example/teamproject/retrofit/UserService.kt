@@ -1,9 +1,11 @@
 package com.example.teamproject.retrofit
 
+import com.example.teamproject.model.Bookmark
 import com.example.teamproject.model.Member
 import com.example.teamproject.model.ModInfo
 import com.example.teamproject.model.ModPro
 import com.example.teamproject.model.Rstr
+import com.example.teamproject.model.Rstrbook
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -53,4 +55,25 @@ interface UserService {
     fun getrstr(
         @Query("rstr_nm") rstr_nm: String
     ): Call<Rstr>
+
+    @POST("seat/rstr/upBook")
+    fun upbookview(
+        @Body rstrbook: Rstrbook
+    ): Call<Unit>
+
+    @GET("seat/bookmark/list")
+    fun bmList(
+        @Query("b_id") b_id: String,
+    ): Call<List<Bookmark>>
+
+    @POST("seat/bookmark/register")
+    fun bmregister(
+        @Body bookmark: Bookmark
+    ): Call<Unit>
+
+    @POST("seat/bookmark/delete")
+    fun bmdelete(
+        @Query("b_id") b_id: String,
+        @Query("b_name") b_name: String
+    ): Call<Unit>
 }

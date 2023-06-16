@@ -11,11 +11,18 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.core.content.ContextCompat.startActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.teamproject.databinding.ActivityMyProfilePageBinding
+import com.example.teamproject.fragment.BookmarkFragment
+import com.example.teamproject.fragment.ReviewFragment
 import com.example.teamproject.login.ModProfileActivity
 import com.example.teamproject.login.ModifyProfileActivity
+import com.example.teamproject.model.Bookmark
 import com.example.teamproject.model.Member
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.tabs.TabLayoutMediator
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -116,9 +123,34 @@ class MyProfilePage : AppCompatActivity() {
 
         binding.userId.text = userId
 
+        val tabLayout = binding.tabs
+        val viewPager = binding.viewpager
+        viewPager.adapter= MyFragmentPagerAdapter(this)
+
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            when(position) {
+                0 -> {
+                    tab.text = "즐겨찾기"
+                }
+
+                1 -> {
+                    tab.text = "리뷰"
+                }
+            }
+        }.attach()
+
 
     }
 
+    class MyFragmentPagerAdapter(activity: FragmentActivity): FragmentStateAdapter(activity){
+        val fragments: List<Fragment>
+        init {
+            fragments= listOf(BookmarkFragment(), ReviewFragment())
+        }
+        override fun getItemCount(): Int = fragments.size
+
+        override fun createFragment(position: Int): Fragment = fragments[position]
+    }
     //액션바 메뉴 설정
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.actionmenu, menu)
