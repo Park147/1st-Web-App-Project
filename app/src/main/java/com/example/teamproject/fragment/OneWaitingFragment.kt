@@ -10,19 +10,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.teamproject.recycler.MyReserveAdapter
 import com.example.teamproject.MainActivity
 import com.example.teamproject.MyApplication
 import com.example.teamproject.databinding.FragmentOneWaitingBinding
-import com.example.teamproject.model.ItemData
 import com.example.teamproject.model.ItemDataList
+import com.example.teamproject.recycler.MyWaitingAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class OneWaitingFragment : Fragment() {
     lateinit var binding: FragmentOneWaitingBinding
-    lateinit var adapter: MyReserveAdapter
+    lateinit var adapter: MyWaitingAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,13 +37,11 @@ class OneWaitingFragment : Fragment() {
             val networkService = (context?.applicationContext as MyApplication).networkService
             val reserveListCall = networkService.getWaitingAll()
 
-
-
             reserveListCall.enqueue(object : Callback<ItemDataList> {
                 override fun onResponse(call: Call<ItemDataList>, response: Response<ItemDataList>) {
                     var item = response.body()?.items
 
-                    adapter = MyReserveAdapter(this@OneWaitingFragment, item)
+                    adapter = MyWaitingAdapter(this@OneWaitingFragment, item)
 
                     binding.oneRecyclerView.adapter = adapter
                     binding.oneRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))

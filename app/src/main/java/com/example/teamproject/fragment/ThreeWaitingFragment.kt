@@ -11,14 +11,14 @@ import com.example.teamproject.MyApplication
 import com.example.teamproject.databinding.FragmentThreeWaitingBinding
 import com.example.teamproject.databinding.ItemRecyclerviewBinding
 import com.example.teamproject.model.ItemDataList
-import com.example.teamproject.recycler.MyReserveCanAdapter
+import com.example.teamproject.recycler.MyWaitingCanAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class ThreeWaitingFragment : Fragment() {
     lateinit var binding: FragmentThreeWaitingBinding
-    lateinit var adapter: MyReserveCanAdapter
+    lateinit var adapter: MyWaitingCanAdapter
     lateinit var bindingRe: ItemRecyclerviewBinding
 
     override fun onCreateView(
@@ -35,7 +35,7 @@ class ThreeWaitingFragment : Fragment() {
             override fun onResponse(call: Call<ItemDataList>, response: Response<ItemDataList>) {
                 var item = response.body()?.items
 
-                adapter = MyReserveCanAdapter(this@ThreeWaitingFragment, item)
+                adapter = MyWaitingCanAdapter(this@ThreeWaitingFragment, item)
                 binding.threeRecyclerView.adapter = adapter
                 binding.threeRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
                 adapter.notifyDataSetChanged()

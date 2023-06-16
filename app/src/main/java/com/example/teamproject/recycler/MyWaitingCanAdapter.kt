@@ -14,14 +14,14 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MyReserveCanViewHolder(val binding: ItemRecyclerviewBinding): RecyclerView.ViewHolder(binding.root)
+class MyWaitingCanViewHolder(val binding: ItemRecyclerviewBinding): RecyclerView.ViewHolder(binding.root)
 
-class MyReserveCanAdapter(val context: ThreeWaitingFragment, val datas:List<ItemData>?): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class MyWaitingCanAdapter(val context: ThreeWaitingFragment, val datas:List<ItemData>?): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
-            = MyReserveCanViewHolder(ItemRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent,  false))
+            = MyWaitingCanViewHolder(ItemRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent,  false))
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val binding=(holder as MyReserveCanViewHolder).binding
+        val binding=(holder as MyWaitingCanViewHolder).binding
         val waiting = datas?.get(position)
 
         binding.cancelbutton.setOnClickListener {
@@ -39,6 +39,7 @@ class MyReserveCanAdapter(val context: ThreeWaitingFragment, val datas:List<Item
 
             })
         }
+        binding.itemContent.text = "방문취소"
         binding.itemtitle.text = waiting?.w_title
         binding.itemcontent.text = waiting?.w_item
         binding.itemwaiting.text = waiting?.w_waiting

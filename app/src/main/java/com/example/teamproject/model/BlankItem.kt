@@ -1,7 +1,6 @@
 package com.example.teamproject.model
 
 data class BlankItem (
-    var b_id: Int,
     var b_username: String,
     var b_image: String,
     var b_title: String,

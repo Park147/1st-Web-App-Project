@@ -18,17 +18,18 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.teamproject.MainActivity
 import com.example.teamproject.R
+import com.example.teamproject.adapter.MyReserveViewHolder
 import com.example.teamproject.databinding.ItemRecyclerviewBinding
 import com.example.teamproject.fragment.OneWaitingFragment
 import com.example.teamproject.model.ItemData
 import com.example.teamproject.model.ItemDataList
 
-class MyReserveViewHolder(val binding: ItemRecyclerviewBinding): RecyclerView.ViewHolder(binding.root)
+class MyWaitingViewHolder(val binding: ItemRecyclerviewBinding): RecyclerView.ViewHolder(binding.root)
 
-class MyReserveAdapter(val context: OneWaitingFragment, val datas:List<ItemData>?): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class MyWaitingAdapter(val context: OneWaitingFragment, val datas:List<ItemData>?): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
-        MyReserveViewHolder(
+        MyWaitingViewHolder(
             ItemRecyclerviewBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -37,10 +38,11 @@ class MyReserveAdapter(val context: OneWaitingFragment, val datas:List<ItemData>
         )
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val binding = (holder as MyReserveViewHolder).binding
+        val binding = (holder as MyWaitingViewHolder).binding
 
 
         val waiting = datas?.get(position)
+        binding.itemContent.text = waiting?.w_waiting_confirm
         binding.itemtitle.text = waiting?.w_title
         binding.itemcontent.text = waiting?.w_item
         binding.itemwaiting.text = waiting?.w_waiting

@@ -13,6 +13,7 @@ import com.example.teamproject.MyApplication
 import com.example.teamproject.databinding.FragmentTwoWaitingBinding
 import com.example.teamproject.model.ItemDataList
 import com.example.teamproject.recycler.MyReserveComAdapter
+import com.example.teamproject.recycler.MyWaitingCanAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

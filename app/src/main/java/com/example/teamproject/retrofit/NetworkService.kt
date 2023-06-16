@@ -33,4 +33,7 @@ interface NetworkService {
 
     @POST("main/myDining/blank/delete/{b_title}")
     fun  deleteBlankList(@Path("b_title")b_title:String?):Call<Unit>
+
+    @POST("main/myDining/insert")
+    fun doInsertReserve(@Body reserve: ItemData?): Call<ItemData>
 }

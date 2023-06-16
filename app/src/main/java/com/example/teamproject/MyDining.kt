@@ -3,24 +3,15 @@ package com.example.teamproject
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.teamproject.databinding.ActivityMyDiningBinding
 import com.example.teamproject.fragment.OneFragment
 import com.example.teamproject.fragment.TwoFragment
-import com.example.teamproject.model.ItemData
-import com.example.teamproject.model.ItemDataList
-import com.example.teamproject.recycler.MyReserveAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayoutMediator
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MyDining : AppCompatActivity() {
     lateinit var binding: ActivityMyDiningBinding
