@@ -6,19 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!--    <androidx.appcompat.widget.Toolbar-->
-<!--        android:id="@+id/toolbar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="#FFAC07"-->
-<!--        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
-<!--        tools:layout_editor_absoluteX="0dp">-->
-
-
-<!--    </androidx.appcompat.widget.Toolbar>-->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -32,10 +19,10 @@
         tools:context=".MainActivity">
 
         <FrameLayout
+            android:id="@+id/fragend"
             android:layout_width="match_parent"
             android:layout_height="@dimen/frameSize"
-            android:layout_marginTop="20dp"
-            android:id="@+id/fragend">
+            android:layout_marginTop="20dp">
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewpager"
@@ -56,8 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="130dp"
             android:gravity="center_horizontal"
-            android:orientation="horizontal"
-            tools:context=".MainActivity">
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/sbtn1"
@@ -94,15 +80,13 @@
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
-
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="500dp"
             android:gravity="center_horizontal"
-            android:orientation="horizontal"
-            tools:context=".MainActivity">
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btn1"
@@ -114,7 +98,8 @@
                 android:textSize="25dp"
                 android:textStyle="bold"
                 android:paddingRight="10dp"
-                android:drawableRight="@drawable/reserve"/>
+                android:drawableRight="@drawable/reserve" />
+
             <Button
                 android:id="@+id/btn2"
                 android:layout_width="150dp"
@@ -125,17 +110,9 @@
                 android:text="실시간   웨이팅"
                 android:textSize="20dp"
                 android:textStyle="bold"
-                android:drawableRight="@drawable/wait"/>
+                android:drawableRight="@drawable/wait" />
 
         </LinearLayout>
-
-
-        <!--        <TextView-->
-        <!--            android:id="@+id/text"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="match_parent"-->
-        <!--            android:text="뷰어 밑에 위치"-->
-        <!--            android:gravity="center"/>-->
 
     </LinearLayout>
 
@@ -148,7 +125,6 @@
         app:itemIconTint="#000000"
         app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/menu"
-        tools:layout_editor_absoluteX="-16dp" />
+        app:menu="@menu/menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

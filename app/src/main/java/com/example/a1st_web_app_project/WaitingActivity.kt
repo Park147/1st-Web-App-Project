@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.a1st_web_app_project.databinding.ActivityWaitingBinding
 import com.example.a1st_web_app_project.model.RstrModel
-import com.example.a1st_web_app_project.retrofit.RstrService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -47,7 +46,7 @@ class WaitingActivity : AppCompatActivity() {
                     val rstrList = response.body()
                     Log.d("hjm", "${rstrList}")
                     binding.recyclerView.adapter =
-                        MyAdapter(this@WaitingActivity, rstrList)
+                        MyAdapter(this@WaitingActivity, rstrList as List<RstrModel>)
 
                     binding.recyclerView.addItemDecoration(
                         DividerItemDecoration(
