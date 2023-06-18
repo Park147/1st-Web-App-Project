@@ -15,7 +15,7 @@ import com.example.teamproject.model.ItemData
 
 class MyWaitingViewHolder(val binding: ItemRecyclerviewBinding): RecyclerView.ViewHolder(binding.root)
 
-class MyWaitingAdapter(val context: Fragment, val datas:MutableList<ItemData>?): RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable{
+class MyWaitingAdapter(val context: Fragment, datas:MutableList<ItemData>?): RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable{
     var listDataFilter: MutableList<ItemData>? = datas
     var listDataUnFilter: MutableList<ItemData>? = datas
 
