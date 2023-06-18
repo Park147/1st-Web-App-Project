@@ -14,8 +14,12 @@ interface MyAdapterListener {
 }
 class MyViewHolder(val binding: ItemMainBinding): RecyclerView.ViewHolder(binding.root)
 
-class MyAdapter(val context: Context, val datas: List<RstrModel>?): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class MyAdapter(val context: Context, var datas: List<RstrModel>?): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
+     fun updatedatas(updaters: List<RstrModel>) {
+         datas = updaters
+        notifyDataSetChanged()
+    }
     override fun getItemCount(): Int{
         return datas?.size ?: 0
     }
@@ -30,9 +34,9 @@ class MyAdapter(val context: Context, val datas: List<RstrModel>?): RecyclerView
         val rs = datas?.get(position)
         binding.id.text = rs?.rstr_nm
         binding.firstNameView.text = "주소: "+rs?.rstr_addr
-        binding.contactView.text = "전화: "+rs?.rstr_tell
-        binding.contactView.text = "업종: "+rs?.rstr_list
-        binding.contactView.text = "소개: "+rs?.rstr_intro
+        binding.contactView1.text = "전화: "+rs?.rstr_tell
+        binding.contactView2.text = "업종: "+rs?.rstr_list
+        binding.contactView3.text = "소개: "+rs?.rstr_intro
 
         val imageUrl = rs?.rstr_img
 

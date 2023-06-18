@@ -41,7 +41,17 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/contactView"
+                android:id="@+id/contactView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/contactView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/contactView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 

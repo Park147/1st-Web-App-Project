@@ -15,6 +15,12 @@ import com.example.a1st_web_app_project.R
 import com.example.a1st_web_app_project.databinding.Fragment1pBinding
 
 class FragmentThird : Fragment() {
+    private var rstr_nm: String? = null
+    private var rstr_img: String? = null
+    private var rstr_addr: String? = null
+    private var rstr_tell: String? = null
+    private var rstr_intro: String? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_3p, container, false)
     }
@@ -25,10 +31,13 @@ class FragmentThird : Fragment() {
         val imgBanner3 = view.findViewById<ImageView>(R.id.imgBanner3)
         val tvName3 = view.findViewById<TextView>(R.id.tvName3)
 
-        val rstr_nm = arguments?.getString("rstr_nm")
-        val rstr_img = arguments?.getString("rstr_img")
+        rstr_nm = arguments?.getString("rstr_nm")
+        rstr_img = arguments?.getString("rstr_img")
+        rstr_addr = arguments?.getString("rstr_addr")
+        rstr_tell = arguments?.getString("rstr_tell")
+        rstr_intro = arguments?.getString("rstr_intro")
 
-        Log.d("fraglist3", "$rstr_img, $rstr_nm")
+        Log.d("fraglist1", "$rstr_img, $rstr_nm")
         tvName3.text = rstr_nm
 
         if (rstr_img != null) {
@@ -36,10 +45,13 @@ class FragmentThird : Fragment() {
                 .load(rstr_img)
                 .into(imgBanner3)
         }
-
         imgBanner3.setOnClickListener {
-            val intent = Intent(requireContext(), DetailActivity::class.java)
+            val intent = Intent(requireContext(), DetailActivity::class.java).apply {
+                putExtra("rstr_nm", rstr_nm)
+                putExtra("rstr_img", rstr_img)
+                putExtra("rstr_addr", rstr_addr)
+                putExtra("rstr_tell", rstr_tell)
+                putExtra("rstr_intro", rstr_intro)
+            }
             startActivity(intent)
-        }
-    }
-}
+        }}}

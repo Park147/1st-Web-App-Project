@@ -38,7 +38,7 @@
         <ImageView
             android:id="@+id/imageViewImage"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="300dp"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_launcher_background" />
 
@@ -47,26 +47,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="35sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/textViewAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="15dp"
+            android:textSize="20sp"
+            />
 
         <TextView
             android:id="@+id/textViewPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/textViewIntroduction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"/>
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

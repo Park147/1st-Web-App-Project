@@ -22,7 +22,8 @@
             android:id="@+id/fragend"
             android:layout_width="match_parent"
             android:layout_height="@dimen/frameSize"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:background="@drawable/round_button3">
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewpager"
@@ -51,7 +52,7 @@
                 android:layout_height="80dp"
                 android:layout_marginTop="35dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/white_radius"
+                android:background="@drawable/round_button2"
                 android:drawableTop="@drawable/best"
                 android:text="인기순위"
                 android:textSize="20dp"
@@ -62,7 +63,7 @@
                 android:layout_width="120dp"
                 android:layout_height="80dp"
                 android:layout_marginTop="35dp"
-                android:background="@drawable/white_radius"
+                android:background="@drawable/round_button2"
                 android:drawableTop="@drawable/anniversary"
                 android:text="동네별"
                 android:textSize="20dp"
@@ -74,7 +75,7 @@
                 android:layout_height="80dp"
                 android:layout_marginTop="35dp"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/white_radius"
+                android:background="@drawable/round_button2"
                 android:drawableTop="@drawable/dining"
                 android:text="장르별"
                 android:textSize="20dp"

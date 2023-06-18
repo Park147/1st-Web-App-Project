@@ -54,4 +54,6 @@ class FragmentFirst : Fragment() {
                 putExtra("rstr_intro", rstr_intro)
             }
             startActivity(intent)
-        }}}
+        }
+    }
+}

@@ -11,7 +11,7 @@
         android:layout_height="@dimen/frameSize"
         android:orientation="vertical">
 
-        <ImageButton
+        <ImageView
             android:id="@+id/imgBanner1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -21,13 +21,13 @@
             android:id="@+id/tvName1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_centerInParent="true"
+            android:text="Hello This is Page 2"
             android:textColor="@android:color/white"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:text="Hello This is Page 1"/>
+            android:textStyle="bold" />
 
     </RelativeLayout>
 

@@ -5,9 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -73,6 +70,22 @@ class MainActivity : FragmentActivity() {
             val intent = Intent(this@MainActivity, WaitingActivity::class.java)
             startActivity(intent)
         }
+        val buttonStartWaitingActivity3 = findViewById<Button>(R.id.sbtn2)
+        buttonStartWaitingActivity3.setOnClickListener {
+            val intent = Intent(this@MainActivity, CategoryTwoActivity::class.java)
+            startActivity(intent)
+        }
+        val buttonStartWaitingActivity4 = findViewById<Button>(R.id.sbtn3)
+        buttonStartWaitingActivity4.setOnClickListener {
+            val intent = Intent(this@MainActivity, CategoryThreeActivity::class.java)
+            startActivity(intent)
+        }
+        val buttonStartWaitingActivity5 = findViewById<Button>(R.id.sbtn1)
+        buttonStartWaitingActivity5.setOnClickListener {
+            val intent = Intent(this@MainActivity, CategoryOneActivity::class.java)
+            startActivity(intent)
+        }
+
 
         val RstrService = (applicationContext as MyApplication).rstrService
 
