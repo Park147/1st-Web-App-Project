@@ -48,7 +48,6 @@ class MyAlarmAdapter(val context: OneAlarmFragment, val datas:List<BlankItem>?):
             })
     }
     override fun getItemCount(): Int{
-        Log.d("lmj", "${datas?.size}")
         return datas?.size ?: 0
     }
 }

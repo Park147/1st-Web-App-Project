@@ -19,9 +19,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class OneWaitingFragment : Fragment() {
+class OneWaitingFragment : Fragment(){
     lateinit var binding: FragmentOneWaitingBinding
-    lateinit var adapter: MyWaitingAdapter
+    lateinit var adapter : MyWaitingAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,14 +34,16 @@ class OneWaitingFragment : Fragment() {
             val intent = Intent(activity, MainActivity::class.java)
             startActivity(intent)
         }
+
             val networkService = (context?.applicationContext as MyApplication).networkService
             val reserveListCall = networkService.getWaitingAll()
 
             reserveListCall.enqueue(object : Callback<ItemDataList> {
                 override fun onResponse(call: Call<ItemDataList>, response: Response<ItemDataList>) {
                     var item = response.body()?.items
-
-                    adapter = MyWaitingAdapter(this@OneWaitingFragment, item)
+                    Log.d("lmj", "One item : $item")
+                    adapter = MyWaitingAdapter(OneFragment(), item)
+                    adapter.filter.filter("방문예약")
 
                     binding.oneRecyclerView.adapter = adapter
                     binding.oneRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))

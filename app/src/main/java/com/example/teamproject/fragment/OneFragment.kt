@@ -1,22 +1,42 @@
 package com.example.teamproject.fragment
 
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.teamproject.MyApplication
 import com.example.teamproject.databinding.FragmentOneBinding
+import com.example.teamproject.databinding.FragmentOneWaitingBinding
+import com.example.teamproject.databinding.FragmentThreeWaitingBinding
+import com.example.teamproject.databinding.FragmentTwoWaitingBinding
+import com.example.teamproject.model.ItemDataList
+import com.example.teamproject.recycler.MyWaitingAdapter
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class OneFragment : Fragment() {
 
     lateinit var binding: FragmentOneBinding
+    lateinit var bindingOne: FragmentOneWaitingBinding
+    lateinit var bindingTwo: FragmentTwoWaitingBinding
+    lateinit var bindingThree: FragmentThreeWaitingBinding
+    lateinit var adapter: MyWaitingAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentOneBinding.inflate(inflater, container, false)
+
 
         val tabLayout = binding.ReserveTabs
 

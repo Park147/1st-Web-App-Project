@@ -2,6 +2,7 @@ package com.example.teamproject.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,15 +13,14 @@ import com.example.teamproject.MainActivity
 import com.example.teamproject.MyApplication
 import com.example.teamproject.databinding.FragmentTwoWaitingBinding
 import com.example.teamproject.model.ItemDataList
-import com.example.teamproject.recycler.MyReserveComAdapter
-import com.example.teamproject.recycler.MyWaitingCanAdapter
+import com.example.teamproject.recycler.MyWaitingAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class TwoWaitingFragment : Fragment() {
+class TwoWaitingFragment : Fragment(){
     lateinit var binding: FragmentTwoWaitingBinding
-    lateinit var adapter: MyReserveComAdapter
+    lateinit var adapter: MyWaitingAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,13 +33,16 @@ class TwoWaitingFragment : Fragment() {
         }
 
         val networkService = (context?.applicationContext as MyApplication).networkService
-        val reserveListCall = networkService.getWaitingCom()
+        val reserveListCall = networkService.getWaitingAll()
 
         reserveListCall.enqueue(object : Callback<ItemDataList> {
             override fun onResponse(call: Call<ItemDataList>, response: Response<ItemDataList>) {
                 var item = response.body()?.items
+                Log.d("lmj", "Two item : $item")
 
-                adapter = MyReserveComAdapter(this@TwoWaitingFragment, item)
+                adapter = MyWaitingAdapter(this@TwoWaitingFragment, item)
+                adapter.filter.filter("방문완료")
+
                 binding.twoRecyclerView.adapter = adapter
                 binding.twoRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
                 adapter.notifyDataSetChanged()

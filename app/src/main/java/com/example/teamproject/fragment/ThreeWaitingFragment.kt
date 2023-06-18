@@ -1,6 +1,7 @@
 package com.example.teamproject.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,33 +10,33 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teamproject.MyApplication
 import com.example.teamproject.databinding.FragmentThreeWaitingBinding
-import com.example.teamproject.databinding.ItemRecyclerviewBinding
 import com.example.teamproject.model.ItemDataList
-import com.example.teamproject.recycler.MyWaitingCanAdapter
+import com.example.teamproject.recycler.MyWaitingAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ThreeWaitingFragment : Fragment() {
+class ThreeWaitingFragment : Fragment(){
     lateinit var binding: FragmentThreeWaitingBinding
-    lateinit var adapter: MyWaitingCanAdapter
-    lateinit var bindingRe: ItemRecyclerviewBinding
+    lateinit var adapter: MyWaitingAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentThreeWaitingBinding.inflate(inflater, container, false)
-        bindingRe = ItemRecyclerviewBinding.inflate(inflater, container, false)
 
         val networkService = (context?.applicationContext as MyApplication).networkService
-        val reserveListCall = networkService.getWaitingCan()
+        val reserveListCall = networkService.getWaitingAll()
 
         reserveListCall.enqueue(object : Callback<ItemDataList> {
             override fun onResponse(call: Call<ItemDataList>, response: Response<ItemDataList>) {
                 var item = response.body()?.items
+                Log.d("lmj", "Three item : $item")
 
-                adapter = MyWaitingCanAdapter(this@ThreeWaitingFragment, item)
+                adapter = MyWaitingAdapter(this@ThreeWaitingFragment, item)
+                adapter.filter.filter("방문취소")
+
                 binding.threeRecyclerView.adapter = adapter
                 binding.threeRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
                 adapter.notifyDataSetChanged()

@@ -65,7 +65,6 @@ class ReserveActivity : AppCompatActivity() {
             var reserveTime = binding.btn1.text.toString()
 
             var reserve = ItemData("유저이름","","제목","","",reserveTime,reserveDate,personCount,"방문예약")
-            Log.d("lmj","$reserve")
 
             val networkService = (applicationContext as MyApplication).networkService
             val requestCall = networkService.doInsertReserve(reserve)
@@ -90,7 +89,6 @@ class ReserveActivity : AppCompatActivity() {
             var reserveTime = binding.btn2.text.toString()
 
             var reserve = ItemData("유저이름","","제목","","",reserveTime,reserveDate,personCount,"방문예약")
-            Log.d("lmj","$reserve")
 
             val networkService = (applicationContext as MyApplication).networkService
             val requestCall = networkService.doInsertReserve(reserve)
@@ -115,7 +113,6 @@ class ReserveActivity : AppCompatActivity() {
             var reserveTime = binding.btn3.text.toString()
 
             var reserve = ItemData("유저이름","","제목","","",reserveTime,reserveDate,personCount,"방문예약")
-            Log.d("lmj","$reserve")
 
             val networkService = (applicationContext as MyApplication).networkService
             val requestCall = networkService.doInsertReserve(reserve)
