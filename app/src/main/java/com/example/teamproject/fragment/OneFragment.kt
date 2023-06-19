@@ -42,7 +42,7 @@ class OneFragment : Fragment() {
 
         val viewPager = binding.ReserveViewpager
 
-        viewPager.adapter= MyReserveFragmentPagerAdapter(this)
+        viewPager.adapter= MyWaitingFragmentPagerAdapter(this)
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             when (position) {
@@ -62,7 +62,7 @@ class OneFragment : Fragment() {
 
         return binding.root
     }
-    class MyReserveFragmentPagerAdapter(Fragment: Fragment): FragmentStateAdapter(Fragment){
+    class MyWaitingFragmentPagerAdapter(Fragment: Fragment): FragmentStateAdapter(Fragment){
         val fragments: List<Fragment>
         init {
             fragments= listOf(OneWaitingFragment(), TwoWaitingFragment(), ThreeWaitingFragment())

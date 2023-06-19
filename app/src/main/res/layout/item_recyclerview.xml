@@ -66,10 +66,5 @@
                     />
         </LinearLayout>
     </LinearLayout>
-    <Button
-        android:id="@+id/cancelbutton"
-        android:layout_width="20dp"
-        android:layout_height="30dp"
-        android:gravity="right" />
 
 </LinearLayout>

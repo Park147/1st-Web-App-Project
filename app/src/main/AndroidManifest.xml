@@ -21,6 +21,9 @@
         android:theme="@style/Theme.TeamProject"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ReserveUpdateActivity"
+            android:exported="true" />
+        <activity
             android:name=".ReserveActivity"
             android:exported="true" />
         <activity

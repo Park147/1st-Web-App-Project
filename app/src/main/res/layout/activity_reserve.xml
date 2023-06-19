@@ -8,15 +8,32 @@
     android:orientation="vertical"
     tools:context=".ReserveActivity">
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="20dp">
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="10dp">
+        android:text="예약하기"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="100dp"
+        android:background="#FFAC07"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="100dp"
+        android:layout_marginLeft="10dp">
         <TextView
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="날짜    :  "/>
+            android:text="예약 날짜"
+            android:textSize="20sp"
+            android:layout_margin="10dp"/>
         <Button
             android:id="@+id/dateButton"
             style="?android:spinnerStyle"
@@ -29,13 +46,17 @@
             android:textSize="20sp" />
     </LinearLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:layout_marginBottom="100dp"
+        android:layout_marginLeft="10dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="인원수 :       "/>
+            android:text="예약 인원수"
+            android:textSize="20sp"
+            android:layout_marginBottom="10dp"/>
         <EditText
             android:id="@+id/person"
             android:layout_width="200dp"
@@ -44,8 +65,15 @@
             android:text=""
             android:hint="예약 인원수(x명)"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:layout_marginBottom="20dp"/>
     </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="예약 시간"
+            android:textSize="20sp"
+            android:layout_margin="10dp" />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,18 +83,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="오후 4:30"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginLeft="10dp"/>
         <Button
             android:id="@+id/btn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="오후 6:30"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginLeft="10dp"/>
         <Button
             android:id="@+id/btn3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="오후 8:30"/>
+            android:text="오후 8:30"
+            android:layout_marginLeft="10dp"/>
     </LinearLayout>
-
+    </LinearLayout>
 </LinearLayout>

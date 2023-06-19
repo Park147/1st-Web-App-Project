@@ -29,23 +29,23 @@ class MyOpenAlarmAdapter(val context: TwoAlarmFragment, val datas:List<BlankItem
         binding.itemtitle.text = waiting?.b_title
         binding.itemcontent.text = waiting?.b_date
         binding.itemwaiting.text = waiting?.b_time
-        val urlImg = waiting?.b_image
+//        val urlImg = waiting?.b_image
 
-        Glide.with(context)
-            .asBitmap()
-            .load(urlImg)
-            .into(object : CustomTarget<Bitmap>(200, 200) {
-                override fun onResourceReady(
-                    resource: Bitmap,
-                    transition: Transition<in Bitmap>?
-                ) {
-                    binding.itemimage.setImageBitmap(resource)
-                }
-
-                override fun onLoadCleared(placeholder: Drawable?) {
-                    UCharacter.GraphemeClusterBreak.T
-                }
-            })
+//        Glide.with(context)
+//            .asBitmap()
+//            .load(urlImg)
+//            .into(object : CustomTarget<Bitmap>(200, 200) {
+//                override fun onResourceReady(
+//                    resource: Bitmap,
+//                    transition: Transition<in Bitmap>?
+//                ) {
+//                    binding.itemimage.setImageBitmap(resource)
+//                }
+//
+//                override fun onLoadCleared(placeholder: Drawable?) {
+//                    UCharacter.GraphemeClusterBreak.T
+//                }
+//            })
     }
     override fun getItemCount(): Int{
         return datas?.size ?: 0

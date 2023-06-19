@@ -19,7 +19,7 @@ import retrofit2.Response
 
 class TwoAlarmFragment : Fragment() {
    lateinit var binding: FragmentTwoAlarmBinding
-    lateinit var adapter: MyOpenAlarmAdapter
+    lateinit var adapter: MyAlarmAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,14 +30,14 @@ class TwoAlarmFragment : Fragment() {
         val networkService = (context?.applicationContext as MyApplication).networkService
         val reserveListCall = networkService.getBlank()
 
-
         reserveListCall.enqueue(object : Callback<BlankItemList> {
             override fun onResponse(call: Call<BlankItemList>, response: Response<BlankItemList>) {
                 var item = response.body()?.blankItems
 
-                adapter = MyOpenAlarmAdapter(this@TwoAlarmFragment, item)
-                binding.TwoAlarmRecyclerView.adapter = adapter
-                binding.TwoAlarmRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+                adapter = MyAlarmAdapter(this@TwoAlarmFragment, item)
+                adapter.filter.filter("예약 오픈 알림")
+                binding.twoAlarmRecyclerView.adapter = adapter
+                binding.twoAlarmRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
                 adapter.notifyDataSetChanged()
             }
 

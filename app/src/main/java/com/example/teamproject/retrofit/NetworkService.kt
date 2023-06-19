@@ -16,12 +16,6 @@ interface NetworkService {
     @GET("main/myDining/waitingAll")
     fun getWaitingAll(): Call<ItemDataList>
 
-    @GET("main/myDining/waitingCom")
-    fun getWaitingCom(): Call<ItemDataList>
-
-    @GET("main/myDining/waitingCan")
-    fun getWaitingCan(): Call<ItemDataList>
-
     @POST("main/myDining/delete/{w_title}")
     fun  deleteWaitingList(@Path("w_title")w_title:String?):Call<Unit>
 
@@ -36,4 +30,7 @@ interface NetworkService {
 
     @POST("main/myDining/insert")
     fun doInsertReserve(@Body reserve: ItemData?): Call<ItemData>
+
+    @POST("main/myDining/update")
+    fun update(@Body reserve: ItemData):Call<Unit>
 }

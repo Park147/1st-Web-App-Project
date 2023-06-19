@@ -1,5 +1,6 @@
-package com.example.teamproject.recycler
+package com.example.teamproject.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
@@ -9,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.teamproject.databinding.ItemRecyclerviewBinding
 import com.example.teamproject.model.ItemData
 
-
 class MyWaitingViewHolder(val binding: ItemRecyclerviewBinding): RecyclerView.ViewHolder(binding.root)
 
-class MyWaitingAdapter(val context: Fragment, datas:MutableList<ItemData>?): RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable{
+class MyWaitingAdapter(val context: Fragment, datas:MutableList<ItemData>?): RecyclerView.Adapter<RecyclerView.ViewHolder>(),
+    Filterable {
     var listDataFilter: MutableList<ItemData>? = datas
     var listDataUnFilter: MutableList<ItemData>? = datas
 
@@ -24,8 +25,10 @@ class MyWaitingAdapter(val context: Fragment, datas:MutableList<ItemData>?): Rec
                 var filterString = constraint.toString()
                 // listDataFilter의 값이 필터되면 listDataFiltering, 필터 안되면 listDataUnFilter
                 listDataFilter = if(filterString.isEmpty()){
+                    Log.d("lmj", "filterString이 empty")
                     listDataUnFilter
                 } else {
+                    Log.d("lmj", "filterString이 NotEmpty")
                     val listDataFiltering = mutableListOf<ItemData>()
                     for (no in listDataUnFilter!!) {
                         if(no.toString().contains(filterString))
@@ -35,12 +38,15 @@ class MyWaitingAdapter(val context: Fragment, datas:MutableList<ItemData>?): Rec
                 }
                 // 필터결과 리턴
                 val filterResults = FilterResults()
+                Log.d("lmj", "데이터 값 : $listDataFilter")
                 filterResults.values = listDataFilter
+                Log.d("lmj", "함수 값 : ${filterResults.values}")
                 return filterResults
             }
             // 필터되면 데이터 변경
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
                 listDataFilter = results?.values as MutableList<ItemData>?
+                Log.d("lmj", "최종 데이터 : $listDataFilter")
                 notifyDataSetChanged()
             }
         }

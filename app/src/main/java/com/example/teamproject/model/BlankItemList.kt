@@ -1,5 +1,5 @@
 package com.example.teamproject.model
 
 data class BlankItemList (
-    var blankItems:List<BlankItem>
+    var blankItems:MutableList<BlankItem>
 )

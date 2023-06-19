@@ -1,10 +1,10 @@
 package com.example.teamproject
 
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import com.example.teamproject.databinding.ActivityReserveBinding
+import com.example.teamproject.databinding.ActivityReserveUpdateBinding
 import com.example.teamproject.model.ItemData
 import com.google.android.material.datepicker.MaterialDatePicker
 import retrofit2.Call
@@ -14,9 +14,8 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-
-class ReserveActivity : AppCompatActivity() {
-    lateinit var binding: ActivityReserveBinding
+class ReserveUpdateActivity : AppCompatActivity() {
+    lateinit var binding: ActivityReserveUpdateBinding
     var date:Long = 0L
     var reserveDate:String = ""
     var reserveTime:String = ""
@@ -24,12 +23,34 @@ class ReserveActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityReserveBinding.inflate(layoutInflater)
+        binding = ActivityReserveUpdateBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         //날짜 선택하는 달력 호출
         binding.dateButton.setOnClickListener {
             showDatePicker()
+        }
+
+        binding.cancel.setOnClickListener {
+            reserveDate = binding.dateButton.text.toString()
+            personCount = binding.person.text.toString()
+            var reserve = ItemData("유저이름","","제목2","","","",reserveDate, personCount,"방문취소")
+
+            val networkService = (applicationContext as MyApplication).networkService
+            val reserveDeleteCall = networkService.update(reserve)
+
+            reserveDeleteCall.enqueue(object : Callback<Unit> {
+                override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                    Toast.makeText(this@ReserveUpdateActivity,"success", Toast.LENGTH_SHORT).show()
+                    val intent= Intent(this@ReserveUpdateActivity, MyDining::class.java)
+                    startActivity(intent)
+                }
+
+                override fun onFailure(call: Call<Unit>, t: Throwable) {
+                    Toast.makeText(this@ReserveUpdateActivity,"fail", Toast.LENGTH_SHORT).show()
+                }
+
+            })
         }
 
         // 예약날짜, 인원수 입력안하면 Toast호출, 예약시간 클릭하면 db에 값 저장하고 메인으로 넘어감
@@ -47,15 +68,17 @@ class ReserveActivity : AppCompatActivity() {
                 var reserve = ItemData("유저이름","","제목1","","",reserveTime,reserveDate, personCount,"방문예약")
 
                 val networkService = (applicationContext as MyApplication).networkService
-                val requestCall = networkService.doInsertReserve(reserve)
-                requestCall.enqueue(object : Callback<ItemData> {
-                    override fun onResponse(call: Call<ItemData>, response: Response<ItemData>) {
-                        val intent= Intent(this@ReserveActivity,MainActivity::class.java)
+                val reserveDeleteCall = networkService.update(reserve)
+
+                reserveDeleteCall.enqueue(object : Callback<Unit> {
+                    override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                        Toast.makeText(this@ReserveUpdateActivity,"success", Toast.LENGTH_SHORT).show()
+                        val intent= Intent(this@ReserveUpdateActivity, MyDining::class.java)
                         startActivity(intent)
                     }
 
-                    override fun onFailure(call: Call<ItemData>, t: Throwable) {
-                        call.cancel()
+                    override fun onFailure(call: Call<Unit>, t: Throwable) {
+                        Toast.makeText(this@ReserveUpdateActivity,"fail", Toast.LENGTH_SHORT).show()
                     }
 
                 })
@@ -76,15 +99,17 @@ class ReserveActivity : AppCompatActivity() {
                 var reserve = ItemData("유저이름","","제목2","","",reserveTime,reserveDate, personCount,"방문예약")
 
                 val networkService = (applicationContext as MyApplication).networkService
-                val requestCall = networkService.doInsertReserve(reserve)
-                requestCall.enqueue(object : Callback<ItemData> {
-                    override fun onResponse(call: Call<ItemData>, response: Response<ItemData>) {
-                        val intent= Intent(this@ReserveActivity,MainActivity::class.java)
+                val reserveDeleteCall = networkService.update(reserve)
+
+                reserveDeleteCall.enqueue(object : Callback<Unit> {
+                    override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                        Toast.makeText(this@ReserveUpdateActivity,"success", Toast.LENGTH_SHORT).show()
+                        val intent= Intent(this@ReserveUpdateActivity, MyDining::class.java)
                         startActivity(intent)
                     }
 
-                    override fun onFailure(call: Call<ItemData>, t: Throwable) {
-                        call.cancel()
+                    override fun onFailure(call: Call<Unit>, t: Throwable) {
+                        Toast.makeText(this@ReserveUpdateActivity,"fail", Toast.LENGTH_SHORT).show()
                     }
 
                 })
@@ -105,15 +130,17 @@ class ReserveActivity : AppCompatActivity() {
                 var reserve = ItemData("유저이름","","제목3","","",reserveTime,reserveDate, personCount,"방문예약")
 
                 val networkService = (applicationContext as MyApplication).networkService
-                val requestCall = networkService.doInsertReserve(reserve)
-                requestCall.enqueue(object : Callback<ItemData> {
-                    override fun onResponse(call: Call<ItemData>, response: Response<ItemData>) {
-                        val intent= Intent(this@ReserveActivity,MainActivity::class.java)
+                val reserveDeleteCall = networkService.update(reserve)
+
+                reserveDeleteCall.enqueue(object : Callback<Unit> {
+                    override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                        Toast.makeText(this@ReserveUpdateActivity,"success", Toast.LENGTH_SHORT).show()
+                        val intent= Intent(this@ReserveUpdateActivity, MyDining::class.java)
                         startActivity(intent)
                     }
 
-                    override fun onFailure(call: Call<ItemData>, t: Throwable) {
-                        call.cancel()
+                    override fun onFailure(call: Call<Unit>, t: Throwable) {
+                        Toast.makeText(this@ReserveUpdateActivity,"fail", Toast.LENGTH_SHORT).show()
                     }
 
                 })

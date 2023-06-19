@@ -41,7 +41,6 @@ class OneWaitingFragment : Fragment(){
             reserveListCall.enqueue(object : Callback<ItemDataList> {
                 override fun onResponse(call: Call<ItemDataList>, response: Response<ItemDataList>) {
                     var item = response.body()?.items
-                    Log.d("lmj", "One item : $item")
                     adapter = MyWaitingAdapter(OneFragment(), item)
                     adapter.filter.filter("방문예약")
 
@@ -55,38 +54,6 @@ class OneWaitingFragment : Fragment(){
                 }
 
             })
-
-
-
-//                personal
-//                var itemDataList = arrayListOf<ItemData>()
-//                for(i in 0 until (itemList?.items?.size ?:0)){
-//                    memberCheck = itemList?.items?.get(i)?.name?.split(",") ?: null
-//
-//                    if(memberCheck?.size?.minus(1) == 1){
-//                        itemList?.items?.get(i)?.let { itemDataList?.add(it) }
-//                    }
-//                    adapter = MyReserveAdapter(this@OneReserveFragment, itemDataList)
-//                }
-//
-//                people
-//                var itemDataList = arrayListOf<ItemData>()
-//                for(i in 0 until (itemList?.items?.size ?:0)){
-//                    memberCheck = itemList?.items?.get(i)?.name?.split(",") ?: null
-//                    if(memberCheck?.size?.minus(1)!! > 1){
-//                        itemList?.items?.get(i)?.let { itemDataList?.add(it) }
-//                    }
-//                    adapter = MyReserveAdapter(this@OneReserveFragment, itemDataList)
-//                }
-//
-//            }
-//
-//            }
-//
-//            override fun onFailure(call: Call<ItemDataList>, t: Throwable) {
-//                call.cancle()
-//            }
-//        })
 
         return binding.root
     }

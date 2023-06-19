@@ -1,54 +1,65 @@
 package com.example.teamproject.recycler
 
 import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
-import android.icu.lang.UCharacter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
 import com.example.teamproject.databinding.ItemRecyclerviewBinding
-import com.example.teamproject.fragment.OneAlarmFragment
 import com.example.teamproject.model.BlankItem
-import com.example.teamproject.model.BlankItemList
-import com.example.teamproject.model.ItemData
 
 class MyAlarmViewHolder(val binding: ItemRecyclerviewBinding): RecyclerView.ViewHolder(binding.root)
 
-class MyAlarmAdapter(val context: OneAlarmFragment, val datas:List<BlankItem>?): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class MyAlarmAdapter(val context: Fragment, datas:MutableList<BlankItem>?): RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable{
+    var listDataFilter: MutableList<BlankItem>? = datas
+    var listDataUnFilter: MutableList<BlankItem>? = datas
+    override fun getFilter(): Filter {
+        return object: Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                // 필터값
+                var filterString = constraint.toString()
+                // listDataFilter의 값이 필터되면 listDataFiltering, 필터 안되면 listDataUnFilter
+                listDataFilter = if(filterString.isEmpty()){
+                    listDataUnFilter
+
+                } else {
+                    val listDataFiltering = mutableListOf<BlankItem>()
+                    for (no in listDataUnFilter!!) {
+                        if(no.toString().contains(filterString))
+                            listDataFiltering.add(no)
+                    }
+                    listDataFiltering
+                }
+                // 필터결과 리턴
+                val filterResults = FilterResults()
+                filterResults.values = listDataFilter
+                return filterResults
+            }
+            // 필터되면 데이터 변경
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                listDataFilter = results?.values as MutableList<BlankItem>?
+                Log.d("lmj", "최종 데이터 값 : $listDataFilter")
+                notifyDataSetChanged()
+            }
+        }
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
             = MyAlarmViewHolder(ItemRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent,  false))
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val binding=(holder as MyAlarmViewHolder).binding
 
-        val waiting = datas?.get(position)
+        val waiting = listDataFilter?.get(position)
+        binding.itemContent.text = waiting?.b_blank_confirm
         binding.itemtitle.text = waiting?.b_title
         binding.itemcontent.text = waiting?.b_date
         binding.itemwaiting.text = waiting?.b_time
-        val urlImg = waiting?.b_image
-
-        Glide.with(context)
-            .asBitmap()
-            .load(urlImg)
-            .into(object : CustomTarget<Bitmap>(200, 200) {
-                override fun onResourceReady(
-                    resource: Bitmap,
-                    transition: Transition<in Bitmap>?
-                ) {
-                    binding.itemimage.setImageBitmap(resource)
-                }
-
-                override fun onLoadCleared(placeholder: Drawable?) {
-                    UCharacter.GraphemeClusterBreak.T
-                }
-            })
     }
     override fun getItemCount(): Int{
-        return datas?.size ?: 0
+        return listDataFilter?.size ?: 0
     }
 }
 

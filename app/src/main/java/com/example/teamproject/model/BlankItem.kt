@@ -7,4 +7,5 @@ data class BlankItem (
     var b_date: String,
     var b_people: String,
     var b_time: String,
+    var b_blank_confirm: String
 )
