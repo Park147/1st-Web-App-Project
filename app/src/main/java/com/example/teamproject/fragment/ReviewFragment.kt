@@ -2,6 +2,7 @@ package com.example.teamproject.fragment
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,17 +11,16 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teamproject.MyApplication
-import com.example.teamproject.databinding.BookmarkMainBinding
 import com.example.teamproject.databinding.FragmentReviewBinding
-import com.example.teamproject.model.Bookmark
-import com.example.teamproject.recycler.BookAdapter
+import com.example.teamproject.model.Review
+import com.example.teamproject.recycler.ReviewAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class ReviewFragment : Fragment() {
     lateinit var binding: FragmentReviewBinding
-    lateinit var adapter: BookAdapter
+    lateinit var adapter: ReviewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,16 +33,24 @@ class ReviewFragment : Fragment() {
         val userId = loginSharedPref.getString("m_id", null)
 
         val userService = (context?.applicationContext as MyApplication).userService
-        val booklist = userService.bmList(userId.toString())
+        val reviewList = userService.getRList()
+
+        reviewList.enqueue(object : Callback<List<Review>> {
+            override fun onResponse(call: Call<List<Review>>, response: Response<List<Review>>) {
+                if (response.isSuccessful){
+                    var item = response.body()
+                    Log.d("reviewlist","$item")
+                    adapter = ReviewAdapter(this@ReviewFragment, item, userId.toString(), userService)
+
+                    binding.twoRecyclerView.adapter = adapter
+                    binding.twoRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+                    adapter.notifyDataSetChanged()
+                }
 
 
-
-        booklist.enqueue(object : Callback<List<Bookmark>> {
-            override fun onResponse(call: Call<List<Bookmark>>, response: Response<List<Bookmark>>) {
-                var item = response.body()
             }
 
-            override fun onFailure(call: Call<List<Bookmark>>, t: Throwable) {
+            override fun onFailure(call: Call<List<Review>>, t: Throwable) {
                 call.cancel()
             }
 

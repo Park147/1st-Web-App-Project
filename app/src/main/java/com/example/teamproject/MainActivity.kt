@@ -12,6 +12,7 @@ import com.example.teamproject.databinding.ActivityMainBinding
 import com.example.teamproject.login.LoginActivity
 import com.example.teamproject.model.Rstr
 import com.example.teamproject.recycler.MyAdapter
+import com.example.teamproject.review.ReviewActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import retrofit2.Call
 import retrofit2.Callback
@@ -42,8 +43,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.second_tab -> {
                     Toast.makeText(this@MainActivity, "미구현", Toast.LENGTH_SHORT).show()
                 }
-                R.id.first_tab -> {
-                    Toast.makeText(this@MainActivity, "미구현", Toast.LENGTH_SHORT).show()
+                R.id.third_tab -> {
+                    val intent = Intent(this@MainActivity, ReviewActivity::class.java)
+                    startActivity(intent)
                 }
                 R.id.fourth_tab -> {
                     Toast.makeText(this@MainActivity, "미구현", Toast.LENGTH_SHORT).show()

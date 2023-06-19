@@ -2,11 +2,8 @@ package com.example.teamproject
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Base64
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -21,6 +18,7 @@ import com.example.teamproject.fragment.ReviewFragment
 import com.example.teamproject.login.ModProfileActivity
 import com.example.teamproject.model.Member
 import com.example.teamproject.model.Pimg
+import com.example.teamproject.review.ReviewActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayoutMediator
 import retrofit2.Call
@@ -62,7 +60,8 @@ class MyProfilePage : AppCompatActivity() {
                     Toast.makeText(this@MyProfilePage, "미구현", Toast.LENGTH_SHORT).show()
                 }
                 R.id.third_tab -> {
-                    Toast.makeText(this@MyProfilePage, "미구현", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@MyProfilePage, ReviewActivity::class.java)
+                    startActivity(intent)
                 }
                 R.id.fourth_tab -> {
                     Toast.makeText(this@MyProfilePage, "미구현", Toast.LENGTH_SHORT).show()

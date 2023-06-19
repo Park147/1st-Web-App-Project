@@ -1,15 +1,10 @@
 package com.example.teamproject.recycler
 
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
-import android.icu.lang.UCharacter
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
 import com.example.teamproject.databinding.ItemBookBinding
 import com.example.teamproject.fragment.BookmarkFragment
 import com.example.teamproject.model.Bookmark

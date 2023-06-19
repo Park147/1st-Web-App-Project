@@ -12,6 +12,7 @@ import com.example.teamproject.MyProfilePage
 import com.example.teamproject.R
 import com.example.teamproject.databinding.ActivityLoginBinding
 import com.example.teamproject.model.Member
+import com.example.teamproject.review.ReviewActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import retrofit2.Call
 import retrofit2.Callback
@@ -47,7 +48,8 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this@LoginActivity, "미구현", Toast.LENGTH_SHORT).show()
                 }
                 R.id.third_tab -> {
-                    Toast.makeText(this@LoginActivity, "미구현", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@LoginActivity, ReviewActivity::class.java)
+                    startActivity(intent)
                 }
                 R.id.fourth_tab -> {
                     Toast.makeText(this@LoginActivity, "미구현", Toast.LENGTH_SHORT).show()
