@@ -2,15 +2,16 @@ package com.example.teamproject
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.Toast
-import androidx.annotation.NonNull
-import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -18,9 +19,8 @@ import com.example.teamproject.databinding.ActivityMyProfilePageBinding
 import com.example.teamproject.fragment.BookmarkFragment
 import com.example.teamproject.fragment.ReviewFragment
 import com.example.teamproject.login.ModProfileActivity
-import com.example.teamproject.login.ModifyProfileActivity
-import com.example.teamproject.model.Bookmark
 import com.example.teamproject.model.Member
+import com.example.teamproject.model.Pimg
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayoutMediator
 import retrofit2.Call
@@ -44,7 +44,9 @@ class MyProfilePage : AppCompatActivity() {
         modprofile = binding.modprofile
         bottommenu = binding.bottommenu
 
-        
+
+
+
         // 하단바 초기값 설정
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottommenu)
         bottomNavigationView.selectedItemId = R.id.fifth_tab
@@ -118,10 +120,43 @@ class MyProfilePage : AppCompatActivity() {
         
         // 로그인 정보를 가져오는 곳
         val loginSharedPref = applicationContext.getSharedPreferences("login_prof", Context.MODE_PRIVATE)
-        val userId = loginSharedPref.getString("m_id", "")
+        val userId = loginSharedPref.getString("m_id", "").toString()
         val password = loginSharedPref.getString("m_password", "")
 
         binding.userId.text = userId
+
+//        val userService = ( applicationContext as MyApplication).userService
+//
+//        val usersel = userService.selimg(userId)
+//
+//        Log.d("galtest1", "${usersel.request().url()}")
+//
+//        usersel.enqueue(object: Callback<Pimg>{
+//            override fun onResponse(call: Call<Pimg>, response: Response<Pimg>) {
+//                if (response.isSuccessful){
+//                    val userprofileimg = response.body()
+//                    val userimg = userprofileimg?.img
+//                    Log.d("galtest1","$userprofileimg")
+//                    Log.d("galtest1","성공 ")
+//                    if (userimg != null) {
+//                        val bitmap = StringToBitmaps(userimg)
+//                        Log.d("galtest1", "$bitmap")
+//                    }
+//
+//                    // String -> Bitmap 변환
+//
+//
+//
+//
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<Pimg>, t: Throwable) {
+//                Log.d("selimg2","실패 ${t.message}")
+//                call.cancel()
+//            }
+//
+//        })
 
         val tabLayout = binding.tabs
         val viewPager = binding.viewpager
@@ -138,6 +173,8 @@ class MyProfilePage : AppCompatActivity() {
                 }
             }
         }.attach()
+
+
 
 
     }
@@ -168,4 +205,20 @@ class MyProfilePage : AppCompatActivity() {
         }
         return true
     }
+
+//    fun StringToBitmaps(image: String): Bitmap? {
+//        return try {
+//            val encodeByte = Base64.decode(image, Base64.DEFAULT)
+//            Log.d("galtest2 i","${encodeByte}")
+//            Log.d("galtest2 size","${encodeByte.size}")
+//            val bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.size)
+//            Log.d("galtest2","$bitmap")
+//            bitmap
+//        } catch (e: Exception) {
+//            Log.d("galtest2","${e.message}")
+//            e.printStackTrace()
+//            null
+//        }
+//    }
+
 }

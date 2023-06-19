@@ -29,8 +29,9 @@
         app:layout_constraintVertical_bias="0.023">
 
         <ImageButton
-            android:layout_width="108dp"
-            android:layout_height="96dp"
+            android:id="@+id/proimg"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_gravity="center"
             android:src="@drawable/user_basic" />
 
@@ -77,12 +78,20 @@
             android:textSize="20dp" />
 
         <android.widget.Button
+            android:id="@+id/savebtn"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:text="사진"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/button_info"/>
+
+        <android.widget.Button
             android:id="@+id/modprofiler"
             android:layout_width="400dp"
             android:layout_height="wrap_content"
             android:textSize="30dp"
             android:text="저장"
-            android:layout_marginTop="120dp"
             android:background="@drawable/button_info"/>
     </LinearLayout>
 

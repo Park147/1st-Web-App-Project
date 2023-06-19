@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teamproject.MyApplication
-import com.example.teamproject.databinding.BookmarkMainBinding
 import com.example.teamproject.databinding.FragmentBookmarkBinding
 import com.example.teamproject.model.Bookmark
 import com.example.teamproject.recycler.BookAdapter

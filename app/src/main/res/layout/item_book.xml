@@ -32,6 +32,5 @@
             android:hint="나만의 메모를 남겨보세요."
             />
 
-
     </LinearLayout>
 </LinearLayout>

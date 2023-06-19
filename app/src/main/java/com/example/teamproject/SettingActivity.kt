@@ -96,7 +96,7 @@ class SettingActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<Member>, response: Response<Member>) {
                     if(response.isSuccessful) {
                         val sucUser = response.body()
-
+                        Log.d("galtest1", "$sucUser")
                         val m_id = sucUser?.m_id.toString()
                         val m_name = sucUser?.m_name.toString()
                         val m_phone = sucUser?.m_phone.toString()

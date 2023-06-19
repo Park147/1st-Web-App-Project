@@ -4,6 +4,7 @@ import com.example.teamproject.model.Bookmark
 import com.example.teamproject.model.Member
 import com.example.teamproject.model.ModInfo
 import com.example.teamproject.model.ModPro
+import com.example.teamproject.model.Pimg
 import com.example.teamproject.model.Rstr
 import com.example.teamproject.model.Rstrbook
 import retrofit2.Call
@@ -76,4 +77,14 @@ interface UserService {
         @Query("b_id") b_id: String,
         @Query("b_name") b_name: String
     ): Call<Unit>
+
+    @POST("seat/img/save")
+    fun imgsave(
+        @Body pimg: Pimg
+    ): Call<Unit>
+
+    @GET("seat/img/selimg")
+    fun selimg(
+        @Query("idx") idx: String
+    ): Call<Pimg>
 }
