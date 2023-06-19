@@ -20,6 +20,7 @@ class FragmentFirst : Fragment() {
     private var rstr_addr: String? = null
     private var rstr_tell: String? = null
     private var rstr_intro: String? = null
+    private var rstr_popularity: String? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_1p, container, false)
@@ -36,9 +37,11 @@ class FragmentFirst : Fragment() {
         rstr_addr = arguments?.getString("rstr_addr")
         rstr_tell = arguments?.getString("rstr_tell")
         rstr_intro = arguments?.getString("rstr_intro")
+        rstr_popularity = arguments?.getString("rstr_popularity")
 
         Log.d("fraglist1", "$rstr_img, $rstr_nm")
         tvName1.text = rstr_nm
+
 
         if (rstr_img != null) {
             Glide.with(requireContext())
@@ -52,6 +55,7 @@ class FragmentFirst : Fragment() {
                 putExtra("rstr_addr", rstr_addr)
                 putExtra("rstr_tell", rstr_tell)
                 putExtra("rstr_intro", rstr_intro)
+                putExtra("rstr_popularity", rstr_popularity)
             }
             startActivity(intent)
         }

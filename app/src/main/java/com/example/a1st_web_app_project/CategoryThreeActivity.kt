@@ -1,5 +1,7 @@
 package com.example.a1st_web_app_project
 
+import MyAdapter
+import MyAdapterListener
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -41,7 +43,7 @@ class CategoryThreeActivity : AppCompatActivity(), MyAdapterListener {
                 if (response.isSuccessful) {
                     rstrList = response.body() ?: emptyList()
                     Log.d("jcy", "$rstrList")
-                    adapter.updatedatas(rstrList)
+                    adapter.updateDatas(rstrList)
                 }
             }
 
@@ -63,7 +65,7 @@ class CategoryThreeActivity : AppCompatActivity(), MyAdapterListener {
         binding.catebtn111.setOnClickListener {
             val filteredList = filterRstrList()
             if (filteredList.isNotEmpty()) {
-                adapter.updatedatas(filteredList)
+                adapter.updateDatas(filteredList)
             } else {
                 Toast.makeText(this, "해당 조건에 맞는 음식점이 없습니다.", Toast.LENGTH_SHORT).show()
             }
@@ -72,7 +74,7 @@ class CategoryThreeActivity : AppCompatActivity(), MyAdapterListener {
         binding.catebtn222.setOnClickListener {
             val filteredList = filterRstrList2()
             if (filteredList.isNotEmpty()) {
-                adapter.updatedatas(filteredList)
+                adapter.updateDatas(filteredList)
             } else {
                 Toast.makeText(this, "해당 조건에 맞는 음식점이 없습니다.", Toast.LENGTH_SHORT).show()
             }
@@ -81,7 +83,7 @@ class CategoryThreeActivity : AppCompatActivity(), MyAdapterListener {
         binding.catebtn333.setOnClickListener {
             val filteredList = filterRstrList3()
             if (filteredList.isNotEmpty()) {
-                adapter.updatedatas(filteredList)
+                adapter.updateDatas(filteredList)
             } else {
                 Toast.makeText(this, "해당 조건에 맞는 음식점이 없습니다.", Toast.LENGTH_SHORT).show()
             }

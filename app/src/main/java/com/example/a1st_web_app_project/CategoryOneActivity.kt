@@ -1,5 +1,7 @@
 package com.example.a1st_web_app_project
 
+import MyAdapter
+import MyAdapterListener
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -42,7 +44,7 @@ class CategoryOneActivity : AppCompatActivity(), MyAdapterListener {
                 if (response.isSuccessful) {
                     rstrList = response.body() ?: emptyList()
                     Log.d("jcy", "$rstrList")
-                    adapter.updatedatas(rstrList)
+                    adapter.updateDatas(rstrList)
                 }
             }
 
@@ -63,12 +65,12 @@ class CategoryOneActivity : AppCompatActivity(), MyAdapterListener {
 
         binding.catebtn1.setOnClickListener {
             val filteredList = rstrList.filter { rstr ->
-                rstr.popularity > 0 // 인기순위 조건을 여기에 추가해주세요. 예시로는 인기순위가 0보다 큰 음식점을 필터링합니다.
+                rstr.rstr_popularity != null && rstr.rstr_popularity > 0.toString() // 인기순위 조건을 여기에 추가해주세요. 예시로는 인기순위가 0보다 큰 음식점을 필터링합니다.
             }
 
             if (filteredList.isNotEmpty()) {
-                val sortedList = filteredList.sortedByDescending { rstr -> rstr.popularity } // 인기순위로 정렬
-                adapter.updatedatas(sortedList)
+                val sortedList = filteredList.sortedByDescending { rstr -> rstr.rstr_popularity } // 인기순위로 정렬
+                adapter.updateDatas(sortedList)
             } else {
                 Toast.makeText(this, "해당 조건에 맞는 음식점이 없습니다.", Toast.LENGTH_SHORT).show()
             }
@@ -95,6 +97,7 @@ class CategoryOneActivity : AppCompatActivity(), MyAdapterListener {
         intent.putExtra("rstr_addr", data.rstr_addr)
         intent.putExtra("rstr_tell", data.rstr_tell)
         intent.putExtra("rstr_intro", data.rstr_intro)
+        intent.putExtra("rstr_popularity", data.rstr_popularity)
         startActivity(intent)
     }
 

@@ -1,5 +1,7 @@
 package com.example.a1st_web_app_project
 
+import MyAdapter
+import MyAdapterListener
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -42,7 +44,7 @@ class CategoryTwoActivity : AppCompatActivity(), MyAdapterListener {
                 if (response.isSuccessful) {
                     rstrList = response.body() ?: emptyList()
                     Log.d("jcy", "$rstrList")
-                    adapter.updatedatas(rstrList)
+                    adapter.updateDatas(rstrList)
                 }
             }
 
@@ -65,7 +67,7 @@ class CategoryTwoActivity : AppCompatActivity(), MyAdapterListener {
             val filterText = "중구" // 변경 가능: 입력된 텍스트로 대체하면 됩니다.
             val filteredList = filterRstrList(filterText)
             if (filteredList.isNotEmpty()) {
-                adapter.updatedatas(filteredList)
+                adapter.updateDatas(filteredList)
             } else {
                 Toast.makeText(this, "해당 조건에 맞는 음식점이 없습니다.", Toast.LENGTH_SHORT).show()
             }
@@ -75,7 +77,7 @@ class CategoryTwoActivity : AppCompatActivity(), MyAdapterListener {
             val filterText = "종로구" // 변경 가능: 입력된 텍스트로 대체하면 됩니다.
             val filteredList = filterRstrList(filterText)
             if (filteredList.isNotEmpty()) {
-                adapter.updatedatas(filteredList)
+                adapter.updateDatas(filteredList)
             } else {
                 Toast.makeText(this, "해당 조건에 맞는 음식점이 없습니다.", Toast.LENGTH_SHORT).show()
             }
@@ -94,7 +96,7 @@ class CategoryTwoActivity : AppCompatActivity(), MyAdapterListener {
             }
 
             if (filteredList.isNotEmpty()) {
-                adapter.updatedatas(filteredList)
+                adapter.updateDatas(filteredList)
             } else {
                 Toast.makeText(this, "해당 조건에 맞는 음식점이 없습니다.", Toast.LENGTH_SHORT).show()
             }

@@ -43,6 +43,7 @@ class MainActivity : FragmentActivity() {
                 putString("rstr_addr", randRstr.rstr_addr)
                 putString("rstr_tell", randRstr.rstr_tell)
                 putString("rstr_intro", randRstr.rstr_intro)
+                putString("rstr_popularity", randRstr.rstr_popularity)
             }
 
             return when (position) {
@@ -116,6 +117,7 @@ class MainActivity : FragmentActivity() {
                                         putExtra("rstr_addr", randRstr.rstr_addr)
                                         putExtra("rstr_tell", randRstr.rstr_tell)
                                         putExtra("rstr_intro", randRstr.rstr_intro)
+                                        putExtra("rstr_popularity", randRstr.rstr_popularity)
                                     }
                                     startActivity(intent)
                                 }

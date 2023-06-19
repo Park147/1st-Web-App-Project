@@ -1,5 +1,7 @@
 package com.example.a1st_web_app_project
 
+import MyAdapter
+import MyAdapterListener
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -12,9 +14,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
-class MainActivity2 : AppCompatActivity() {
+class MainActivity2 : AppCompatActivity(), MyAdapterListener {
     lateinit var binding: ActivityMain2Binding
+    private lateinit var myAdapter: MyAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,22 +30,29 @@ class MainActivity2 : AppCompatActivity() {
 
         val rstrService = (applicationContext as MyApplication).rstrService
 
+        myAdapter = MyAdapter(this, null)
+        myAdapter.setListener(this)
+        binding.recyclerView.adapter = myAdapter
+        binding.recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                this,
+                LinearLayoutManager.VERTICAL
+            )
+        )
+
         val getRstrList = rstrService.getRstrList()
         Log.d("jcy", "${getRstrList.request().url().toString()}")
 
         getRstrList.enqueue(object : Callback<List<RstrModel>> {
-            override fun onResponse(call: Call<List<RstrModel>>, response: Response<List<RstrModel>>) {
+            override fun onResponse(
+                call: Call<List<RstrModel>>,
+                response: Response<List<RstrModel>>
+            ) {
                 if (response.isSuccessful) {
                     val rstrList = response.body()
-                    Log.d("jcy", "${rstrList}")
+                    Log.d("jcy", "$rstrList")
                     if (rstrList != null) {
-                        binding.recyclerView.adapter = MyAdapter(this@MainActivity2, rstrList)
-                        binding.recyclerView.addItemDecoration(
-                            DividerItemDecoration(
-                                this@MainActivity2,
-                                LinearLayoutManager.VERTICAL
-                            )
-                        )
+                        myAdapter.updateDatas(rstrList)
                     }
                 }
             }
@@ -53,5 +62,21 @@ class MainActivity2 : AppCompatActivity() {
                 call.cancel()
             }
         })
+    }
+
+    override fun onItemClick(data: RstrModel) {
+        val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra("rstr_nm", data.rstr_nm)
+        intent.putExtra("rstr_img", data.rstr_img)
+        intent.putExtra("rstr_addr", data.rstr_addr)
+        intent.putExtra("rstr_tell", data.rstr_tell)
+        intent.putExtra("rstr_intro", data.rstr_intro)
+        intent.putExtra("rstr_popularity", data.rstr_popularity)
+        startActivity(intent)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

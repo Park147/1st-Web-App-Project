@@ -1,7 +1,11 @@
 package com.example.a1st_web_app_project
 
+import MyAdapter
+import MyAdapterListener
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -14,10 +18,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class WaitingActivity : AppCompatActivity() {
-    lateinit var binding: ActivityWaitingBinding
+class WaitingActivity : AppCompatActivity(), MyAdapterListener {
+    private lateinit var binding: ActivityWaitingBinding
     private lateinit var editTextSearch: EditText
     private lateinit var buttonSearch: Button
+    private lateinit var adapter: MyAdapter
+    private var rstrList: List<RstrModel>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,9 +38,9 @@ class WaitingActivity : AppCompatActivity() {
         editTextSearch = findViewById(R.id.editTextSearch)
         buttonSearch = findViewById(R.id.buttonSearch)
 
-        val RstrService = (applicationContext as MyApplication).rstrService
+        val rstrService = (applicationContext as MyApplication).rstrService
 
-        val getRstrList = RstrService.getRstrList()
+        val getRstrList = rstrService.getRstrList()
         Log.d("hjm", "${getRstrList.request().url().toString()}")
 
         getRstrList.enqueue(object : Callback<List<RstrModel>> {
@@ -43,17 +49,9 @@ class WaitingActivity : AppCompatActivity() {
                 response: Response<List<RstrModel>>
             ) {
                 if (response.isSuccessful) {
-                    val rstrList = response.body()
+                    rstrList = response.body()
                     Log.d("hjm", "${rstrList}")
-                    binding.recyclerView.adapter =
-                        MyAdapter(this@WaitingActivity, rstrList as List<RstrModel>)
-
-                    binding.recyclerView.addItemDecoration(
-                        DividerItemDecoration(
-                            this@WaitingActivity,
-                            LinearLayoutManager.VERTICAL
-                        )
-                    )
+                    rstrList?.let { adapter.updateDatas(it) }
                 }
             }
 
@@ -63,6 +61,16 @@ class WaitingActivity : AppCompatActivity() {
             }
         })
 
+        adapter = MyAdapter(this, rstrList)
+        adapter.setListener(this)
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                this,
+                LinearLayoutManager.VERTICAL
+            )
+        )
+
         buttonSearch.setOnClickListener {
             val keyword = editTextSearch.text.toString().trim()
 
@@ -70,9 +78,28 @@ class WaitingActivity : AppCompatActivity() {
                 Toast.makeText(this@WaitingActivity, "식당을 입력해주세요.", Toast.LENGTH_SHORT).show()
             } else {
                 // 검색 로직 실행
-                // TODO: Implement search logic
+                val filteredRstrList = rstrList?.filter { rstrModel ->
+                    rstrModel.rstr_nm.contains(keyword, ignoreCase = true)
+                }
+
+                if (filteredRstrList.isNullOrEmpty()) {
+                    Toast.makeText(this@WaitingActivity, "검색 결과가 없습니다.", Toast.LENGTH_SHORT).show()
+                } else {
+                    adapter.updateDatas(filteredRstrList)
+                }
             }
         }
+    }
+
+    override fun onItemClick(data: RstrModel) {
+        val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra("rstr_nm", data.rstr_nm)
+        intent.putExtra("rstr_img", data.rstr_img)
+        intent.putExtra("rstr_addr", data.rstr_addr)
+        intent.putExtra("rstr_tell", data.rstr_tell)
+        intent.putExtra("rstr_intro", data.rstr_intro)
+        intent.putExtra("rstr_popularity", data.rstr_popularity)
+        startActivity(intent)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -81,4 +108,3 @@ class WaitingActivity : AppCompatActivity() {
         return super.onSupportNavigateUp()
     }
 }
-

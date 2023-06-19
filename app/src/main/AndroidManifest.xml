@@ -17,7 +17,12 @@
         android:theme="@style/Theme.1stWebAppProject"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
+        <activity
+            android:name=".waitinglistActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CategoryOneActivity"
+            android:exported="true" />
         <activity
             android:name=".CategoryThreeActivity"
             android:exported="true" />

@@ -19,4 +19,9 @@ interface RstrService {
 
     @GET("/main/Rstr/getrand")
     fun getRandList(): Call<List<randRstr>>
-}
+
+    @GET("/main/Rstr/getSearch")
+    fun getSearch(
+        @Query("rstr_nm") rstr_nm: String
+    ): Call<List<RstrModel>>
+    }

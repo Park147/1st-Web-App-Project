@@ -2,17 +2,14 @@ package com.example.a1st_web_app_project
 
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.a1st_web_app_project.databinding.ActivityDetailBinding
 
-
 class DetailActivity : AppCompatActivity() {
-    lateinit var binding: ActivityDetailBinding
+    private lateinit var binding: ActivityDetailBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
@@ -28,23 +25,22 @@ class DetailActivity : AppCompatActivity() {
         val rstr_addr = intent.getStringExtra("rstr_addr")
         val rstr_tell = intent.getStringExtra("rstr_tell")
         val rstr_intro = intent.getStringExtra("rstr_intro")
-        Log.d("test34","${rstr_nm}, ${rstr_img} , ${rstr_addr},${rstr_tell},${rstr_intro}")
-
+        val rstr_popularity = intent.getStringExtra("rstr_popularity")
+        Log.d("test34", "$rstr_nm, $rstr_img, $rstr_addr, $rstr_tell, $rstr_intro, $rstr_popularity")
 
         binding.textViewName.text = rstr_nm
         binding.textViewAddress.text = rstr_addr
         binding.textViewPhone.text = rstr_tell
         binding.textViewIntroduction.text = rstr_intro
-        Log.d("test54","실패가 뭐고")
-
+        binding.textViewpopularity.text = "네이버 평점: $rstr_popularity"
 
         if (rstr_img != null) {
             Glide.with(this)
                 .load(rstr_img)
                 .into(binding.imageViewImage)
-            Log.d("test44","실 뭐고")
         }
     }
+
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         Toast.makeText(this@DetailActivity, "뒤로가기", Toast.LENGTH_SHORT).show()
