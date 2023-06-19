@@ -42,7 +42,6 @@ class MyAlarmAdapter(val context: Fragment, datas:MutableList<BlankItem>?): Recy
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
                 listDataFilter = results?.values as MutableList<BlankItem>?
                 Log.d("lmj", "최종 데이터 값 : $listDataFilter")
-                notifyDataSetChanged()
             }
         }
     }

@@ -36,7 +36,7 @@ class OneAlarmFragment : Fragment() {
             override fun onResponse(call: Call<BlankItemList>, response: Response<BlankItemList>) {
                 var item = response.body()?.blankItems
 
-                adapter = MyAlarmAdapter(this@OneAlarmFragment, item)
+                adapter = MyAlarmAdapter(TwoFragment(), item)
                 adapter.filter.filter("빈자리 알림")
 
                 binding.oneAlarmRecyclerView.adapter = adapter
@@ -51,6 +51,7 @@ class OneAlarmFragment : Fragment() {
 
         binding.deleteBtn.setOnClickListener {
             var title = binding.deleteTitle.text.toString()
+            var confirm = "빈자리 알림"
             val networkService = (context?.applicationContext as MyApplication).networkService
             val reserveDeleteCall = networkService.deleteBlankList(title)
 

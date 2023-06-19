@@ -36,7 +36,7 @@ class ThreeWaitingFragment : Fragment(){
             override fun onResponse(call: Call<ItemDataList>, response: Response<ItemDataList>) {
                 var item = response.body()?.items
 
-                adapter = MyWaitingAdapter(this@ThreeWaitingFragment, item)
+                adapter = MyWaitingAdapter(OneFragment(), item)
                 adapter.filter.filter("방문취소")
 
                 binding.threeRecyclerView.adapter = adapter

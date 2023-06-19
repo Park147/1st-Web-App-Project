@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text=""
-                android:hint="예약 인원수(x명)"
+                android:hint="예약 인원수(n명)"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:layout_marginBottom="20dp"/>
@@ -103,6 +103,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="예약 취소"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:backgroundTint="#FF0000"/>
     </LinearLayout>
 </LinearLayout>

@@ -41,7 +41,6 @@ class MyWaitingAdapter(val context: Fragment, datas:MutableList<ItemData>?): Rec
             // 필터되면 데이터 변경
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
                 listDataFilter = results?.values as MutableList<ItemData>?
-                notifyDataSetChanged()
             }
         }
     }

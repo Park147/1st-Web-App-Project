@@ -6,11 +6,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teamproject.MainActivity
 import com.example.teamproject.MyApplication
+import com.example.teamproject.MyDining
 import com.example.teamproject.databinding.FragmentTwoWaitingBinding
 import com.example.teamproject.model.ItemDataList
 import com.example.teamproject.recycler.MyWaitingAdapter
@@ -40,7 +42,7 @@ class TwoWaitingFragment : Fragment(){
                 var item = response.body()?.items
                 Log.d("lmj", "Two item : $item")
 
-                adapter = MyWaitingAdapter(this@TwoWaitingFragment, item)
+                adapter = MyWaitingAdapter(OneFragment(), item)
                 adapter.filter.filter("방문완료")
 
                 binding.twoRecyclerView.adapter = adapter
@@ -53,6 +55,25 @@ class TwoWaitingFragment : Fragment(){
             }
 
         })
+
+        binding.deleteBtn.setOnClickListener {
+            var title = binding.deleteTitle.text.toString()
+            val networkService = (context?.applicationContext as MyApplication).networkService
+            val reserveDeleteCall = networkService.deleteWaitingList(title)
+
+            reserveDeleteCall.enqueue(object : Callback<Unit> {
+                override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                    Toast.makeText(context,"success", Toast.LENGTH_SHORT).show()
+                    val intent= Intent(context, MyDining::class.java)
+                    startActivity(intent)
+                }
+
+                override fun onFailure(call: Call<Unit>, t: Throwable) {
+                    Toast.makeText(context,"fail", Toast.LENGTH_SHORT).show()
+                }
+
+            })
+        }
         return binding.root
     }
 }

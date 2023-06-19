@@ -34,7 +34,7 @@ class TwoAlarmFragment : Fragment() {
             override fun onResponse(call: Call<BlankItemList>, response: Response<BlankItemList>) {
                 var item = response.body()?.blankItems
 
-                adapter = MyAlarmAdapter(this@TwoAlarmFragment, item)
+                adapter = MyAlarmAdapter(TwoFragment(), item)
                 adapter.filter.filter("예약 오픈 알림")
                 binding.twoAlarmRecyclerView.adapter = adapter
                 binding.twoAlarmRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
