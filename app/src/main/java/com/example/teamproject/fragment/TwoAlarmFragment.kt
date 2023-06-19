@@ -10,9 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teamproject.MyApplication
 import com.example.teamproject.databinding.FragmentTwoAlarmBinding
 import com.example.teamproject.model.BlankItemList
-import com.example.teamproject.model.ItemDataList
 import com.example.teamproject.recycler.MyAlarmAdapter
-import com.example.teamproject.recycler.MyOpenAlarmAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
