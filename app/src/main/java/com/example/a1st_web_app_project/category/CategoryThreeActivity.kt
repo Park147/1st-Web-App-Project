@@ -1,4 +1,4 @@
-package com.example.a1st_web_app_project
+package com.example.a1st_web_app_project.category
 
 import MyAdapter
 import MyAdapterListener
@@ -9,21 +9,22 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.a1st_web_app_project.databinding.ActivityCategoryoneBinding
-import com.example.a1st_web_app_project.databinding.ActivityCategorytwoBinding
+import com.example.a1st_web_app_project.DetailActivity
+import com.example.a1st_web_app_project.MyApplication
+import com.example.a1st_web_app_project.databinding.ActivityCategorythreeBinding
 import com.example.a1st_web_app_project.model.RstrModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CategoryOneActivity : AppCompatActivity(), MyAdapterListener {
-    private lateinit var binding: ActivityCategoryoneBinding
+class CategoryThreeActivity : AppCompatActivity(), MyAdapterListener {
+    private lateinit var binding: ActivityCategorythreeBinding
     private lateinit var adapter: MyAdapter
     private var rstrList: List<RstrModel> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityCategoryoneBinding.inflate(layoutInflater)
+        binding = ActivityCategorythreeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
@@ -63,26 +64,63 @@ class CategoryOneActivity : AppCompatActivity(), MyAdapterListener {
             )
         )
 
-        binding.catebtn1.setOnClickListener {
-            val filteredList = rstrList.filter { rstr ->
-                rstr.rstr_popularity != null && rstr.rstr_popularity > 0.toString() // 인기순위 조건을 여기에 추가해주세요. 예시로는 인기순위가 0보다 큰 음식점을 필터링합니다.
-            }
-
+        binding.catebtn111.setOnClickListener {
+            val filteredList = filterRstrList()
             if (filteredList.isNotEmpty()) {
-                val sortedList = filteredList.sortedByDescending { rstr -> rstr.rstr_popularity } // 인기순위로 정렬
-                adapter.updateDatas(sortedList)
+                adapter.updateDatas(filteredList)
+            } else {
+                Toast.makeText(this, "해당 조건에 맞는 음식점이 없습니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        binding.catebtn222.setOnClickListener {
+            val filteredList = filterRstrList2()
+            if (filteredList.isNotEmpty()) {
+                adapter.updateDatas(filteredList)
+            } else {
+                Toast.makeText(this, "해당 조건에 맞는 음식점이 없습니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        binding.catebtn333.setOnClickListener {
+            val filteredList = filterRstrList3()
+            if (filteredList.isNotEmpty()) {
+                adapter.updateDatas(filteredList)
             } else {
                 Toast.makeText(this, "해당 조건에 맞는 음식점이 없습니다.", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun filterRstrList(vararg filterTexts: String): List<RstrModel> {
+    private fun filterRstrList(): List<RstrModel> {
         val filteredList = mutableListOf<RstrModel>()
 
         for (rstr in rstrList) {
-            val containsAllFilters = filterTexts.all { rstr.rstr_addr.contains(it) }
-            if (containsAllFilters) {
+            if (rstr.rstr_list == "한식") {
+                filteredList.add(rstr)
+            }
+        }
+
+        return filteredList
+    }
+
+    private fun filterRstrList2(): List<RstrModel> {
+        val filteredList = mutableListOf<RstrModel>()
+
+        for (rstr in rstrList) {
+            if (rstr.rstr_list == "경양식") {
+                filteredList.add(rstr)
+            }
+        }
+
+        return filteredList
+    }
+
+    private fun filterRstrList3(): List<RstrModel> {
+        val filteredList = mutableListOf<RstrModel>()
+
+        for (rstr in rstrList) {
+            if (rstr.rstr_list == "중국식") {
                 filteredList.add(rstr)
             }
         }
@@ -91,19 +129,19 @@ class CategoryOneActivity : AppCompatActivity(), MyAdapterListener {
     }
 
     override fun onItemClick(data: RstrModel) {
+        // 클릭된 음식점 데이터 처리
+        // 예: 상세 화면으로 이동하는 Intent 호출
         val intent = Intent(this, DetailActivity::class.java)
         intent.putExtra("rstr_nm", data.rstr_nm)
         intent.putExtra("rstr_img", data.rstr_img)
         intent.putExtra("rstr_addr", data.rstr_addr)
         intent.putExtra("rstr_tell", data.rstr_tell)
         intent.putExtra("rstr_intro", data.rstr_intro)
-        intent.putExtra("rstr_popularity", data.rstr_popularity)
         startActivity(intent)
     }
-
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
-        Toast.makeText(this@CategoryOneActivity, "뒤로가기", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this@CategoryThreeActivity, "뒤로가기", Toast.LENGTH_SHORT).show()
         return super.onSupportNavigateUp()
     }
 }

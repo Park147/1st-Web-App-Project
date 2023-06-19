@@ -10,15 +10,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MyApplication: Application(){
 
     //add....................................
-    var networkService: NetworkService
     var rstrService: RstrService
-    val retrofit: Retrofit
-        get() = Retrofit.Builder()
-    .baseUrl(" https://seoul.openapi.redtable.global/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
     init {
-        networkService = retrofit.create(NetworkService::class.java)
         rstrService = retrofit2.create(RstrService::class.java)
     }
     val retrofit2: Retrofit

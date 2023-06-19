@@ -1,4 +1,4 @@
-package com.example.a1st_web_app_project
+package com.example.a1st_web_app_project.category
 
 import MyAdapter
 import MyAdapterListener
@@ -7,9 +7,10 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.a1st_web_app_project.DetailActivity
+import com.example.a1st_web_app_project.MyApplication
 import com.example.a1st_web_app_project.databinding.ActivityCategorytwoBinding
 import com.example.a1st_web_app_project.model.RstrModel
 import retrofit2.Call

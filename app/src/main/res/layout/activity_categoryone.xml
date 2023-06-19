@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CategoryTwoActivity">
+    tools:context=".category.CategoryTwoActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -29,7 +29,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        tools:context=".CategoryTwoActivity">
+        tools:context=".category.CategoryTwoActivity">
 
 
         <LinearLayout
@@ -38,21 +38,24 @@
             android:layout_marginTop="60dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
-            tools:context=".CategoryTwoActivity">
+            tools:context=".category.CategoryTwoActivity">
 
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/catebtn1"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="60dp"
                 android:layout_marginTop="18dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:background="@drawable/round_button2"
-                android:drawableRight="@drawable/best"
+                android:drawableEnd="@drawable/best"
+                android:drawablePadding="8dp"
+                android:gravity="center|center_vertical"
                 android:text="이번달 인기순위"
                 android:textSize="20dp"
                 android:textStyle="bold" />
+
 
 
         </LinearLayout>

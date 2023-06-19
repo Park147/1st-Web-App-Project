@@ -10,6 +10,9 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.example.a1st_web_app_project.category.CategoryOneActivity
+import com.example.a1st_web_app_project.category.CategoryThreeActivity
+import com.example.a1st_web_app_project.category.CategoryTwoActivity
 import com.example.a1st_web_app_project.databinding.ActivityMainBinding
 import com.example.a1st_web_app_project.fragment.FragmentFirst
 import com.example.a1st_web_app_project.fragment.FragmentFourth

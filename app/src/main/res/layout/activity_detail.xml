@@ -41,13 +41,19 @@
             android:layout_height="300dp"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_launcher_background" />
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical"
+        android:background="@drawable/round_button2"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewImage">
         <TextView
             android:id="@+id/textViewName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:textSize="35sp"
+            android:textSize="30sp"
             android:textStyle="bold"
             android:textColor="@color/black"/>
 
@@ -55,31 +61,81 @@
             android:id="@+id/textViewAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:textSize="20sp"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:textSize="10sp"
             />
 
         <TextView
             android:id="@+id/textViewPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:textSize="20sp"/>
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:textSize="10sp"/>
 
         <TextView
             android:id="@+id/textViewIntroduction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="5dp"
+            android:textAlignment="center"
             android:textSize="15sp"/>
-
-        <TextView
-            android:id="@+id/textViewpopularity"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textSize="15sp"
-            />
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/textViewpopularity"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/imageViewPopularityIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/beststar" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/reserve"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:text="예약하기"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:background="@drawable/round_button3"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/waiting"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="40dp"
+            android:text="웨이팅"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:background="@drawable/round_button3"/>
+    </LinearLayout>
+
+
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
