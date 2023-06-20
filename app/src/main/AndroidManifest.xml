@@ -17,6 +17,18 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".review.CommentUpdateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".review.CommentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".review.ReviewUpdateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".review.GetReviewActivity"
+            android:exported="false" />
+        <activity
             android:name=".review.RegisterViewActivity"
             android:exported="false" />
         <activity

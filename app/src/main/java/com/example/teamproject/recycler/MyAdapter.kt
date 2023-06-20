@@ -2,7 +2,6 @@ package com.example.teamproject.recycler
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.BitmapDrawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -15,7 +14,6 @@ import com.example.teamproject.databinding.ItemMainBinding
 import com.example.teamproject.login.LoginActivity
 import com.example.teamproject.model.Bookmark
 import com.example.teamproject.model.Rstr
-import com.example.teamproject.model.Rstrbook
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -45,20 +43,38 @@ class MyAdapter(val context: Context, val datas: List<Rstr>?): RecyclerView.Adap
         binding.bookmarkbtn.contentDescription = rs?.rstr_nm
         Log.d("markviewtest1", "성공! ${rs?.markview}")
 
+        val loginSharedPref = context.getSharedPreferences("login_prof", Context.MODE_PRIVATE)
+        val userId = loginSharedPref.getString("m_id", null)
+
+        val userService = ( context.applicationContext as MyApplication).userService
+
+        val bookck = userService.bookcheck(userId.toString(), rs?.rstr_nm.toString())
+
+        bookck.enqueue(object: Callback<Int>{
+            override fun onResponse(call: Call<Int>, response: Response<Int>) {
+                if (response.isSuccessful) {
+                    val booknum = response.body()
+                    if (booknum == 0) {
+                        Log.d("markviewtest2", "성공! ${booknum}")
+                        binding.bookmarkbtn.setImageResource(R.drawable.bookmarkoff)
+                        binding.bookmarkbtn.setTag(R.string.image_resource_name, "bookmarkoff")
+                    } else if (booknum == 1) {
+                        Log.d("markviewtest3", "실패! ${booknum}")
+                        binding.bookmarkbtn.setImageResource(R.drawable.bookmarkon)
+                        binding.bookmarkbtn.setTag(R.string.image_resource_name, "bookmarkon")
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<Int>, t: Throwable) {
+                call.cancel()
+            }
+
+        })
         // 데이터 값을 비교해서 상황에 따라 출력하는 구간
-        if (rs?.markview == "X") {
-            Log.d("markviewtest2", "성공! ${rs?.markview}")
-            binding.bookmarkbtn.setImageResource(R.drawable.bookmarkoff)
-            binding.bookmarkbtn.setTag(R.string.image_resource_name, "bookmarkoff")
-        } else if (rs?.markview == "O") {
-            Log.d("markviewtest3", "실패! ${rs?.markview}")
-            binding.bookmarkbtn.setImageResource(R.drawable.bookmarkon)
-            binding.bookmarkbtn.setTag(R.string.image_resource_name, "bookmarkon")
-        }
+
 
         binding.bookmarkbtn.setOnClickListener {
-            val loginSharedPref = context.getSharedPreferences("login_prof", Context.MODE_PRIVATE)
-            val userId = loginSharedPref.getString("m_id", null)
             if ( userId == null)
             {
                 val intent = Intent(context, LoginActivity::class.java)
@@ -80,39 +96,14 @@ class MyAdapter(val context: Context, val datas: List<Rstr>?): RecyclerView.Adap
                         ) {
                             if (response.isSuccessful)
                             {
+                                binding.bookmarkbtn.setImageResource(R.drawable.bookmarkoff)
+                                binding.bookmarkbtn.setTag(R.string.image_resource_name,"bookmarkoff")
                                 Log.d("bookmarkup", "성공!")
                             }
                         }
 
                         override fun onFailure(call: Call<Unit>, t: Throwable) {
                             Log.d("bookmarkd", "실패 ${t.message}")
-                            call.cancel()
-                        }
-
-                    })
-                    var rstrbook = Rstrbook(
-                        rstr_nm = b_name!!.toString(),
-                        markview = "X".toString()
-                    )
-                    Log.d("bookmarkup", "${rstrbook}")
-                    val updateBook = userService.upbookview(rstrbook)
-                    updateBook.enqueue(object: Callback<Unit>{
-                        override fun onResponse(
-                            call: Call<Unit>,
-                            response: Response<Unit>
-                        ) {
-                            if(response.isSuccessful) {
-                                binding.bookmarkbtn.setImageResource(R.drawable.bookmarkoff)
-                                binding.bookmarkbtn.setTag(
-                                    R.string.image_resource_name,
-                                    "bookmarkoff"
-                                )
-                                Log.d("bookmarkup", "성공!")
-                            }
-                        }
-
-                        override fun onFailure(call: Call<Unit>, t: Throwable) {
-                            Log.d("bookmarkup", "실패 ${t.message}")
                             call.cancel()
                         }
 
@@ -130,34 +121,14 @@ class MyAdapter(val context: Context, val datas: List<Rstr>?): RecyclerView.Adap
                         override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
                             if (response.isSuccessful)
                             {
+                                binding.bookmarkbtn.setImageResource(R.drawable.bookmarkon)
+                                binding.bookmarkbtn.setTag(R.string.image_resource_name, "bookmarkon")
                                 Log.d("bookmarkup", "성공!")
                             }
                         }
 
                         override fun onFailure(call: Call<Unit>, t: Throwable) {
                             Log.d("bookmarka", "실패 ${t.message}")
-                            call.cancel()
-                        }
-
-                    })
-                    var rstrbook = Rstrbook(
-                        rstr_nm = b_name!!.toString(),
-                        markview = "O".toString()
-                    )
-                    Log.d("bookmarkup", "${rstrbook}")
-                    val updateBook = userService.upbookview(rstrbook)
-                    updateBook.enqueue(object: Callback<Unit>{
-                        override fun onResponse(
-                            call: Call<Unit>,
-                            response: Response<Unit>
-                        ) {
-                            binding.bookmarkbtn.setImageResource(R.drawable.bookmarkon)
-                            binding.bookmarkbtn.setTag(R.string.image_resource_name, "bookmarkon")
-                            Log.d("bookmarkup", "성공!")
-                        }
-
-                        override fun onFailure(call: Call<Unit>, t: Throwable) {
-                            Log.d("bookmarkup", "실패 ${t.message}")
                             call.cancel()
                         }
 

@@ -1,15 +1,19 @@
 package com.example.teamproject.retrofit
 
 import com.example.teamproject.model.Bookmark
+import com.example.teamproject.model.Comment
+import com.example.teamproject.model.CommentR
+import com.example.teamproject.model.CommentU
+import com.example.teamproject.model.Follow
 import com.example.teamproject.model.Heart
 import com.example.teamproject.model.Member
 import com.example.teamproject.model.ModInfo
 import com.example.teamproject.model.ModPro
 import com.example.teamproject.model.Pimg
 import com.example.teamproject.model.Review
+import com.example.teamproject.model.ReviewU
 import com.example.teamproject.model.Review_r
 import com.example.teamproject.model.Rstr
-import com.example.teamproject.model.Rstrbook
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -61,11 +65,6 @@ interface UserService {
         @Query("rstr_nm") rstr_nm: String
     ): Call<Rstr>
 
-    @POST("seat/rstr/upBook")
-    fun upbookview(
-        @Body rstrbook: Rstrbook
-    ): Call<Unit>
-
     
     // 즐겨찾기
     @GET("seat/bookmark/list")
@@ -77,6 +76,12 @@ interface UserService {
     fun bmregister(
         @Body bookmark: Bookmark
     ): Call<Unit>
+
+    @GET("seat/bookmark/check")
+    fun bookcheck(
+        @Query("b_id") b_id: String,
+        @Query("b_name") b_name: String
+    ): Call<Int>
 
     @POST("seat/bookmark/delete")
     fun bmdelete(
@@ -119,7 +124,7 @@ interface UserService {
     //게시물 수정
     @POST("/seat/review/rUpdate")
     fun viewUpdate(
-        @Body review: Review
+        @Body review: ReviewU
     ): Call<Unit>
 
     //게시물 제거
@@ -158,5 +163,74 @@ interface UserService {
     fun checkedH(
         @Query("h_id") h_id: String,
         @Query("h_num")h_num: Int
+    ): Call<Int>
+
+    
+    // 팔로우 작업
+    @GET("/seat/following/getFollowingList")
+    fun followList(
+        @Query("fl_id") fl_id: String
+    ): Call<List<Follow>>
+
+    @GET("/seat/following/getFollowerList")
+    fun followingList(
+        @Query("fr_id") fr_id: String
+    ): Call<List<Follow>>
+
+    @POST("/seat/following/fRegister")
+    fun followR(
+        @Body follow: Follow
+    ): Call<Unit>
+
+    @POST("/seat/following/fDelete")
+    fun followD(
+        @Body follow: Follow
+    ): Call<Unit>
+
+    @GET("/seat/following/fcheck")
+    fun followC(
+        @Query("fl_id")fl_id: String,
+        @Query("fr_id")fr_id: String
+    ): Call<Int>
+
+    @GET("/seat/following/getFollowingCount")
+    fun followingC(
+        @Query("fl_id")fl_id: String,
+    ): Call<Int>
+
+    @GET("/seat/following/getFollowerCount")
+    fun followerC(
+        @Query("fr_id")fr_id: String
+    ): Call<Int>
+
+    // 댓글 작업
+    @GET("/seat/comment/getList")
+    fun cgetList(
+        @Query("c_getnum") c_getnum: Int
+    ): Call<List<Comment>>
+
+    @POST("/seat/comment/cRegister")
+    fun commentR(
+        @Body commentR: CommentR
+    ): Call<Unit>
+
+    @GET("/seat/comment/cGet")
+    fun commentG(
+        @Query("c_num")c_num: Int
+    ): Call<Comment>
+
+    @POST("/seat/comment/cUpdate")
+    fun commentU(
+        @Body commentU: CommentU
+    ): Call<Unit>
+
+    @POST("/seat/comment/cDelete")
+    fun commentD(
+        @Query("c_num")c_num: Int
+    ): Call<Unit>
+
+    @GET("/seat/comment/cCount")
+    fun commentC(
+        @Query("c_getnum")c_getnum: Int
     ): Call<Int>
 }
