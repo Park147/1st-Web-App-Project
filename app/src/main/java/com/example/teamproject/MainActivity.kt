@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         binding.toolbar.title = "메인페이지"
+//        var title = intent.getStringExtra("title")
 
         binding.bottommenu.setOnItemSelectedListener { item ->
             when(item.itemId) {

@@ -9,12 +9,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.teamproject.MyApplication
 import com.example.teamproject.MyDining
+import com.example.teamproject.OnItemClickListener
 import com.example.teamproject.R
 import com.example.teamproject.databinding.ItemRecyclerviewBinding
 import com.example.teamproject.fragment.OneFragment
@@ -29,8 +31,11 @@ class MyWaitingViewHolder(val binding: ItemRecyclerviewBinding): RecyclerView.Vi
 
 class MyWaitingAdapter(val context: Fragment, datas:MutableList<ItemData>?): RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable{
     private var listData: MutableList<ItemData>? = datas
+    private lateinit var listener: OnItemClickListener
 
-
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.listener = listener
+    }
 
     // 리사이클러뷰 필터
     override fun getFilter(): Filter {
@@ -76,6 +81,10 @@ class MyWaitingAdapter(val context: Fragment, datas:MutableList<ItemData>?): Rec
         binding.itemtitle.text = waiting?.w_title
         binding.itemcontent.text = waiting?.w_item
         binding.itemwaiting.text = waiting?.w_waiting
+
+        binding.itemtitle.setOnClickListener {
+            listener.onItemClick("${waiting?.w_title}")
+        }
 
         holder.button.setOnClickListener {
             waiting?.w_waiting_confirm ="방문취소"

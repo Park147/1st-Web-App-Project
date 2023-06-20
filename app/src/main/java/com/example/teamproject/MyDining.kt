@@ -3,17 +3,21 @@ package com.example.teamproject
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.AdapterView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.teamproject.databinding.ActivityMyDiningBinding
 import com.example.teamproject.fragment.OneFragment
 import com.example.teamproject.fragment.TwoFragment
+import com.example.teamproject.model.ItemData
+import com.example.teamproject.recycler.MyWaitingAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayoutMediator
 
-class MyDining : AppCompatActivity() {
+class MyDining : AppCompatActivity(){
     lateinit var binding: ActivityMyDiningBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,4 +85,5 @@ class MyDining : AppCompatActivity() {
 
         override fun createFragment(position: Int): Fragment = fragments[position]
     }
+
 }
