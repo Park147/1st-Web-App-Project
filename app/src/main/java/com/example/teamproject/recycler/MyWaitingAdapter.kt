@@ -82,7 +82,7 @@ class MyWaitingAdapter(val context: Fragment, datas:MutableList<ItemData>?): Rec
         binding.itemcontent.text = waiting?.w_item
         binding.itemwaiting.text = waiting?.w_waiting
 
-        binding.itemtitle.setOnClickListener {
+        binding.root.setOnClickListener {
             listener.onItemClick("${waiting?.w_title}")
         }
 
