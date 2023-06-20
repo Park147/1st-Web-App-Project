@@ -79,7 +79,6 @@ class MyDeleteAdapter(val context: Fragment, datas:MutableList<ItemData>?): Recy
                 .load(img)
                 .into(binding.itemimage)
         }
-
         holder.button.setOnClickListener {
             var title = binding.itemtitle.text.toString()
 
