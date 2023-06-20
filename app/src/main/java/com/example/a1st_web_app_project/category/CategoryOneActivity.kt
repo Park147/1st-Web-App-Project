@@ -64,6 +64,8 @@ class CategoryOneActivity : AppCompatActivity(), MyAdapterListener {
             )
         )
 
+        adapter.setListener(this)
+
         binding.catebtn1.setOnClickListener {
             val filteredList = rstrList.filter { rstr ->
                 rstr.rstr_popularity != null && rstr.rstr_popularity > 0.toString() // 인기순위 조건을 여기에 추가해주세요. 예시로는 인기순위가 0보다 큰 음식점을 필터링합니다.
@@ -92,15 +94,17 @@ class CategoryOneActivity : AppCompatActivity(), MyAdapterListener {
     }
 
     override fun onItemClick(data: RstrModel) {
-        val intent = Intent(this, DetailActivity::class.java)
-        intent.putExtra("rstr_nm", data.rstr_nm)
-        intent.putExtra("rstr_img", data.rstr_img)
-        intent.putExtra("rstr_addr", data.rstr_addr)
-        intent.putExtra("rstr_tell", data.rstr_tell)
-        intent.putExtra("rstr_intro", data.rstr_intro)
-        intent.putExtra("rstr_popularity", data.rstr_popularity)
+        val intent = Intent(this@CategoryOneActivity, DetailActivity::class.java).apply {
+            putExtra("rstr_nm", data.rstr_nm)
+            putExtra("rstr_img", data.rstr_img)
+            putExtra("rstr_addr", data.rstr_addr)
+            putExtra("rstr_tell", data.rstr_tell)
+            putExtra("rstr_intro", data.rstr_intro)
+            putExtra("rstr_popularity", data.rstr_popularity)
+        }
         startActivity(intent)
     }
+
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()

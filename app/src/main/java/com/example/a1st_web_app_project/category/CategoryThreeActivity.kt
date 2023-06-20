@@ -64,6 +64,8 @@ class CategoryThreeActivity : AppCompatActivity(), MyAdapterListener {
             )
         )
 
+        adapter.setListener(this)
+
         binding.catebtn111.setOnClickListener {
             val filteredList = filterRstrList()
             if (filteredList.isNotEmpty()) {
@@ -129,16 +131,17 @@ class CategoryThreeActivity : AppCompatActivity(), MyAdapterListener {
     }
 
     override fun onItemClick(data: RstrModel) {
-        // 클릭된 음식점 데이터 처리
-        // 예: 상세 화면으로 이동하는 Intent 호출
-        val intent = Intent(this, DetailActivity::class.java)
-        intent.putExtra("rstr_nm", data.rstr_nm)
-        intent.putExtra("rstr_img", data.rstr_img)
-        intent.putExtra("rstr_addr", data.rstr_addr)
-        intent.putExtra("rstr_tell", data.rstr_tell)
-        intent.putExtra("rstr_intro", data.rstr_intro)
+        val intent = Intent(this@CategoryThreeActivity, DetailActivity::class.java).apply {
+            putExtra("rstr_nm", data.rstr_nm)
+            putExtra("rstr_img", data.rstr_img)
+            putExtra("rstr_addr", data.rstr_addr)
+            putExtra("rstr_tell", data.rstr_tell)
+            putExtra("rstr_intro", data.rstr_intro)
+            putExtra("rstr_popularity", data.rstr_popularity)
+        }
         startActivity(intent)
     }
+
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         Toast.makeText(this@CategoryThreeActivity, "뒤로가기", Toast.LENGTH_SHORT).show()

@@ -28,8 +28,9 @@
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewpager"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/frameSize"
+                android:layout_height="match_parent"
                 android:clipChildren="false"
+                android:radius="30dp"
                 android:clipToPadding="false" />
 
             <me.relex.circleindicator.CircleIndicator3
@@ -39,7 +40,6 @@
                 android:layout_gravity="bottom" />
 
         </FrameLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="130dp"

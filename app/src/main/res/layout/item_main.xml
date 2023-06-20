@@ -75,10 +75,6 @@
                     android:layout_marginStart="5dp"
                     android:src="@drawable/beststar" />
             </LinearLayout>
-<!--            <TextView-->
-<!--                android:id="@+id/contactView4"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content" />-->
 
         </LinearLayout>
     </LinearLayout>

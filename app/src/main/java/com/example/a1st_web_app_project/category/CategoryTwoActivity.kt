@@ -64,6 +64,8 @@ class CategoryTwoActivity : AppCompatActivity(), MyAdapterListener {
             )
         )
 
+        adapter.setListener(this)
+
         binding.catebtn11.setOnClickListener {
             val filterText = "중구" // 변경 가능: 입력된 텍스트로 대체하면 됩니다.
             val filteredList = filterRstrList(filterText)
@@ -118,14 +120,17 @@ class CategoryTwoActivity : AppCompatActivity(), MyAdapterListener {
     }
 
     override fun onItemClick(data: RstrModel) {
-        val intent = Intent(this, DetailActivity::class.java)
-        intent.putExtra("rstr_nm", data.rstr_nm)
-        intent.putExtra("rstr_img", data.rstr_img)
-        intent.putExtra("rstr_addr", data.rstr_addr)
-        intent.putExtra("rstr_tell", data.rstr_tell)
-        intent.putExtra("rstr_intro", data.rstr_intro)
+        val intent = Intent(this@CategoryTwoActivity, DetailActivity::class.java).apply {
+            putExtra("rstr_nm", data.rstr_nm)
+            putExtra("rstr_img", data.rstr_img)
+            putExtra("rstr_addr", data.rstr_addr)
+            putExtra("rstr_tell", data.rstr_tell)
+            putExtra("rstr_intro", data.rstr_intro)
+            putExtra("rstr_popularity", data.rstr_popularity)
+        }
         startActivity(intent)
     }
+
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         Toast.makeText(this@CategoryTwoActivity, "뒤로가기", Toast.LENGTH_SHORT).show()
