@@ -77,19 +77,12 @@
             android:hint="자신이 활동하는 지역을 작성해 주세요."
             android:textSize="20dp" />
 
-        <android.widget.Button
-            android:id="@+id/savebtn"
-            android:layout_width="400dp"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:text="사진"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/button_info"/>
 
         <android.widget.Button
             android:id="@+id/modprofiler"
             android:layout_width="400dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
             android:textSize="30dp"
             android:text="저장"
             android:background="@drawable/button_info"/>

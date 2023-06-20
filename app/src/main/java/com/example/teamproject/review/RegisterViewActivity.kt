@@ -53,7 +53,8 @@ class RegisterViewActivity : AppCompatActivity() {
                 r_picture = "1",
                 r_content = binding.rvIntroduction.text.toString(),
                 r_registerdate = date.toString(),
-                r_rating = ran
+                r_rating = ran,
+                r_modifydate = date.toString()
             )
 
             val userService = (applicationContext as MyApplication).userService

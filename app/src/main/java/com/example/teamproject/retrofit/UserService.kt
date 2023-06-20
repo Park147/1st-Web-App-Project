@@ -32,6 +32,12 @@ interface UserService {
         @Query("m_password") m_password: String
     ): Call<Member>
 
+    @GET("seat/member/getCheck")
+    fun getCheck(
+        @Query("m_id") m_id: String,
+        @Query("m_password") m_password: String
+    ): Call<Int>
+
     @GET("/seat/member/userPro")
     fun getPro(
         @Query("m_id")m_id: String
@@ -88,16 +94,6 @@ interface UserService {
         @Query("b_id") b_id: String,
         @Query("b_name") b_name: String
     ): Call<Unit>
-
-    @POST("seat/img/save")
-    fun imgsave(
-        @Body pimg: Pimg
-    ): Call<Unit>
-
-    @GET("seat/img/selimg")
-    fun selimg(
-        @Query("idx") idx: String
-    ): Call<Pimg>
 
     
     // 리뷰목록

@@ -33,8 +33,6 @@ class ModifyProfileActivity : AppCompatActivity() {
 
     var modprofiler: Button? = null
     var proimg: ImageButton? = null
-    var savebtn: Button? = null
-    var savebitmap: Bitmap? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityModifyProfileBinding.inflate(layoutInflater)
@@ -56,7 +54,6 @@ class ModifyProfileActivity : AppCompatActivity() {
         binding.modmove.setText(m_activity_area)
         modprofiler = binding.modprofiler
         proimg = binding.proimg
-        savebtn = binding.savebtn
 
         val requestGalleryLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult())
@@ -79,37 +76,6 @@ class ModifyProfileActivity : AppCompatActivity() {
 
                 bitmap?.let {
                     binding.proimg.setImageBitmap(bitmap)
-
-//                    val baos = ByteArrayOutputStream()
-//                    bitmap.compress(Bitmap.CompressFormat.PNG, 50, baos)
-//                    val bytes = baos.toByteArray()
-//                    val mapImage_String: String = Base64.encodeToString(bytes, Base64.DEFAULT)
-//
-//                    binding.savebtn.setOnClickListener {
-//                        var pimg = Pimg(
-//                            idx = m_id.toString(),
-//                            img = mapImage_String
-//                        )
-//
-//                        val userService = (applicationContext as MyApplication).userService
-//
-//                        val userimg = userService.imgsave(pimg)
-//                        userimg.enqueue(object: Callback<Unit>{
-//                            override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
-//                                if (response.isSuccessful){
-//                                    Log.d("galtest2","성공")
-//                                }
-//                            }
-//
-//                            override fun onFailure(call: Call<Unit>, t: Throwable) {
-//                                Log.d("galtest3", "실패 ${t.message}")
-//                                call.cancel()
-//                            }
-//
-//
-//                        })
-
-//                    }
 
                 } ?: let{
                     Log.d("kkang", "bitmap null")
@@ -165,38 +131,6 @@ class ModifyProfileActivity : AppCompatActivity() {
 
 
     }
-
-//    fun bitmapToByteArray(bitmap: Bitmap): String? {
-//        var image: String? = ""
-//        val stream = ByteArrayOutputStream()
-//        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
-//        val byteArray = stream.toByteArray()
-//        image = byteArrayToBinaryString(byteArray)
-//        Log.d("selimgsb2", "${byteArray}")
-//        return image
-//    }
-//
-//    /**바이너리 바이트 배열을 스트링으로 바꾸어주는 메서드  */
-//    fun byteArrayToBinaryString(b: ByteArray): String? {
-//        val sb = StringBuilder()
-//        for (i in b.indices) {
-//            sb.append(byteToBinaryString(b[i]))
-//        }
-//        Log.d("selimgsb1", "${sb}")
-//        return sb.toString()
-//    }
-//
-//    /**바이너리 바이트를 스트링으로 바꾸어주는 메서드  */
-//    fun byteToBinaryString(n: Byte): String? {
-//        val sb = StringBuilder("00000000")
-//        for (bit in 0..7) {
-//            if (n.toInt() shr bit and 1 > 0) {
-//                sb.setCharAt(7 - bit, '1')
-//            }
-//        }
-//
-//        return sb.toString()
-//    }
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return super.onSupportNavigateUp()

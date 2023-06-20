@@ -72,44 +72,64 @@ class LoginActivity : AppCompatActivity() {
             var m_password =binding.loginps.text.toString()
 
             Log.d("logintest1", "${m_id}, ${m_password}")
-            
-            
-            // 여기서부터 로그인과 스프링 연동 구간
             val userService = (applicationContext as MyApplication).userService
+            val checkLogin = userService.getCheck(m_id, m_password)
+            checkLogin.enqueue(object: Callback<Int>{
+                override fun onResponse(call: Call<Int>, response: Response<Int>) {
+                    if ( response.isSuccessful ){
+                        val Lognum = response.body()
+                        if ( Lognum == 0 ){
+                            Toast.makeText(this@LoginActivity, "아이디 비번을 정확하게 입력해주세요!!!!",Toast.LENGTH_SHORT).show()
+                            binding.loginps.text = null
+                        } else if ( Lognum == 1 ){
 
-            var userLogin = userService.getUser(m_id, m_password)
-            Log.d("logintest2", "url:" + userLogin.request().url().toString())
-            userLogin.enqueue(object : Callback<Member> {
-                override fun onResponse(call: Call<Member>, response: Response<Member>) {
-                    if(response.isSuccessful) {
-                        val sucUser = response.body()
+                            var userLogin = userService.getUser(m_id, m_password)
+                            Log.d("logintest2", "url:" + userLogin.request().url().toString())
+                            userLogin.enqueue(object : Callback<Member> {
+                                override fun onResponse(call: Call<Member>, response: Response<Member>) {
+                                    if (response.isSuccessful) {
+                                        val sucUser = response.body()
 
-                        val m_id = sucUser?.m_id.toString()
-                        val m_password = sucUser?.m_password.toString()
+                                        val m_id = sucUser?.m_id.toString()
+                                        val m_password = sucUser?.m_password.toString()
 
-                        Log.d("logintest3", "${m_id}, ${m_password}")
-                        
-                        
-                        //스프링의 세션과 같은 구간입니다
-                        val loginSharedPref = getSharedPreferences("login_prof", Context.MODE_PRIVATE)
-                        loginSharedPref.edit().run {
-                            putString("m_id", m_id)
-                            putString("m_password", m_password)
-                            commit()
+                                        Log.d("logintest3", "${m_id}, ${m_password}")
+
+
+                                        //스프링의 세션과 같은 구간입니다
+                                        val loginSharedPref =
+                                            getSharedPreferences("login_prof", Context.MODE_PRIVATE)
+                                        loginSharedPref.edit().run {
+                                            putString("m_id", m_id)
+                                            putString("m_password", m_password)
+                                            commit()
+                                        }
+
+                                        Toast.makeText(this@LoginActivity, "${m_id}님 어서오세요!!!!!",Toast.LENGTH_SHORT).show()
+                                        val intent = Intent(this@LoginActivity, MyProfilePage::class.java)
+                                        startActivity(intent)
+
+                                    }
+                                }
+
+                                override fun onFailure(call: Call<Member>, t: Throwable) {
+                                    Log.d("logintest4", "실패! ${t.message}")
+                                    call.cancel()
+                                }
+
+
+                            })
                         }
-
-                        val intent = Intent(this@LoginActivity, MyProfilePage::class.java)
-                        startActivity(intent)
-
                     }
                 }
-                override fun onFailure(call: Call<Member>, t: Throwable) {
-                    Log.d("logintest4", "실패! ${t.message}")
+
+                override fun onFailure(call: Call<Int>, t: Throwable) {
                     call.cancel()
                 }
 
-
             })
+            // 여기서부터 로그인과 스프링 연동 구간
+
         }
     }
 }
