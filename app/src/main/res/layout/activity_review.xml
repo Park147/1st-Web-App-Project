@@ -31,28 +31,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <TextView
-        android:id="@+id/mypagetablayout"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/mypage_tablayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="리뷰 목록"
-        android:textSize="25dp"
         app:layout_constraintTop_toBottomOf="@+id/regView"
         app:tabIndicatorColor="@color/navtext"
         app:tabIndicatorFullWidth="false"
         app:tabIndicatorHeight="4dp"
         app:tabSelectedTextColor="@color/navtext"
-        app:tabTextColor="@color/editGray"
-        tools:layout_editor_absoluteX="16dp" />
+        app:tabTextColor="@color/editGray"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/reviewpager"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="450dp"
-        app:layout_constraintTop_toBottomOf="@+id/mypagetablayout"
+        app:layout_constraintTop_toBottomOf="@+id/mypage_tablayout"
         app:layout_constraintVertical_bias="0.582"
         tools:layout_editor_absoluteX="0dp"/>
 

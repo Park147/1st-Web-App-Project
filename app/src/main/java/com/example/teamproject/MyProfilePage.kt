@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.teamproject.databinding.ActivityMyProfilePageBinding
 import com.example.teamproject.fragment.BookmarkFragment
+import com.example.teamproject.fragment.MyReviewFragment
 import com.example.teamproject.fragment.ReviewFragment
 import com.example.teamproject.login.ModProfileActivity
 import com.example.teamproject.model.Member
@@ -124,39 +125,6 @@ class MyProfilePage : AppCompatActivity() {
 
         binding.userId.text = userId
 
-//        val userService = ( applicationContext as MyApplication).userService
-//
-//        val usersel = userService.selimg(userId)
-//
-//        Log.d("galtest1", "${usersel.request().url()}")
-//
-//        usersel.enqueue(object: Callback<Pimg>{
-//            override fun onResponse(call: Call<Pimg>, response: Response<Pimg>) {
-//                if (response.isSuccessful){
-//                    val userprofileimg = response.body()
-//                    val userimg = userprofileimg?.img
-//                    Log.d("galtest1","$userprofileimg")
-//                    Log.d("galtest1","성공 ")
-//                    if (userimg != null) {
-//                        val bitmap = StringToBitmaps(userimg)
-//                        Log.d("galtest1", "$bitmap")
-//                    }
-//
-//                    // String -> Bitmap 변환
-//
-//
-//
-//
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<Pimg>, t: Throwable) {
-//                Log.d("selimg2","실패 ${t.message}")
-//                call.cancel()
-//            }
-//
-//        })
-
         val tabLayout = binding.tabs
         val viewPager = binding.viewpager
         viewPager.adapter= MyFragmentPagerAdapter(this)
@@ -181,7 +149,7 @@ class MyProfilePage : AppCompatActivity() {
     class MyFragmentPagerAdapter(activity: FragmentActivity): FragmentStateAdapter(activity){
         val fragments: List<Fragment>
         init {
-            fragments= listOf(BookmarkFragment(), ReviewFragment())
+            fragments= listOf(BookmarkFragment(), MyReviewFragment())
         }
         override fun getItemCount(): Int = fragments.size
 
@@ -205,19 +173,5 @@ class MyProfilePage : AppCompatActivity() {
         return true
     }
 
-//    fun StringToBitmaps(image: String): Bitmap? {
-//        return try {
-//            val encodeByte = Base64.decode(image, Base64.DEFAULT)
-//            Log.d("galtest2 i","${encodeByte}")
-//            Log.d("galtest2 size","${encodeByte.size}")
-//            val bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.size)
-//            Log.d("galtest2","$bitmap")
-//            bitmap
-//        } catch (e: Exception) {
-//            Log.d("galtest2","${e.message}")
-//            e.printStackTrace()
-//            null
-//        }
-//    }
 
 }

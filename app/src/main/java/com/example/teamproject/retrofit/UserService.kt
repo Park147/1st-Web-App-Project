@@ -107,6 +107,7 @@ interface UserService {
     // 내 게시물 보여주기
     @GET("/seat/review/getMyList")
     fun getmyList(
+        @Query("r_id") r_id: String
     ): Call<List<Review>>
 
     // 게시물 등록

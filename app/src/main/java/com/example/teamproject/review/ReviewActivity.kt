@@ -12,9 +12,11 @@ import com.example.teamproject.MainActivity
 import com.example.teamproject.MyProfilePage
 import com.example.teamproject.R
 import com.example.teamproject.databinding.ActivityReviewBinding
+import com.example.teamproject.fragment.FollowingFragment
 import com.example.teamproject.fragment.ReviewFragment
 import com.example.teamproject.login.LoginActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.tabs.TabLayoutMediator
 
 class ReviewActivity : AppCompatActivity() {
     lateinit var binding: ActivityReviewBinding
@@ -74,8 +76,22 @@ class ReviewActivity : AppCompatActivity() {
             }
         }
 
+        val tabLayout = binding.mypageTablayout
         val viewPager = binding.reviewpager
-        viewPager.adapter= ReviewActivity.MyFragmentPagerAdapter(this)
+        viewPager.adapter= MyFragmentPagerAdapter(this)
+        
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            when(position){
+                0 -> {
+                    tab.text = "리뷰"
+                }
+                
+                1 -> {
+                    tab.text = "팔로잉"
+                }
+            }
+            
+        }.attach()
 
 
     }
@@ -83,7 +99,7 @@ class ReviewActivity : AppCompatActivity() {
     class MyFragmentPagerAdapter(activity: FragmentActivity): FragmentStateAdapter(activity){
         val fragments: List<Fragment>
         init {
-            fragments= listOf(ReviewFragment())
+            fragments= listOf(ReviewFragment(), FollowingFragment())
         }
         override fun getItemCount(): Int = fragments.size
 
