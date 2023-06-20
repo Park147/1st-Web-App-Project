@@ -8,6 +8,20 @@ import com.example.teamproject.retrofit.NetworkService
 
 class MyApplication : Application() {
 
+    companion object {
+        private lateinit var instance: MyApplication
+
+        fun getInstance(): MyApplication {
+            return instance
+        }
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        instance = this
+        networkService = retrofit.create(NetworkService::class.java)
+    }
+
     var networkService: NetworkService
     val retrofit: Retrofit
         get() = Retrofit.Builder()

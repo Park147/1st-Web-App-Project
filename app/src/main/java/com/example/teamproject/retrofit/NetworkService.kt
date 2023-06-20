@@ -32,5 +32,5 @@ interface NetworkService {
     fun doInsertReserve(@Body reserve: ItemData?): Call<ItemData>
 
     @POST("main/myDining/update")
-    fun update(@Body reserve: ItemData):Call<Unit>
+    fun update(@Body reserve: ItemData?):Call<Unit>
 }

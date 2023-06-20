@@ -66,5 +66,14 @@
                     />
         </LinearLayout>
     </LinearLayout>
+    <Button
+        android:id="@+id/item_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="X"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:backgroundTint="#FF0000"
+        />
 
 </LinearLayout>

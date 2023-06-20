@@ -1,33 +1,26 @@
 package com.example.teamproject.recycler
 
-import android.content.Intent
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Filter
 import android.widget.Filterable
-import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.teamproject.MyApplication
-import com.example.teamproject.MyDining
 import com.example.teamproject.R
 import com.example.teamproject.databinding.ItemRecyclerviewBinding
-import com.example.teamproject.fragment.OneFragment
 import com.example.teamproject.model.ItemData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MyWaitingViewHolder(val binding: ItemRecyclerviewBinding): RecyclerView.ViewHolder(binding.root) {
+class MyDeleteViewHolder(val binding: ItemRecyclerviewBinding): RecyclerView.ViewHolder(binding.root) {
     val button: Button = itemView.findViewById(R.id.item_button)
 }
 
-class MyWaitingAdapter(val context: Fragment, datas:MutableList<ItemData>?): RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable{
+class MyDeleteAdapter(val context: Fragment, datas:MutableList<ItemData>?): RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable{
     private var listData: MutableList<ItemData>? = datas
 
 
@@ -66,10 +59,10 @@ class MyWaitingAdapter(val context: Fragment, datas:MutableList<ItemData>?): Rec
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
-        MyWaitingViewHolder(ItemRecyclerviewBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        MyDeleteViewHolder(ItemRecyclerviewBinding.inflate(LayoutInflater.from(parent.context),parent,false))
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val binding = (holder as MyWaitingViewHolder).binding
+        val binding = (holder as MyDeleteViewHolder).binding
         val waiting = listData?.get(position)
 
         binding.itemContent.text = waiting?.w_waiting_confirm
@@ -78,11 +71,10 @@ class MyWaitingAdapter(val context: Fragment, datas:MutableList<ItemData>?): Rec
         binding.itemwaiting.text = waiting?.w_waiting
 
         holder.button.setOnClickListener {
-            waiting?.w_waiting_confirm ="방문취소"
-            val waiting = listData?.get(position)
+            var title = binding.itemtitle.text.toString()
 
             val networkService = MyApplication.getInstance().networkService
-            val reserveDeleteCall = networkService.update(waiting)
+            val reserveDeleteCall = networkService.deleteWaitingList(title)
 
             reserveDeleteCall.enqueue(object : Callback<Unit> {
                 override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
@@ -95,7 +87,6 @@ class MyWaitingAdapter(val context: Fragment, datas:MutableList<ItemData>?): Rec
                     Log.d("lmj", "실패 : ${t.message}")
                 }
             })
-
         }
 
 //        val urlImg = waiting?.w_image

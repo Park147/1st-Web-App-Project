@@ -2,7 +2,6 @@ package com.example.teamproject.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,14 +13,14 @@ import com.example.teamproject.MyApplication
 import com.example.teamproject.MyDining
 import com.example.teamproject.databinding.FragmentThreeWaitingBinding
 import com.example.teamproject.model.ItemDataList
-import com.example.teamproject.recycler.MyWaitingAdapter
+import com.example.teamproject.recycler.MyDeleteAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class ThreeWaitingFragment : Fragment(){
     lateinit var binding: FragmentThreeWaitingBinding
-    lateinit var adapter: MyWaitingAdapter
+    lateinit var adapter: MyDeleteAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +35,7 @@ class ThreeWaitingFragment : Fragment(){
             override fun onResponse(call: Call<ItemDataList>, response: Response<ItemDataList>) {
                 var item = response.body()?.items
 
-                adapter = MyWaitingAdapter(OneFragment(), item)
+                adapter = MyDeleteAdapter(OneFragment(), item)
                 adapter.filter.filter("방문취소")
 
                 binding.threeRecyclerView.adapter = adapter

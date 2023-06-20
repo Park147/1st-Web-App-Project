@@ -2,7 +2,6 @@ package com.example.teamproject.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 
 import android.view.LayoutInflater
 import android.view.View
@@ -41,7 +40,7 @@ class OneWaitingFragment : Fragment(){
             reserveListCall.enqueue(object : Callback<ItemDataList> {
                 override fun onResponse(call: Call<ItemDataList>, response: Response<ItemDataList>) {
                     var item = response.body()?.items
-                    adapter = MyWaitingAdapter(OneFragment(), item)
+                    adapter = MyWaitingAdapter(this@OneWaitingFragment, item)
                     adapter.filter.filter("방문예약")
 
                     binding.oneRecyclerView.adapter = adapter
