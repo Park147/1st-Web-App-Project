@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.team.mapper.RMapper">
+	
+	<select id="getList" resultType="com.example.team.dto.Rvo">
+		select * from review order by rand() limit 5
+	</select>
+	
+	<select id="getMyList" resultType="com.example.team.dto.Rvo">
+		select * from review where r_id = #{r_id}
+	</select>
+	
+	<insert id="rRegister">
+		insert into 
+			review (r_restaurant, r_id , r_picture , r_content , r_registerdate , r_rating , r_modifydate) 
+		values
+			(#{r_restaurant}, #{r_id} , #{r_picture} , #{r_content} , #{r_registerdate} , #{r_rating} , #{r_modifydate}) 
+	</insert>
+		
+	<select id="rGet">
+		select * from review where r_num = #{r_num}
+	</select>
+	
+	<update id="rUpdate">
+		update 
+			review
+		set
+			r_content = #{r_content}, r_picture = #{r_picture}, r_modifydate = #{r_modifydate} 
+		where
+			r_num = #{r_num}
+	</update>
+	
+	<delete id="rDelete">
+		delete from review where r_num = #{r_num}
+	</delete>
+	
+</mapper>
+        

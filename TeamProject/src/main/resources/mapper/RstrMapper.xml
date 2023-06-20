@@ -10,13 +10,5 @@
 	<select id="getRstr">
 		select * from rstr where rstr_nm = #{rstr_nm}
 	</select>
-	
-	<update id="upBook">
-		update 
-			rstr
-		set
-			markview = #{markview}
-		where
-			rstr_nm = #{rstr_nm}
-	</update>
+
 </mapper>

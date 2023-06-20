@@ -25,10 +25,15 @@ public class MemberController {
 	}
 
 	@GetMapping("/getUser")
-	public MemberVO getUser(String m_id, String m_password) {
+	public MemberVO getUser(@Param("m_id") String m_id, @Param("m_password") String m_password) {
 		System.out.println("로그인 테스트ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
 		MemberVO member = memberService.getUser(m_id, m_password);
 		return member;
+	}
+
+	@GetMapping("/getCheck")
+	public int getCheck(@Param("m_id") String m_id, @Param("m_password") String m_password) {
+		return memberService.getCheck(m_id, m_password);
 	}
 
 	@GetMapping({ "/userPro", "/userIntro" })

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.team.mapper.FMapper">
+	
+	<select id="getFollowingList" resultType="com.example.team.dto.Fvo">
+		select * from follow where fl_id = #{fl_id}
+	</select>
+	
+	<select id="getFollowerList" resultType="com.example.team.dto.Fvo">
+		select * from follow where fr_id = #{fr_id}
+	</select>
+	
+	<insert id="fRegisterFollowing">
+		insert into 
+			follow (fl_id, fr_id) 
+		values
+			(#{fl_id}, #{fr_id}) 
+	</insert>
+		
+	<delete id="fDeleteFollowing">
+		delete from follow where fl_id = #{fl_id}
+	</delete>
+	
+	<select id="getFollowingCount">
+		select count(*) from follow where fl_id = #{fl_id}
+	</select>
+	
+	<select id="getFollowerCount">
+		select count(*) from follow where fr_id = #{fr_id}
+	</select>
+	
+	<select id="fcheck">
+		select count(*) from follow where fl_id = #{fl_id} and fr_id = #{fr_id}
+	</select>
+</mapper>
+        

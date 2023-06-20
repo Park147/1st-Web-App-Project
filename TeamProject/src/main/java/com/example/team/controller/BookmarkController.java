@@ -35,4 +35,9 @@ public class BookmarkController {
 	public void bookmarkdelete(@Param("b_id") String b_id, @Param("b_name") String b_name) {
 		bookmarkService.bookmarkD(b_id, b_name);
 	}
+
+	@GetMapping("/check")
+	public int bookmarkcheck(@Param("b_id") String b_id, @Param("b_name") String b_name) {
+		return bookmarkService.bookmarkC(b_id, b_name);
+	}
 }

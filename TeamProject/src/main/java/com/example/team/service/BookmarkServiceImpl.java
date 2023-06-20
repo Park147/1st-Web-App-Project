@@ -30,4 +30,9 @@ public class BookmarkServiceImpl implements BookmarkService {
 		bookmarkMapper.bookmarkD(b_id, b_name);
 	}
 
+	@Override
+	public int bookmarkC(@Param("b_id") String b_id, @Param("b_name") String b_name) {
+		return bookmarkMapper.bookmarkC(b_id, b_name);
+	}
+
 }

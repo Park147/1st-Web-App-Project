@@ -18,4 +18,8 @@
 		delete from bookmark where b_id = #{b_id} and b_name = #{b_name}
 	</delete>
 	
+	<select id="bookmarkC">
+		select count(*) from bookmark where b_id = #{b_id} and b_name = #{b_name}
+	</select>
+	
 </mapper>

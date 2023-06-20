@@ -24,9 +24,4 @@ public class RstrServiceImpl implements RstrService {
 		return rstrMapper.getRstr(rstr_nm);
 	}
 
-	@Override
-	public void upBook(RstrVO rstr) {
-		rstrMapper.upBook(rstr);
-	}
-
 }

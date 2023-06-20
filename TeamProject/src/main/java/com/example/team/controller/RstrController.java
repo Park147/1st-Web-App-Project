@@ -5,8 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,12 +27,6 @@ public class RstrController {
 	@GetMapping("rstrinfo")
 	public RstrVO getRstr(@Param("rstr_nm") String rstr_nm) {
 		return rstrService.getRstr(rstr_nm);
-	}
-
-	@PostMapping("upBook")
-	public void upbookRstr(@RequestBody RstrVO rstr) {
-		System.out.println("북뷰 업데이트");
-		rstrService.upBook(rstr);
 	}
 
 }

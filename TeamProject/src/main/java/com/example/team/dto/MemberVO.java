@@ -16,4 +16,5 @@ public class MemberVO {
 	private String m_introduction;
 	private String m_activity_area;
 	private String m_created_date;
+
 }

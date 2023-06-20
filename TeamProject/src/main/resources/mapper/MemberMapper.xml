@@ -15,6 +15,10 @@
 		select * from member where m_id = #{m_id} and m_password = #{m_password}
 	</select>
 	
+	<select id="getCheck">
+		select count(*) from member where m_id = #{m_id} and m_password = #{m_password} 
+	</select>
+	
 	<select id="getData">
 		select * from member where m_id = #{m_id}
 	</select>

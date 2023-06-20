@@ -8,6 +8,4 @@ public interface RstrService {
 	public List<RstrVO> getList();
 
 	public RstrVO getRstr(String rstr_nm);
-
-	public void upBook(RstrVO rstr);
 }
