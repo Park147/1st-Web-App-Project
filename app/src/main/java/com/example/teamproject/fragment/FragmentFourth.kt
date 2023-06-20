@@ -1,4 +1,4 @@
-package com.example.a1st_web_app_project.fragment
+package com.example.teamproject.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,9 +10,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.example.a1st_web_app_project.DetailActivity
-import com.example.a1st_web_app_project.R
-import com.example.a1st_web_app_project.databinding.Fragment1pBinding
+import com.example.teamproject.DetailActivity
+import com.example.teamproject.R
+import com.example.teamproject.databinding.Fragment1pBinding
 
 class FragmentFourth : Fragment() {
     private var rstr_nm: String? = null

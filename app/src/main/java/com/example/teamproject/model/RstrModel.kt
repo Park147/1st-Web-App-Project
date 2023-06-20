@@ -1,6 +1,7 @@
-package com.example.a1st_web_app_project.model
+package com.example.teamproject.model
 
-data class randRstr(
+data class RstrModel(
+
     var rstr_nm : String,
     var rstr_addr : String,
     var rstr_tell : String,
@@ -8,4 +9,5 @@ data class randRstr(
     var rstr_intro : String,
     var rstr_img : String,
     var rstr_popularity : String
+
 )

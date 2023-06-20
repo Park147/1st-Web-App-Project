@@ -15,6 +15,7 @@ import com.example.teamproject.MyApplication
 import com.example.teamproject.MyDining
 import com.example.teamproject.databinding.FragmentTwoWaitingBinding
 import com.example.teamproject.model.ItemDataList
+import com.example.teamproject.recycler.MyDeleteAdapter
 import com.example.teamproject.recycler.MyWaitingAdapter
 import retrofit2.Call
 import retrofit2.Callback
@@ -22,7 +23,7 @@ import retrofit2.Response
 
 class TwoWaitingFragment : Fragment(){
     lateinit var binding: FragmentTwoWaitingBinding
-    lateinit var adapter: MyWaitingAdapter
+    lateinit var adapter: MyDeleteAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,7 +43,7 @@ class TwoWaitingFragment : Fragment(){
                 var item = response.body()?.items
                 Log.d("lmj", "Two item : $item")
 
-                adapter = MyWaitingAdapter(OneFragment(), item)
+                adapter = MyDeleteAdapter(OneFragment(), item)
                 adapter.filter.filter("방문완료")
 
                 binding.twoRecyclerView.adapter = adapter

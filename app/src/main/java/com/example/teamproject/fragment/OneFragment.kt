@@ -26,9 +26,6 @@ import retrofit2.Response
 class OneFragment : Fragment() {
 
     lateinit var binding: FragmentOneBinding
-    lateinit var bindingOne: FragmentOneWaitingBinding
-    lateinit var bindingTwo: FragmentTwoWaitingBinding
-    lateinit var bindingThree: FragmentThreeWaitingBinding
     lateinit var adapter: MyWaitingAdapter
 
     override fun onCreateView(

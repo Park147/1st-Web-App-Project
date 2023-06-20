@@ -5,6 +5,8 @@ import com.example.teamproject.model.BlankItem
 import com.example.teamproject.model.BlankItemList
 import com.example.teamproject.model.ItemData
 import com.example.teamproject.model.ItemDataList
+import com.example.teamproject.model.RstrModel
+import com.example.teamproject.model.randRstr
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -32,5 +34,21 @@ interface NetworkService {
     fun doInsertReserve(@Body reserve: ItemData?): Call<ItemData>
 
     @POST("main/myDining/update")
-    fun update(@Body reserve: ItemData):Call<Unit>
+    fun update(@Body reserve: ItemData?):Call<Unit>
+
+    @GET("/main/Rstr/list")
+    fun getRstrList(): Call<List<RstrModel>>
+
+    @GET("/main/Rstr/getRead")
+    fun getRead(
+        @Query("rstr_nm") rstr_nm: String
+    ): Call<RstrModel>
+
+    @GET("/main/Rstr/getrand")
+    fun getRandList(): Call<List<randRstr>>
+
+    @GET("/main/Rstr/getSearch")
+    fun getSearch(
+        @Query("rstr_nm") rstr_nm: String
+    ): Call<List<RstrModel>>
 }

@@ -1,11 +1,12 @@
-package com.example.a1st_web_app_project
+package com.example.teamproject
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.example.a1st_web_app_project.databinding.ActivityDetailBinding
+import com.example.teamproject.databinding.ActivityDetailBinding
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
@@ -28,6 +29,7 @@ class DetailActivity : AppCompatActivity() {
         val rstr_popularity = intent.getStringExtra("rstr_popularity")
         Log.d("test34", "$rstr_nm, $rstr_img, $rstr_addr, $rstr_tell, $rstr_intro, $rstr_popularity")
 
+
         binding.textViewName.text = rstr_nm
         binding.textViewAddress.text = rstr_addr
         binding.textViewPhone.text = rstr_tell
@@ -38,6 +40,14 @@ class DetailActivity : AppCompatActivity() {
             Glide.with(this)
                 .load(rstr_img)
                 .into(binding.imageViewImage)
+        }
+
+        binding.reserve.setOnClickListener{
+            val intent = Intent(this@DetailActivity, ReserveActivity::class.java)
+            intent.putExtra("img", rstr_img)
+            intent.putExtra("title", rstr_nm)
+            intent.putExtra("content", rstr_intro)
+            startActivity(intent)
         }
     }
 

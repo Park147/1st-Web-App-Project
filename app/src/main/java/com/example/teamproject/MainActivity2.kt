@@ -1,4 +1,4 @@
-package com.example.a1st_web_app_project
+package com.example.teamproject
 
 import MyAdapter
 import MyAdapterListener
@@ -8,8 +8,8 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.a1st_web_app_project.databinding.ActivityMain2Binding
-import com.example.a1st_web_app_project.model.RstrModel
+import com.example.teamproject.databinding.ActivityMain2Binding
+import com.example.teamproject.model.RstrModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,7 +28,7 @@ class MainActivity2 : AppCompatActivity(), MyAdapterListener {
         supportActionBar?.setDisplayShowTitleEnabled(false)
         binding.toolbar.title = "뒤로가기"
 
-        val rstrService = (applicationContext as MyApplication).rstrService
+        val rstrService = (applicationContext as MyApplication).networkService
 
         myAdapter = MyAdapter(this, null)
         myAdapter.setListener(this)

@@ -1,4 +1,4 @@
-package com.example.a1st_web_app_project
+package com.example.teamproject
 
 import org.junit.Test
 

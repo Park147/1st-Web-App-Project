@@ -1,4 +1,4 @@
-package com.example.a1st_web_app_project
+package com.example.teamproject
 
 import MyAdapter
 import MyAdapterListener
@@ -12,8 +12,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.a1st_web_app_project.databinding.ActivityWaitingBinding
-import com.example.a1st_web_app_project.model.RstrModel
+import com.example.teamproject.databinding.ActivityWaitingBinding
+import com.example.teamproject.model.RstrModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -38,7 +38,7 @@ class WaitingActivity : AppCompatActivity(), MyAdapterListener {
         editTextSearch = findViewById(R.id.editTextSearch)
         buttonSearch = findViewById(R.id.buttonSearch)
 
-        val rstrService = (applicationContext as MyApplication).rstrService
+        val rstrService = (applicationContext as MyApplication).networkService
 
         val getRstrList = rstrService.getRstrList()
         Log.d("hjm", "${getRstrList.request().url().toString()}")

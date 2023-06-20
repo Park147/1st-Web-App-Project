@@ -2,6 +2,7 @@ package com.example.teamproject
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.teamproject.databinding.ActivityReserveBinding
@@ -21,6 +22,9 @@ class ReserveActivity : AppCompatActivity() {
     var reserveDate:String = ""
     var reserveTime:String = ""
     var personCount:String = ""
+    var img:String? = ""
+    var title:String? = ""
+    var content:String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,13 +42,16 @@ class ReserveActivity : AppCompatActivity() {
             reserveDate = binding.dateButton.text.toString()
             reserveTime = binding.btn1.text.toString()
             personCount = binding.person.text.toString()
+            img = intent.getStringExtra("img")
+            title = intent.getStringExtra("title")
+            content = intent.getStringExtra("content")
 
             if(reserveDate == "") {
                 Toast.makeText(this, "날짜를 입력하시오", Toast.LENGTH_SHORT).show()
             } else if(personCount == "") {
                 Toast.makeText(this, "인원수를 입력하시오", Toast.LENGTH_SHORT).show()
             } else {
-                var reserve = ItemData("유저이름","","제목1","","",reserveTime,reserveDate, personCount,"방문예약")
+                var reserve = ItemData("유저이름",img,title,content,"",reserveTime,reserveDate, personCount,"방문예약")
 
                 val networkService = (applicationContext as MyApplication).networkService
                 val requestCall = networkService.doInsertReserve(reserve)
@@ -68,12 +75,17 @@ class ReserveActivity : AppCompatActivity() {
             reserveDate = binding.dateButton.text.toString()
             reserveTime = binding.btn2.text.toString()
             personCount = binding.person.text.toString()
+            img = intent.getStringExtra("img")
+            Log.d("lmj", "이미지 파일 : $img")
+            title = intent.getStringExtra("title")
+            content = intent.getStringExtra("content")
+
             if(reserveDate == "") {
                 Toast.makeText(this, "날짜를 입력하시오", Toast.LENGTH_SHORT).show()
             } else if(personCount == "") {
                 Toast.makeText(this, "인원수를 입력하시오", Toast.LENGTH_SHORT).show()
             } else {
-                var reserve = ItemData("유저이름","","제목2","","",reserveTime,reserveDate, personCount,"방문예약")
+                var reserve = ItemData("유저이름",img,title,content,"",reserveTime,reserveDate, personCount,"방문예약")
 
                 val networkService = (applicationContext as MyApplication).networkService
                 val requestCall = networkService.doInsertReserve(reserve)
@@ -97,12 +109,17 @@ class ReserveActivity : AppCompatActivity() {
             reserveDate = binding.dateButton.text.toString()
             reserveTime = binding.btn3.text.toString()
             personCount = binding.person.text.toString()
+            img = intent.getStringExtra("img")
+            Log.d("lmj", "이미지 파일 : $img")
+            title = intent.getStringExtra("title")
+            content = intent.getStringExtra("content")
+
             if(reserveDate == "") {
                 Toast.makeText(this, "날짜를 입력하시오", Toast.LENGTH_SHORT).show()
             } else if(personCount == "") {
                 Toast.makeText(this, "인원수를 입력하시오", Toast.LENGTH_SHORT).show()
             } else {
-                var reserve = ItemData("유저이름","","제목3","","",reserveTime,reserveDate, personCount,"방문예약")
+                var reserve = ItemData("유저이름",img,title,content,"",reserveTime,reserveDate, personCount,"방문예약")
 
                 val networkService = (applicationContext as MyApplication).networkService
                 val requestCall = networkService.doInsertReserve(reserve)
