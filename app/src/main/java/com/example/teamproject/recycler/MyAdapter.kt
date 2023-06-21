@@ -1,5 +1,3 @@
-package com.example.teamproject.recycler
-
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -13,42 +11,63 @@ import com.example.teamproject.R
 import com.example.teamproject.databinding.ItemMainBinding
 import com.example.teamproject.login.LoginActivity
 import com.example.teamproject.model.Bookmark
-import com.example.teamproject.model.Rstr
+import com.example.teamproject.model.RstrModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+interface MyAdapterListener {
+    fun onItemClick(data: RstrModel)
+}
 
-class MyViewHolder(val binding: ItemMainBinding): RecyclerView.ViewHolder(binding.root)
+class MyViewHolder(val binding: ItemMainBinding) : RecyclerView.ViewHolder(binding.root)
 
-class MyAdapter(val context: Context, val datas: List<Rstr>?): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
-    override fun getItemCount(): Int{
-        return datas?.size ?: 0
+class MyAdapter(val context: Context, var datas: List<RstrModel>?) :
+    RecyclerView.Adapter<MyViewHolder>() {
+
+    private var listener: MyAdapterListener? = null
+
+    fun setListener(listener: MyAdapterListener) {
+        this.listener = listener
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
-            = MyViewHolder(ItemMainBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+    fun updateDatas(updaters: List<RstrModel>) {
+        datas = updaters
+        notifyDataSetChanged()
+    }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val binding=(holder as MyViewHolder).binding
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        val binding =
+            ItemMainBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MyViewHolder(binding)
+    }
 
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        val binding = holder.binding
 
-        //받아온 데이터를 아이템에 넣기 위한 설정
-        val rs = datas?.get(position)
-        binding.id.text = rs?.rstr_nm
-        binding.firstNameView.text = "주소: "+rs?.rstr_addr
-        binding.secondNameView.text = "전화: "+rs?.rstr_tell
-        binding.thirdNameView.text = "업종: "+rs?.rstr_list
-        binding.fourthNameView.text = "소개: "+rs?.rstr_intro
-        binding.bookmarkbtn.contentDescription = rs?.rstr_nm
-        Log.d("markviewtest1", "성공! ${rs?.markview}")
+        val rstrModel = datas?.get(position)
+        binding.id.text = rstrModel?.rstr_nm
+        binding.firstNameView.text = "주소: ${rstrModel?.rstr_addr}"
+        binding.contactView1.text = "전화: ${rstrModel?.rstr_tell}"
+        binding.contactView2.text = "업종: ${rstrModel?.rstr_list}"
+        binding.contactView3.text = "소개: ${rstrModel?.rstr_intro}"
+        binding.contactView4.text = "평점: ${rstrModel?.rstr_popularity}"
+        binding.bookmarkbtn.contentDescription = rstrModel?.rstr_nm
 
         val loginSharedPref = context.getSharedPreferences("login_prof", Context.MODE_PRIVATE)
         val userId = loginSharedPref.getString("m_id", null)
 
+        val imageUrl = rstrModel?.rstr_img
+
+        if (imageUrl != null) {
+            Glide.with(context)
+                .load(imageUrl)
+                .into(binding.avatarView)
+        }
+
         val userService = ( context.applicationContext as MyApplication).userService
 
-        val bookck = userService.bookcheck(userId.toString(), rs?.rstr_nm.toString())
+        val bookck = userService.bookcheck(userId.toString(), rstrModel?.rstr_nm.toString())
 
         bookck.enqueue(object: Callback<Int>{
             override fun onResponse(call: Call<Int>, response: Response<Int>) {
@@ -71,8 +90,6 @@ class MyAdapter(val context: Context, val datas: List<Rstr>?): RecyclerView.Adap
             }
 
         })
-        // 데이터 값을 비교해서 상황에 따라 출력하는 구간
-
 
         binding.bookmarkbtn.setOnClickListener {
             if ( userId == null)
@@ -84,7 +101,7 @@ class MyAdapter(val context: Context, val datas: List<Rstr>?): RecyclerView.Adap
                 val userService = ( context.applicationContext as MyApplication).userService
                 val b_name = binding.bookmarkbtn.contentDescription as String
                 val imgd = binding.bookmarkbtn.getTag(R.string.image_resource_name) as String?
-                Log.d("imgbtn","이미지 이름: ${imgd}, url: ${rs?.rstr_img}")
+                Log.d("imgbtn","이미지 이름: ${imgd}, url: ${rstrModel?.rstr_img}")
                 Toast.makeText(context, "식당 이름: ${b_name}, 이미지 이름: ${imgd}", Toast.LENGTH_SHORT).show()
                 if ( imgd == "bookmarkon")
                 {
@@ -113,7 +130,7 @@ class MyAdapter(val context: Context, val datas: List<Rstr>?): RecyclerView.Adap
                     var bookmark = Bookmark(
                         b_id = userId.toString(),
                         b_name = b_name!!.toString(),
-                        b_imgurl = rs?.rstr_img.toString()
+                        b_imgurl = rstrModel?.rstr_img.toString()
                     )
                     Log.d("bookmarkup", "${bookmark}")
                     val addbook = userService.bmregister(bookmark)
@@ -138,14 +155,15 @@ class MyAdapter(val context: Context, val datas: List<Rstr>?): RecyclerView.Adap
             }
 
         }
-        
-        // 이미지의 주소가 url일 경우 출력하는 구간
-        val imageUrl = rs?.rstr_img
 
-        if (imageUrl != null) {
-            Glide.with(context)
-                .load(imageUrl)
-                .into(binding.avatarView)
+        binding.root.setOnClickListener {
+            if (rstrModel != null) {
+                listener?.onItemClick(rstrModel)
+            }
         }
+    }
+
+    override fun getItemCount(): Int {
+        return datas?.size ?: 0
     }
 }

@@ -1,11 +1,15 @@
 package com.example.teamproject.retrofit
 
+import com.example.teamproject.model.BlankItem
+import com.example.teamproject.model.BlankItemList
 import com.example.teamproject.model.Bookmark
 import com.example.teamproject.model.Comment
 import com.example.teamproject.model.CommentR
 import com.example.teamproject.model.CommentU
 import com.example.teamproject.model.Follow
 import com.example.teamproject.model.Heart
+import com.example.teamproject.model.ItemData
+import com.example.teamproject.model.ItemDataList
 import com.example.teamproject.model.Member
 import com.example.teamproject.model.ModInfo
 import com.example.teamproject.model.ModPro
@@ -14,6 +18,8 @@ import com.example.teamproject.model.Review
 import com.example.teamproject.model.ReviewU
 import com.example.teamproject.model.Review_r
 import com.example.teamproject.model.Rstr
+import com.example.teamproject.model.RstrModel
+import com.example.teamproject.model.randRstr
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -229,5 +235,77 @@ interface UserService {
     @GET("/seat/comment/cCount")
     fun commentC(
         @Query("c_getnum")c_getnum: Int
+    ): Call<Int>
+
+    @GET("main/myDining/myWaiting")
+    fun getMyWaiting(@Query("r_username") r_username: String?): Call<ItemData>
+
+    @GET("main/myDining/waitingAll")
+    fun getWaitingAll(): Call<ItemDataList>
+
+    @POST("main/myDining/delete/{w_title}")
+    fun  deleteWaitingList(@Path("w_title")w_title:String?):Call<Unit>
+
+    @GET("main/myDining/myBlank")
+    fun getMyBlank(@Query("r_username") r_username: String?): Call<BlankItem>
+
+    @GET("main/myDining/blank")
+    fun getBlank(): Call<BlankItemList>
+
+    @POST("main/myDining/blank/delete/{b_title}")
+    fun  deleteBlankList(@Path("b_title")b_title:String?):Call<Unit>
+
+    @POST("main/myDining/insert")
+    fun doInsertReserve(@Body reserve: ItemData?): Call<ItemData>
+
+    @POST("main/myDining/update")
+    fun update(@Body reserve: ItemData?):Call<Unit>
+
+    @GET("/main/Rstr/list")
+    fun getRstrList(): Call<List<RstrModel>>
+
+    @GET("/main/Rstr/getRead")
+    fun getRead(
+        @Query("rstr_nm") rstr_nm: String
+    ): Call<RstrModel>
+
+    @GET("/main/Rstr/getrand")
+    fun getRandList(): Call<List<randRstr>>
+
+    @GET("/main/Rstr/getSearch")
+    fun getSearch(
+        @Query("rstr_nm") rstr_nm: String
+    ): Call<List<RstrModel>>
+
+    //검색
+
+    @GET("/main/Rstr/getarea")
+    fun getArea(
+        @Query("rstr_addr") rstr_addr: String
+    ): Call<List<RstrModel>>
+
+    @GET("/main/Rstr/gettype")
+    fun getType(
+        @Query("rstr_list") rstr_list: String
+    ): Call<List<RstrModel>>
+
+    @GET("/main/Rstr/getname")
+    fun getName(
+        @Query("rstr_nm") rstr_nm: String
+    ): Call<List<RstrModel>>
+
+    @GET("/main/Rstr/getareacount")
+    fun getAreacount(
+        @Query("rstr_addr") rstr_addr: String
+    ): Call<Int>
+
+    @GET("/main/Rstr/gettypecount")
+    fun getTypecount(
+        @Query("rstr_list") rstr_list: String
+    ): Call<Int>
+
+    @GET("/main/Rstr/getnamecount")
+    fun getNamecount(
+        @Query("rstr_nm") rstr_nm: String
     ): Call<Int>
 }

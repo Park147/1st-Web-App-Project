@@ -26,7 +26,7 @@
         android:gravity="center"
         android:text="리뷰 등록하기"
         android:textSize="25dp"
-        android:background="@drawable/button_round"
+        android:background="@drawable/button_lound"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />

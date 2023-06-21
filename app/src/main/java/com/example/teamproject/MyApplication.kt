@@ -7,17 +7,25 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MyApplication: Application(){
 
+    companion object {
+        private lateinit var instance: MyApplication
+
+        fun getInstance(): MyApplication {
+            return instance
+        }
+    }
+    
     //서비스 파일 불러오기
     var userService: UserService
 
     //스프링의 주소를 불러오기 [ 스프링과 안드로이드 연동을 위한 작업 ]
-    val retrofit2: Retrofit
+    val retrofit: Retrofit
         get() = Retrofit.Builder()
             .baseUrl("http://10.100.105.187:8888/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     init {
         //서비스파일 초기화하기
-        userService = retrofit2.create(UserService::class.java)
+        userService = retrofit.create(UserService::class.java)
     }
 }

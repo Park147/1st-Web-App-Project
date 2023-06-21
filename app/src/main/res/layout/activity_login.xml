@@ -92,7 +92,7 @@
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/button_round"
+            android:background="@drawable/button_lound"
             android:textColor="@color/black"
             android:text="로그인"
             android:textSize="30dp" />

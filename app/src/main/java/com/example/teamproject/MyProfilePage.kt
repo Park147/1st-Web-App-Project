@@ -9,16 +9,16 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.teamproject.databinding.ActivityMyProfilePageBinding
 import com.example.teamproject.fragment.BookmarkFragment
 import com.example.teamproject.fragment.MyReviewFragment
-import com.example.teamproject.fragment.ReviewFragment
+import com.example.teamproject.login.LoginActivity
 import com.example.teamproject.login.ModProfileActivity
 import com.example.teamproject.model.Member
-import com.example.teamproject.model.Pimg
 import com.example.teamproject.review.ReviewActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayoutMediator
@@ -43,8 +43,9 @@ class MyProfilePage : AppCompatActivity() {
         modprofile = binding.modprofile
         bottommenu = binding.bottommenu
 
-
-
+        val loginSharedPref = applicationContext.getSharedPreferences("login_prof", Context.MODE_PRIVATE)
+        val userId = loginSharedPref.getString("m_id", null).toString()
+        val password = loginSharedPref.getString("m_password", "")
 
         // 하단바 초기값 설정
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottommenu)
@@ -58,14 +59,16 @@ class MyProfilePage : AppCompatActivity() {
                     startActivity(intent)
                 }
                 R.id.second_tab -> {
-                    Toast.makeText(this@MyProfilePage, "미구현", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@MyProfilePage, SearchActivity::class.java)
+                    startActivity(intent)
                 }
                 R.id.third_tab -> {
                     val intent = Intent(this@MyProfilePage, ReviewActivity::class.java)
                     startActivity(intent)
                 }
                 R.id.fourth_tab -> {
-                    Toast.makeText(this@MyProfilePage, "미구현", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@MyProfilePage, MyDining::class.java)
+                    startActivity(intent)
 
                 }
 
@@ -119,9 +122,7 @@ class MyProfilePage : AppCompatActivity() {
         }
         
         // 로그인 정보를 가져오는 곳
-        val loginSharedPref = applicationContext.getSharedPreferences("login_prof", Context.MODE_PRIVATE)
-        val userId = loginSharedPref.getString("m_id", "").toString()
-        val password = loginSharedPref.getString("m_password", "")
+
 
         binding.userId.text = userId
 

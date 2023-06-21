@@ -190,7 +190,7 @@
                 android:textSize="30dp"
                 android:theme="@style/Theme.AppCompat.Light"
                 android:textColor="@color/black"
-                android:background="@drawable/button_round"
+                android:background="@drawable/button_lound"
                 android:layout_gravity="center"
                 />
 

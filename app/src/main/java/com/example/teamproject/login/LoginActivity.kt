@@ -8,8 +8,10 @@ import android.util.Log
 import android.widget.Toast
 import com.example.teamproject.MainActivity
 import com.example.teamproject.MyApplication
+import com.example.teamproject.MyDining
 import com.example.teamproject.MyProfilePage
 import com.example.teamproject.R
+import com.example.teamproject.SearchActivity
 import com.example.teamproject.databinding.ActivityLoginBinding
 import com.example.teamproject.model.Member
 import com.example.teamproject.review.ReviewActivity
@@ -45,14 +47,15 @@ class LoginActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
                 R.id.second_tab -> {
-                    Toast.makeText(this@LoginActivity, "미구현", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@LoginActivity, SearchActivity::class.java)
+                    startActivity(intent)
                 }
                 R.id.third_tab -> {
                     val intent = Intent(this@LoginActivity, ReviewActivity::class.java)
                     startActivity(intent)
                 }
                 R.id.fourth_tab -> {
-                    Toast.makeText(this@LoginActivity, "미구현", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, "로그인을 하셔야 이동할 수 있습니다.", Toast.LENGTH_SHORT).show()
 
                 }
 

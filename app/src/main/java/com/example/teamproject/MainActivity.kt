@@ -2,57 +2,95 @@ package com.example.teamproject
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
+import com.example.teamproject.category.CategoryOneActivity
+import com.example.teamproject.category.CategoryThreeActivity
+import com.example.teamproject.category.CategoryTwoActivity
 import com.example.teamproject.databinding.ActivityMainBinding
+import com.example.teamproject.fragment.FragmentFirst
+import com.example.teamproject.fragment.FragmentFourth
+import com.example.teamproject.fragment.FragmentSecond
+import com.example.teamproject.fragment.FragmentThird
 import com.example.teamproject.login.LoginActivity
-import com.example.teamproject.model.Rstr
-import com.example.teamproject.recycler.MyAdapter
+import com.example.teamproject.model.randRstr
 import com.example.teamproject.review.ReviewActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import me.relex.circleindicator.CircleIndicator3
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMainBinding
 
+class MainActivity : FragmentActivity() {
+    lateinit var binding: ActivityMainBinding
     var bottommenu: BottomNavigationView? = null
+    var Toorbarname: TextView? = null
+    lateinit var viewPager: ViewPager2
+    lateinit var indicator: CircleIndicator3
+
+    inner class MyFragmentAdapter(fragmentActivity: FragmentActivity, private val randList: List<randRstr>) : FragmentStateAdapter(fragmentActivity) {
+        override fun getItemCount(): Int {
+            return randList.size
+        }
+
+        override fun createFragment(position: Int): Fragment {
+            val randRstr = randList[position]
+            val bundle = Bundle().apply {
+                putString("rstr_nm", randRstr.rstr_nm)
+                putString("rstr_img", randRstr.rstr_img)
+                putString("rstr_addr", randRstr.rstr_addr)
+                putString("rstr_tell", randRstr.rstr_tell)
+                putString("rstr_intro", randRstr.rstr_intro)
+                putString("rstr_popularity", randRstr.rstr_popularity)
+            }
+
+            return when (position) {
+                0 -> FragmentFirst().apply { arguments = bundle }
+                1 -> FragmentSecond().apply { arguments = bundle }
+                2 -> FragmentThird().apply { arguments = bundle }
+                3 -> FragmentFourth().apply { arguments = bundle }
+                else -> throw IllegalArgumentException("Invalid position: $position")
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-        binding.toolbar.title = "메인페이지"
+        val loginSharedPref = applicationContext.getSharedPreferences("login_prof", Context.MODE_PRIVATE)
+        val userId = loginSharedPref.getString("m_id", null)
 
-        bottommenu = binding.bottommenu
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottommenu)
-        bottomNavigationView.selectedItemId = R.id.first_tab
-        
-        // 하단바 메뉴 선택 이동 구간
-        binding.bottommenu.setOnItemSelectedListener {item ->
+        binding.bottommenu.setOnItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.second_tab -> {
-                    Toast.makeText(this@MainActivity, "미구현", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@MainActivity, SearchActivity::class.java)
+                    startActivity(intent)
                 }
                 R.id.third_tab -> {
                     val intent = Intent(this@MainActivity, ReviewActivity::class.java)
                     startActivity(intent)
                 }
                 R.id.fourth_tab -> {
-                    Toast.makeText(this@MainActivity, "미구현", Toast.LENGTH_SHORT).show()
+                    if ( userId == null){
+                        val intent = Intent(this@MainActivity, LoginActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        val intent = Intent(this@MainActivity, MyDining::class.java)
+                        startActivity(intent)
+                    }
                 }
                 R.id.fifth_tab -> {
-                    val loginSharedPref = applicationContext.getSharedPreferences("login_prof", Context.MODE_PRIVATE)
-                    val userId = loginSharedPref.getString("m_id", null)
                     if ( userId == null){
                         val intent = Intent(this@MainActivity, LoginActivity::class.java)
                         startActivity(intent)
@@ -60,43 +98,81 @@ class MainActivity : AppCompatActivity() {
                         val intent = Intent(this@MainActivity, MyProfilePage::class.java)
                         startActivity(intent)
                     }
-
                 }
-
             }
             true
-
         }
-        // 메인화면에 스프링에서 받아온 식당리스트를 출력하는 구간
-        val userService = (applicationContext as MyApplication).userService
-        var getrstrlist = userService.rstrList()
 
-        Log.d("lsy", "${getrstrlist}")
-        
-        getrstrlist.enqueue(object: Callback<List<Rstr>>{
-            override fun onResponse(call: Call<List<Rstr>>, response: Response<List<Rstr>>) {
-                if (response.isSuccessful){
-                    val rstrL = response.body()
-                    Log.d("lsy", "${rstrL}")
-                    
-                    //받아온 식당정보를 MyAdapter에 넣어서 recyclerView에 넣어주는 작업
-                    binding.recyclerView.adapter = MyAdapter(this@MainActivity, rstrL)
+        val buttonStartMainActivity2 = findViewById<Button>(R.id.btn1)
+        buttonStartMainActivity2.setOnClickListener {
+            val intent = Intent(this@MainActivity, MainActivity2::class.java)
+            startActivity(intent)
+        }
+        val buttonStartWaitingActivity = findViewById<Button>(R.id.btn2)
+        buttonStartWaitingActivity.setOnClickListener {
+            val intent = Intent(this@MainActivity, WaitingActivity::class.java)
+            startActivity(intent)
+        }
+        val buttonStartWaitingActivity3 = findViewById<Button>(R.id.sbtn2)
+        buttonStartWaitingActivity3.setOnClickListener {
+            val intent = Intent(this@MainActivity, CategoryTwoActivity::class.java)
+            startActivity(intent)
+        }
+        val buttonStartWaitingActivity4 = findViewById<Button>(R.id.sbtn3)
+        buttonStartWaitingActivity4.setOnClickListener {
+            val intent = Intent(this@MainActivity, CategoryThreeActivity::class.java)
+            startActivity(intent)
+        }
+        val buttonStartWaitingActivity5 = findViewById<Button>(R.id.sbtn1)
+        buttonStartWaitingActivity5.setOnClickListener {
+            val intent = Intent(this@MainActivity, CategoryOneActivity::class.java)
+            startActivity(intent)
+        }
 
-                    binding.recyclerView.addItemDecoration(
-                        DividerItemDecoration(this@MainActivity, LinearLayoutManager.VERTICAL))
 
+        val RstrService = (applicationContext as MyApplication).userService
+
+        val getrandlist = RstrService.getRandList()
+        getrandlist.enqueue(object : Callback<List<randRstr>> {
+            override fun onResponse(call: Call<List<randRstr>>, response: Response<List<randRstr>>) {
+                if (response.isSuccessful) {
+                    val randList = response.body()
+                    Log.d("MainActivity123", "randList: $randList")
+                    viewPager = findViewById(R.id.viewpager)
+                    indicator = findViewById(R.id.indicator)
+
+                    val fragmentAdapter = randList?.let { MyFragmentAdapter(this@MainActivity, it) }
+                    viewPager.adapter = fragmentAdapter
+                    indicator.setViewPager(viewPager)
+
+                    // 아이템 클릭 시 DetailActivity로 전환
+                    fragmentAdapter?.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+                        override fun onItemRangeChanged(positionStart: Int, itemCount: Int) {
+                            super.onItemRangeChanged(positionStart, itemCount)
+                            viewPager.post {
+                                val currentItem = viewPager.currentItem
+                                if (currentItem in 0 until itemCount) {
+                                    val randRstr = randList[currentItem]
+                                    val intent = Intent(this@MainActivity, DetailActivity::class.java).apply {
+                                        putExtra("rstr_nm", randRstr.rstr_nm)
+                                        putExtra("rstr_img", randRstr.rstr_img)
+                                        putExtra("rstr_addr", randRstr.rstr_addr)
+                                        putExtra("rstr_tell", randRstr.rstr_tell)
+                                        putExtra("rstr_intro", randRstr.rstr_intro)
+                                        putExtra("rstr_popularity", randRstr.rstr_popularity)
+                                    }
+                                    startActivity(intent)
+                                }
+                            }
+                        }
+                    })
                 }
             }
 
-            override fun onFailure(call: Call<List<Rstr>>, t: Throwable) {
-                Log.d("lsy", "실패! ${t.message}")
+            override fun onFailure(call: Call<List<randRstr>>, t: Throwable) {
+                Log.d("MainActivity", "Network request failed: ${t.message}")
                 call.cancel()
             }
-
         })
-
-
-
-
     }
 }

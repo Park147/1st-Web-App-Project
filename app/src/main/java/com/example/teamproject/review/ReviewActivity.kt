@@ -9,8 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.teamproject.MainActivity
+import com.example.teamproject.MyDining
 import com.example.teamproject.MyProfilePage
 import com.example.teamproject.R
+import com.example.teamproject.SearchActivity
 import com.example.teamproject.databinding.ActivityReviewBinding
 import com.example.teamproject.fragment.FollowingFragment
 import com.example.teamproject.fragment.ReviewFragment
@@ -46,10 +48,17 @@ class ReviewActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
                 R.id.second_tab -> {
-                    Toast.makeText(this@ReviewActivity, "미구현", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@ReviewActivity, SearchActivity::class.java)
+                    startActivity(intent)
                 }
                 R.id.fourth_tab -> {
-                    Toast.makeText(this@ReviewActivity, "미구현", Toast.LENGTH_SHORT).show()
+                    if ( userId == null){
+                        val intent = Intent(this@ReviewActivity, LoginActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        val intent = Intent(this@ReviewActivity, MyDining::class.java)
+                        startActivity(intent)
+                    }
                 }
                 R.id.fifth_tab -> {
                     if ( userId == null){
