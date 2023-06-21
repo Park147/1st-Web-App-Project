@@ -35,6 +35,27 @@ class WaitingActivity : AppCompatActivity(), MyAdapterListener {
         supportActionBar?.setDisplayShowTitleEnabled(false)
         binding.toolbar.title = "뒤로가기"
 
+        binding.bottommenu.setOnItemSelectedListener { item ->
+            when(item.itemId) {
+                R.id.first_tab -> {
+                }
+                R.id.second_tab -> {
+                    Toast.makeText(this@WaitingActivity, "미구현", Toast.LENGTH_SHORT).show()
+                }
+                R.id.first_tab -> {
+                    Toast.makeText(this@WaitingActivity, "미구현", Toast.LENGTH_SHORT).show()
+                }
+                R.id.fourth_tab -> {
+                    val intent = Intent(this@WaitingActivity, MyDining::class.java)
+                    startActivity(intent)
+                }
+                R.id.fifth_tab -> {
+                    Toast.makeText(this@WaitingActivity, "미구현", Toast.LENGTH_SHORT).show()
+                }
+            }
+            true
+        }
+
         editTextSearch = findViewById(R.id.editTextSearch)
         buttonSearch = findViewById(R.id.buttonSearch)
 

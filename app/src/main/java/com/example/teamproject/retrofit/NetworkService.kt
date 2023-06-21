@@ -33,6 +33,9 @@ interface NetworkService {
     @POST("main/myDining/insert")
     fun doInsertReserve(@Body reserve: ItemData?): Call<ItemData>
 
+    @POST("main/myDining/insertBlank")
+    fun doInsertBlank(@Body blank: BlankItem?): Call<BlankItem>
+
     @POST("main/myDining/update")
     fun update(@Body reserve: ItemData?):Call<Unit>
 
