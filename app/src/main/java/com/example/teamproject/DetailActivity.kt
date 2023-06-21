@@ -9,6 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.teamproject.databinding.ActivityDetailBinding
 import com.example.teamproject.login.LoginActivity
+import com.example.teamproject.model.ItemData
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
@@ -55,11 +59,30 @@ class DetailActivity : AppCompatActivity() {
                 val intent = Intent(this@DetailActivity, ReserveActivity::class.java)
                 intent.putExtra("img", rstr_img)
                 intent.putExtra("title", rstr_nm)
+                intent.putExtra("addr", rstr_addr)
+                intent.putExtra("tell", rstr_tell)
                 intent.putExtra("content", rstr_intro)
+                intent.putExtra("popularity", rstr_popularity)
                 startActivity(intent)
             }
 
+        }
+        binding.waiting.setOnClickListener{
+            var reserve = ItemData("유저이름",rstr_img,rstr_nm,rstr_intro,rstr_popularity,"","", "","방문예약 웨이팅")
 
+            val networkService = (applicationContext as MyApplication).userService
+            val requestCall = networkService.doInsertReserve(reserve)
+            requestCall.enqueue(object : Callback<ItemData> {
+                override fun onResponse(call: Call<ItemData>, response: Response<ItemData>) {
+                    val intent= Intent(this@DetailActivity,MainActivity::class.java)
+                    startActivity(intent)
+                }
+
+                override fun onFailure(call: Call<ItemData>, t: Throwable) {
+                    call.cancel()
+                }
+
+            })
 
         }
     }

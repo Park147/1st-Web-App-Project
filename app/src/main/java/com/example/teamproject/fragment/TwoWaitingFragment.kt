@@ -35,8 +35,8 @@ class TwoWaitingFragment : Fragment(){
             startActivity(intent)
         }
 
-        val userService = (context?.applicationContext as MyApplication).userService
-        val reserveListCall = userService.getWaitingAll()
+        val networkService = (context?.applicationContext as MyApplication).userService
+        val reserveListCall = networkService.getWaitingAll()
 
         reserveListCall.enqueue(object : Callback<ItemDataList> {
             override fun onResponse(call: Call<ItemDataList>, response: Response<ItemDataList>) {
@@ -56,25 +56,6 @@ class TwoWaitingFragment : Fragment(){
             }
 
         })
-
-        binding.deleteBtn.setOnClickListener {
-            var title = binding.deleteTitle.text.toString()
-            val userService = (context?.applicationContext as MyApplication).userService
-            val reserveDeleteCall = userService.deleteWaitingList(title)
-
-            reserveDeleteCall.enqueue(object : Callback<Unit> {
-                override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
-                    Toast.makeText(context,"success", Toast.LENGTH_SHORT).show()
-                    val intent= Intent(context, MyDining::class.java)
-                    startActivity(intent)
-                }
-
-                override fun onFailure(call: Call<Unit>, t: Throwable) {
-                    Toast.makeText(context,"fail", Toast.LENGTH_SHORT).show()
-                }
-
-            })
-        }
         return binding.root
     }
 }

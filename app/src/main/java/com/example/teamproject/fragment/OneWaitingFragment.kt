@@ -2,22 +2,21 @@ package com.example.teamproject.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.teamproject.DetailActivity
 import com.example.teamproject.MainActivity
 import com.example.teamproject.MyApplication
-import com.example.teamproject.OnItemClickListener
 import com.example.teamproject.databinding.FragmentOneWaitingBinding
+import com.example.teamproject.model.ItemData
 import com.example.teamproject.model.ItemDataList
 import com.example.teamproject.recycler.MyWaitingAdapter
+import com.example.teamproject.recycler.OnItemClickListener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -38,8 +37,8 @@ class OneWaitingFragment : Fragment(), OnItemClickListener {
             startActivity(intent)
         }
 
-        val userService = (context?.applicationContext as MyApplication).userService
-        val reserveListCall = userService.getWaitingAll()
+        val networkService = (context?.applicationContext as MyApplication).userService
+        val reserveListCall = networkService.getWaitingAll()
 
         reserveListCall.enqueue(object : Callback<ItemDataList> {
             override fun onResponse(call: Call<ItemDataList>, response: Response<ItemDataList>) {
@@ -63,9 +62,12 @@ class OneWaitingFragment : Fragment(), OnItemClickListener {
         return binding.root
     }
 
-    override fun onItemClick(title: String) {
+    override fun onItemClick(items: ItemData?) {
         val intent = Intent(context, DetailActivity::class.java)
-        intent.putExtra("title", title)
+        intent.putExtra("rstr_nm", items?.w_title)
+        intent.putExtra("rstr_img", items?.w_image)
+        intent.putExtra("rstr_intro", items?.w_item)
+        intent.putExtra("rstr_popularity", items?.w_waiting)
         startActivity(intent)
     }
 
