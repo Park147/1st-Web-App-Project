@@ -2,10 +2,10 @@ package com.example.teamproject.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -36,7 +36,7 @@ class ThreeWaitingFragment : Fragment(){
             override fun onResponse(call: Call<ItemDataList>, response: Response<ItemDataList>) {
                 var item = response.body()?.items
 
-                adapter = MyDeleteAdapter(OneFragment(), item)
+                adapter = MyDeleteAdapter(this@ThreeWaitingFragment, item, networkService)
                 adapter.filter.filter("방문취소")
 
                 binding.threeRecyclerView.adapter = adapter
@@ -48,26 +48,6 @@ class ThreeWaitingFragment : Fragment(){
                 call.cancel()
             }
         })
-
-        binding.deleteBtn.setOnClickListener {
-            var title = binding.deleteTitle.text.toString()
-            val networkService = (context?.applicationContext as MyApplication).networkService
-            val reserveDeleteCall = networkService.deleteWaitingList(title)
-
-            reserveDeleteCall.enqueue(object : Callback<Unit> {
-                override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
-                    Toast.makeText(context,"success", Toast.LENGTH_SHORT).show()
-                    val intent= Intent(context, MyDining::class.java)
-                    startActivity(intent)
-                }
-
-                override fun onFailure(call: Call<Unit>, t: Throwable) {
-                    Toast.makeText(context,"fail", Toast.LENGTH_SHORT).show()
-                }
-
-            })
-        }
-
 
         return binding.root
     }

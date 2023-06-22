@@ -1,35 +1,32 @@
 package com.example.teamproject.recycler
 
-import android.content.Intent
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Filter
 import android.widget.Filterable
-import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.teamproject.MyApplication
-import com.example.teamproject.MyDining
-import com.example.teamproject.OnItemClickListener
 import com.example.teamproject.R
 import com.example.teamproject.databinding.ItemRecyclerviewBinding
-import com.example.teamproject.fragment.OneFragment
 import com.example.teamproject.model.ItemData
+import com.example.teamproject.retrofit.NetworkService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+interface OnItemClickListener {
+    fun onItemClick(items:ItemData?)
+
+}
 class MyWaitingViewHolder(val binding: ItemRecyclerviewBinding): RecyclerView.ViewHolder(binding.root) {
     val button: Button = itemView.findViewById(R.id.item_button)
 }
 
-class MyWaitingAdapter(val context: Fragment, datas:MutableList<ItemData>?): RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable{
+class MyWaitingAdapter(val context: Fragment, datas:MutableList<ItemData>?, val networkService: NetworkService): RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable{
     private var listData: MutableList<ItemData>? = datas
     private lateinit var listener: OnItemClickListener
 
@@ -81,16 +78,23 @@ class MyWaitingAdapter(val context: Fragment, datas:MutableList<ItemData>?): Rec
         binding.itemtitle.text = waiting?.w_title
         binding.itemcontent.text = waiting?.w_item
         binding.itemwaiting.text = waiting?.w_waiting
+        var img = waiting?.w_image
+
+        if (context!=null && img != null) {
+            Glide.with(context)
+                .load(img)
+                .into(binding.itemimage)
+        }
 
         binding.root.setOnClickListener {
-            listener.onItemClick("${waiting?.w_title}")
+            listener.onItemClick(waiting)
+
         }
 
         holder.button.setOnClickListener {
             waiting?.w_waiting_confirm ="방문취소"
             val waiting = listData?.get(position)
 
-            val networkService = MyApplication.getInstance().networkService
             val reserveDeleteCall = networkService.update(waiting)
 
             reserveDeleteCall.enqueue(object : Callback<Unit> {
@@ -106,24 +110,6 @@ class MyWaitingAdapter(val context: Fragment, datas:MutableList<ItemData>?): Rec
             })
 
         }
-
-//        val urlImg = waiting?.w_image
-//
-//        Glide.with(context)
-//            .asBitmap()
-//            .load(urlImg)
-//            .into(object : CustomTarget<Bitmap>(200, 200) {
-//                override fun onResourceReady(
-//                    resource: Bitmap,
-//                    transition: Transition<in Bitmap>?
-//                ) {
-//                    binding.itemimage.setImageBitmap(resource)
-//                }
-//
-//                override fun onLoadCleared(placeholder: Drawable?) {
-//                    UCharacter.GraphemeClusterBreak.T
-//                }
-//            })
     }
 
     override fun getItemCount(): Int {

@@ -43,7 +43,7 @@ class TwoWaitingFragment : Fragment(){
                 var item = response.body()?.items
                 Log.d("lmj", "Two item : $item")
 
-                adapter = MyDeleteAdapter(OneFragment(), item)
+                adapter = MyDeleteAdapter(this@TwoWaitingFragment, item, networkService)
                 adapter.filter.filter("방문완료")
 
                 binding.twoRecyclerView.adapter = adapter
@@ -56,25 +56,6 @@ class TwoWaitingFragment : Fragment(){
             }
 
         })
-
-        binding.deleteBtn.setOnClickListener {
-            var title = binding.deleteTitle.text.toString()
-            val networkService = (context?.applicationContext as MyApplication).networkService
-            val reserveDeleteCall = networkService.deleteWaitingList(title)
-
-            reserveDeleteCall.enqueue(object : Callback<Unit> {
-                override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
-                    Toast.makeText(context,"success", Toast.LENGTH_SHORT).show()
-                    val intent= Intent(context, MyDining::class.java)
-                    startActivity(intent)
-                }
-
-                override fun onFailure(call: Call<Unit>, t: Throwable) {
-                    Toast.makeText(context,"fail", Toast.LENGTH_SHORT).show()
-                }
-
-            })
-        }
         return binding.root
     }
 }
