@@ -25,14 +25,14 @@ class TwoAlarmFragment : Fragment() {
     ): View? {
         binding = FragmentTwoAlarmBinding.inflate(inflater, container, false)
 
-        val networkService = (context?.applicationContext as MyApplication).networkService
-        val reserveListCall = networkService.getBlank()
+        val userService = (context?.applicationContext as MyApplication).userService
+        val reserveListCall = userService.getBlank()
 
         reserveListCall.enqueue(object : Callback<BlankItemList> {
             override fun onResponse(call: Call<BlankItemList>, response: Response<BlankItemList>) {
                 var item = response.body()?.blankItems
 
-                adapter = MyAlarmAdapter(this@TwoAlarmFragment, item)
+                adapter = MyAlarmAdapter(this@TwoAlarmFragment, item, userService)
                 adapter.filter.filter("예약 오픈 알림")
                 binding.twoAlarmRecyclerView.adapter = adapter
                 binding.twoAlarmRecyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))

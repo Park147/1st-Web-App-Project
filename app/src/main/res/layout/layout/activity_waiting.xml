@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WaitingActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFAC07"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            tools:layout_editor_absoluteX="0dp">
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:context=".WaitingActivity">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_marginTop="100dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            tools:context=".WaitingActivity">
+
+
+            <EditText
+                android:id="@+id/editTextSearch"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="30dp"
+                android:layout_weight="8"
+                android:hint="검색어를 입력하세요"
+                android:inputType="text"
+                android:maxLines="1"
+                tools:layout_editor_absoluteX="68dp"
+                tools:layout_editor_absoluteY="83dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonSearch"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_margin="25dp"
+                android:background="@drawable/round_button"
+                android:elevation="30dp"
+                android:text="검색"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="360dp"
+            android:layout_height="500dp"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.496"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="16dp" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    tools:context=".WaitingActivity">-->
+
+
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:id="@+id/toolbar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="?attr/actionBarSize"-->
+<!--        android:background="#FFAC07"-->
+<!--        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
+<!--        tools:layout_editor_absoluteX="0dp" >-->
+
+<!--    </androidx.appcompat.widget.Toolbar>-->
+
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="650dp"-->
+<!--        android:gravity="center_horizontal"-->
+<!--        android:orientation="horizontal"-->
+<!--        tools:context=".MainActivity">-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/editTextSearch"-->
+<!--            android:layout_width="dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="8"-->
+<!--            android:hint="검색어를 입력하세요"-->
+<!--            android:inputType="text"-->
+<!--            android:maxLines="1"-->
+<!--            tools:layout_editor_absoluteX="68dp"-->
+<!--            tools:layout_editor_absoluteY="83dp" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/buttonSearch"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="2"-->
+<!--            android:background="@drawable/round_button"-->
+<!--            android:text="검색"-->
+<!--            tools:layout_editor_absoluteX="243dp"-->
+<!--            tools:layout_editor_absoluteY="81dp"-->
+<!--            />-->
+
+<!--    </LinearLayout>-->
+
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/bottommenu"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_gravity="bottom"-->
+<!--        android:background="#FF9800"-->
+<!--        app:itemIconTint="#000000"-->
+<!--        app:labelVisibilityMode="unlabeled"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:menu="@menu/menu"-->
+<!--        tools:layout_editor_absoluteX="-16dp" />-->
+<!--</LinearLayout>-->

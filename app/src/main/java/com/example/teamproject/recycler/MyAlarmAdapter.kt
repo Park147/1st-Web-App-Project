@@ -13,6 +13,7 @@ import com.example.teamproject.MyApplication
 import com.example.teamproject.R
 import com.example.teamproject.databinding.ItemRecyclerviewBinding
 import com.example.teamproject.model.BlankItem
+import com.example.teamproject.retrofit.UserService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,7 +22,7 @@ class MyAlarmViewHolder(val binding: ItemRecyclerviewBinding): RecyclerView.View
     val button: Button = itemView.findViewById(R.id.item_button)
 }
 
-class MyAlarmAdapter(val context: Fragment, datas:MutableList<BlankItem>?): RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable{
+class MyAlarmAdapter(val context: Fragment, datas:MutableList<BlankItem>?, val userService: UserService): RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable{
     private var listData: MutableList<BlankItem>? = datas
 
     override fun getFilter(): Filter {
@@ -77,8 +78,7 @@ class MyAlarmAdapter(val context: Fragment, datas:MutableList<BlankItem>?): Recy
         holder.button.setOnClickListener {
             val blank = listData?.get(position)
 
-            val networkService = MyApplication.getInstance().networkService
-            val reserveDeleteCall = networkService.deleteBlankList(blank?.b_title)
+            val reserveDeleteCall = userService.deleteBlankList(blank?.b_title)
 
             reserveDeleteCall.enqueue(object : Callback<Unit> {
                 override fun onResponse(call: Call<Unit>, response: Response<Unit>) {

@@ -30,14 +30,14 @@ class OneAlarmFragment : Fragment(){
     ): View? {
         binding = FragmentOneAlarmBinding.inflate(inflater, container, false)
 
-        val networkService = (context?.applicationContext as MyApplication).networkService
-        val reserveListCall = networkService.getBlank()
+        val userService = (context?.applicationContext as MyApplication).userService
+        val reserveListCall = userService.getBlank()
 
         reserveListCall.enqueue(object : Callback<BlankItemList> {
             override fun onResponse(call: Call<BlankItemList>, response: Response<BlankItemList>) {
                 var item = response.body()?.blankItems
 
-                adapter = MyAlarmAdapter(this@OneAlarmFragment, item)
+                adapter = MyAlarmAdapter(this@OneAlarmFragment, item, userService)
                 adapter.filter.filter("빈자리 알림")
 
                 binding.oneAlarmRecyclerView.adapter = adapter

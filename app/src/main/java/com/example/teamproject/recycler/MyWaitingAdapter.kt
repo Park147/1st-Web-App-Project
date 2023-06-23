@@ -13,6 +13,7 @@ import com.example.teamproject.MyApplication
 import com.example.teamproject.R
 import com.example.teamproject.databinding.ItemRecyclerviewBinding
 import com.example.teamproject.model.ItemData
+import com.example.teamproject.retrofit.UserService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,7 +26,7 @@ class MyWaitingViewHolder(val binding: ItemRecyclerviewBinding): RecyclerView.Vi
     val button: Button = itemView.findViewById(R.id.item_button)
 }
 
-class MyWaitingAdapter(val context: Fragment, datas:MutableList<ItemData>?): RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable{
+class MyWaitingAdapter(val context: Fragment, datas:MutableList<ItemData>?, val userService: UserService): RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable{
     private var listData: MutableList<ItemData>? = datas
     private lateinit var listener: OnItemClickListener
 
@@ -94,8 +95,7 @@ class MyWaitingAdapter(val context: Fragment, datas:MutableList<ItemData>?): Rec
             waiting?.w_waiting_confirm ="방문취소"
             val waiting = listData?.get(position)
 
-            val networkService = MyApplication.getInstance().networkService
-            val reserveDeleteCall = networkService.update(waiting)
+            val reserveDeleteCall = userService.update(waiting)
 
             reserveDeleteCall.enqueue(object : Callback<Unit> {
                 override fun onResponse(call: Call<Unit>, response: Response<Unit>) {

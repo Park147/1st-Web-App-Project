@@ -1,11 +1,10 @@
 package com.example.teamproject
 
-import MyAdapter
-import MyAdapterListener
+import com.example.teamproject.recycler.MyAdapter
+import com.example.teamproject.recycler.MyAdapterListener
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -59,7 +58,7 @@ class WaitingActivity : AppCompatActivity(), MyAdapterListener {
         editTextSearch = findViewById(R.id.editTextSearch)
         buttonSearch = findViewById(R.id.buttonSearch)
 
-        val rstrService = (applicationContext as MyApplication).networkService
+        val rstrService = (applicationContext as MyApplication).userService
 
         val getRstrList = rstrService.getRstrList()
         Log.d("hjm", "${getRstrList.request().url().toString()}")

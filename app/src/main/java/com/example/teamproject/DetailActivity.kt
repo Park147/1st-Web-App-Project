@@ -65,8 +65,8 @@ class DetailActivity : AppCompatActivity() {
         binding.waiting.setOnClickListener{
             var reserve = ItemData("유저이름",rstr_img,rstr_nm,rstr_intro,rstr_popularity,"","", "","방문예약 웨이팅")
 
-            val networkService = (applicationContext as MyApplication).networkService
-            val requestCall = networkService.doInsertReserve(reserve)
+            val userService = (applicationContext as MyApplication).userService
+            val requestCall = userService.doInsertReserve(reserve)
             requestCall.enqueue(object : Callback<ItemData> {
                 override fun onResponse(call: Call<ItemData>, response: Response<ItemData>) {
                     val intent= Intent(this@DetailActivity,MainActivity::class.java)

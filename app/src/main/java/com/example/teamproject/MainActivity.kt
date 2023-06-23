@@ -113,7 +113,7 @@ class MainActivity : FragmentActivity() {
         }
 
 
-        val RstrService = (applicationContext as MyApplication).networkService
+        val RstrService = (applicationContext as MyApplication).userService
 
         val getrandlist = RstrService.getRandList()
         getrandlist.enqueue(object : Callback<List<randRstr>> {

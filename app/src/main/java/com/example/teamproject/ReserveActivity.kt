@@ -61,8 +61,8 @@ class ReserveActivity : AppCompatActivity() {
             } else {
                 var reserve = ItemData("유저이름",img,title,content,"",reserveTime,reserveDate, personCount,"방문예약")
 
-                val networkService = (applicationContext as MyApplication).networkService
-                val requestCall = networkService.doInsertReserve(reserve)
+                val userService = (applicationContext as MyApplication).userService
+                val requestCall = userService.doInsertReserve(reserve)
                 requestCall.enqueue(object : Callback<ItemData> {
                     override fun onResponse(call: Call<ItemData>, response: Response<ItemData>) {
                         val intent= Intent(this@ReserveActivity,MainActivity::class.java)
@@ -95,8 +95,8 @@ class ReserveActivity : AppCompatActivity() {
             } else {
                 var reserve = ItemData("유저이름",img,title,content,"",reserveTime,reserveDate, personCount,"방문예약")
 
-                val networkService = (applicationContext as MyApplication).networkService
-                val requestCall = networkService.doInsertReserve(reserve)
+                val userService = (applicationContext as MyApplication).userService
+                val requestCall = userService.doInsertReserve(reserve)
                 requestCall.enqueue(object : Callback<ItemData> {
                     override fun onResponse(call: Call<ItemData>, response: Response<ItemData>) {
                         val intent= Intent(this@ReserveActivity,MainActivity::class.java)
@@ -129,8 +129,8 @@ class ReserveActivity : AppCompatActivity() {
             } else {
                 var reserve = ItemData("유저이름",img,title,content,"",reserveTime,reserveDate, personCount,"방문예약")
 
-                val networkService = (applicationContext as MyApplication).networkService
-                val requestCall = networkService.doInsertReserve(reserve)
+                val userService = (applicationContext as MyApplication).userService
+                val requestCall = userService.doInsertReserve(reserve)
                 requestCall.enqueue(object : Callback<ItemData> {
                     override fun onResponse(call: Call<ItemData>, response: Response<ItemData>) {
                         val intent= Intent(this@ReserveActivity,MainActivity::class.java)
@@ -160,8 +160,8 @@ class ReserveActivity : AppCompatActivity() {
             } else {
                 var blank = BlankItem("유저이름", img, title, reserveDate, personCount, reserveTime, "빈자리 알림")
 
-                val networkService = (applicationContext as MyApplication).networkService
-                val requestCall = networkService.doInsertBlank(blank)
+                val userService = (applicationContext as MyApplication).userService
+                val requestCall = userService.doInsertBlank(blank)
                 requestCall.enqueue(object : Callback<BlankItem> {
                     override fun onResponse(call: Call<BlankItem>, response: Response<BlankItem>) {
                         val intent = Intent(this@ReserveActivity, MainActivity::class.java)
@@ -192,8 +192,8 @@ class ReserveActivity : AppCompatActivity() {
             } else {
                 var blank = BlankItem("유저이름", img, title, reserveDate, personCount, reserveTime, "예약 오픈 알림")
 
-                val networkService = (applicationContext as MyApplication).networkService
-                val requestCall = networkService.doInsertBlank(blank)
+                val userService = (applicationContext as MyApplication).userService
+                val requestCall = userService.doInsertBlank(blank)
                 requestCall.enqueue(object : Callback<BlankItem> {
                     override fun onResponse(call: Call<BlankItem>, response: Response<BlankItem>) {
                         val intent = Intent(this@ReserveActivity, MainActivity::class.java)

@@ -14,6 +14,7 @@ import com.example.teamproject.MyApplication
 import com.example.teamproject.MyDining
 import com.example.teamproject.databinding.FragmentThreeWaitingBinding
 import com.example.teamproject.model.ItemDataList
+import com.example.teamproject.recycler.DeleteAdapter
 import com.example.teamproject.recycler.MyDeleteAdapter
 import retrofit2.Call
 import retrofit2.Callback
@@ -21,7 +22,7 @@ import retrofit2.Response
 
 class ThreeWaitingFragment : Fragment(){
     lateinit var binding: FragmentThreeWaitingBinding
-    lateinit var adapter: MyDeleteAdapter
+    lateinit var adapter: DeleteAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,14 +30,14 @@ class ThreeWaitingFragment : Fragment(){
     ): View? {
         binding = FragmentThreeWaitingBinding.inflate(inflater, container, false)
 
-        val networkService = (context?.applicationContext as MyApplication).networkService
-        val reserveListCall = networkService.getWaitingAll()
+        val userService = (context?.applicationContext as MyApplication).userService
+        val reserveListCall = userService.getWaitingAll()
 
         reserveListCall.enqueue(object : Callback<ItemDataList> {
             override fun onResponse(call: Call<ItemDataList>, response: Response<ItemDataList>) {
                 var item = response.body()?.items
 
-                adapter = MyDeleteAdapter(OneFragment(), item)
+                adapter = DeleteAdapter(this@ThreeWaitingFragment, item, userService)
                 adapter.filter.filter("방문취소")
 
                 binding.threeRecyclerView.adapter = adapter

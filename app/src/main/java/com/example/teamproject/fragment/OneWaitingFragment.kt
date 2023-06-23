@@ -37,13 +37,13 @@ class OneWaitingFragment : Fragment(), OnItemClickListener {
             startActivity(intent)
         }
 
-        val networkService = (context?.applicationContext as MyApplication).networkService
-        val reserveListCall = networkService.getWaitingAll()
+        val userService = (context?.applicationContext as MyApplication).userService
+        val reserveListCall = userService.getWaitingAll()
 
         reserveListCall.enqueue(object : Callback<ItemDataList> {
             override fun onResponse(call: Call<ItemDataList>, response: Response<ItemDataList>) {
                 var item = response.body()?.items
-                adapter = MyWaitingAdapter(this@OneWaitingFragment, item)
+                adapter = MyWaitingAdapter(this@OneWaitingFragment, item, userService)
                 adapter.filter.filter("방문예약")
                 adapter.setOnItemClickListener(this@OneWaitingFragment)
 

@@ -1,7 +1,5 @@
 package com.example.teamproject.category
 
-import MyAdapter
-import MyAdapterListener
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +11,8 @@ import com.example.teamproject.DetailActivity
 import com.example.teamproject.MyApplication
 import com.example.teamproject.databinding.ActivityCategorythreeBinding
 import com.example.teamproject.model.RstrModel
+import com.example.teamproject.recycler.MyAdapter
+import com.example.teamproject.recycler.MyAdapterListener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,7 +32,7 @@ class CategoryThreeActivity : AppCompatActivity(), MyAdapterListener {
         supportActionBar?.setDisplayShowTitleEnabled(false)
         binding.toolbar.title = "뒤로가기"
 
-        val rstrService = (applicationContext as MyApplication).networkService
+        val rstrService = (applicationContext as MyApplication).userService
 
         val getRstrList = rstrService.getRstrList()
         Log.d("jcy", "${getRstrList.request().url().toString()}")

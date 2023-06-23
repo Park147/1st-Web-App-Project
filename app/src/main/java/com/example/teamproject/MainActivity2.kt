@@ -1,7 +1,7 @@
 package com.example.teamproject
 
-import MyAdapter
-import MyAdapterListener
+import com.example.teamproject.recycler.MyAdapter
+import com.example.teamproject.recycler.MyAdapterListener
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -51,7 +51,7 @@ class MainActivity2 : AppCompatActivity(), MyAdapterListener {
             true
         }
 
-        val rstrService = (applicationContext as MyApplication).networkService
+        val rstrService = (applicationContext as MyApplication).userService
 
         myAdapter = MyAdapter(this, null)
         myAdapter.setListener(this)

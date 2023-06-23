@@ -82,8 +82,8 @@ class MyDeleteAdapter(val context: Fragment, datas:MutableList<ItemData>?): Recy
         holder.button.setOnClickListener {
             var title = binding.itemtitle.text.toString()
 
-            val networkService = MyApplication.getInstance().networkService
-            val reserveDeleteCall = networkService.deleteWaitingList(title)
+            val userService = MyApplication.getInstance().userService
+            val reserveDeleteCall = userService.deleteWaitingList(title)
 
             reserveDeleteCall.enqueue(object : Callback<Unit> {
                 override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
@@ -97,24 +97,6 @@ class MyDeleteAdapter(val context: Fragment, datas:MutableList<ItemData>?): Recy
                 }
             })
         }
-
-//        val urlImg = waiting?.w_image
-//
-//        Glide.with(context)
-//            .asBitmap()
-//            .load(urlImg)
-//            .into(object : CustomTarget<Bitmap>(200, 200) {
-//                override fun onResourceReady(
-//                    resource: Bitmap,
-//                    transition: Transition<in Bitmap>?
-//                ) {
-//                    binding.itemimage.setImageBitmap(resource)
-//                }
-//
-//                override fun onLoadCleared(placeholder: Drawable?) {
-//                    UCharacter.GraphemeClusterBreak.T
-//                }
-//            })
     }
 
     override fun getItemCount(): Int {
